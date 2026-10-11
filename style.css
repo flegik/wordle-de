@@ -66,3 +66,6 @@
 .mode-card>span:nth-child(2),header strong {min-width:0;overflow-wrap:anywhere;}
 .quiet {opacity:.85;font-size:14px;}
 @media(max-width:359px){.mode-card {padding:12px;gap:10px;} .filters {flex-wrap:wrap;} .filters select {min-width:0;flex:1 1 120px;}}
+
+/* Result histories retain real rows; touch scrolling never enters new guesses. */
+.played-result{text-align:left}.result-boards{display:grid;gap:20px}.result-grid{display:grid;gap:5px;max-height:65vh;overflow-y:auto;overscroll-behavior:contain;margin:12px auto;width:min(100%,400px)}.result-grid .row{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:5px}.result-grid .tile{aspect-ratio:1;font-size:clamp(18px,6vw,30px);min-width:0;display:grid;place-items:center}.result-board small{font-size:12px}.image-preview{display:block;width:100%;height:auto;margin:12px 0;border-radius:12px}#modal-content:has(.image-preview){max-height:85dvh;overflow-y:auto}.played-result select{width:100%}@media(min-width:760px){.result-boards:has(.result-board:nth-child(2)){grid-template-columns:1fr 1fr}}

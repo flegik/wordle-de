@@ -24,6 +24,7 @@ function validate(state,words){
  E.validate({...state,schema:1,games},legacy);
  const gameIds=new Set();for(const [key,g] of Object.entries(state.games)){if(gameIds.has(g.id))throw Error('Doppelte Runden-ID.');gameIds.add(g.id);const dict=V.resolve(g.wordVersion||state.wordVersion,words);if(dict.version!==legacy.version)E.validate({...state,schema:1,wordVersion:dict.version,games:{[key]:g},bags:{},last:{}},dict);}
  for(const e of state.events)if(e.wordVersion!==undefined)V.resolve(e.wordVersion,words);
+ if(state.roundResults!==undefined){if(!object(state.roundResults)||Object.keys(state.roundResults).length>100000)throw Error('Ungültige Ergebnishistorie.');const events=new Map(state.events.map(e=>[e.id,e]));for(const [id,g] of Object.entries(state.roundResults)){const e=events.get(id);if(g?.id!==id||g.status==='playing'||!e)throw Error('Ungültiges archiviertes Ergebnis.');const dict=V.resolve(g.wordVersion||state.wordVersion,words),key=g.mode==='daily'?'daily:'+g.date:g.mode;E.validate({...E.fresh(),schema:1,wordVersion:dict.version,settings:state.settings,games:{[key]:g},events:[e],streak:(()=>{const t=E.summary(e.mode==='streak'?[e]:[]);return {current:t.current,best:t.best};})(),daily:g.mode==='daily'?{[g.date]:id}:{}},dict);}}
  Y.validate(state);P.validate(state.wordReports);F.validate(state.selection);H.validateBags(state,V.daily());
  if(!object(state.sessions)||!Array.isArray(state.sessionEvents)||state.sessionEvents.length>100000)
   throw Error('Ungültige Session-Datensammlungen.');

@@ -4,20 +4,20 @@
   "runs": [
     {
       "events": 100,
-      "validationMs": 1.813,
-      "summaryMs": 0.083,
+      "validationMs": 1.858,
+      "summaryMs": 0.274,
       "backupBytes": 17601
     },
     {
       "events": 1000,
-      "validationMs": 2.026,
-      "summaryMs": 0.212,
+      "validationMs": 1.322,
+      "summaryMs": 0.223,
       "backupBytes": 174201
     },
     {
       "events": 10000,
-      "validationMs": 10.071,
-      "summaryMs": 0.607,
+      "validationMs": 12.928,
+      "summaryMs": 0.862,
       "backupBytes": 1749201
     }
   ]
