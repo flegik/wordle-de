@@ -1,5 +1,10 @@
 # Online-Duell 2.1 · Prüfungen vom 11.10.2026
 
+Die komplette Suite besteht auch mit dem Produktions-Cache `v2-1-release-20261011`.
+Produktiver Browsercheck: `WORDLE_TEST_URL=https://flegik.github.io/wordle-de/`
+und `WORDLE_PRODUCTION=1`, dann `node tests/browser-online-remote.cjs`.
+[Release-Konfiguration und Abnahme](docs/RELEASE_2_1.md).
+
 `PYTHONUTF8=1 python tools/test_all.py`: vollständige Baseline und Regression
 bestanden, einschließlich 16 neuer API-/SQLite- und 7 Client-/Storage-/SW-Gruppen.
 Git-LF-Dateien verwenden; Windows-Autokonvertierung verändert eingefrorene Hashes.

@@ -1,7 +1,7 @@
 /* Increment CACHE when changing the shipped offline assets. */
 const ROOT=new URL('./',self.location.href);
 const PREFIX='wordle-de-offline:'+ROOT.pathname+':';
-const CACHE=PREFIX+'v2-1-test-20261011-b';
+const CACHE=PREFIX+'v2-1-release-20261011';
 const ASSETS=['./','index.html','style.css','js/engine.js','js/sessions.js','js/double.js','js/double-ui.js','js/tower.js','js/tower-ui.js','js/speedrun.js','js/speedrun-ui.js','data/themes.js','js/theme.js','js/theme-ui.js','js/duel-links.js','js/duel.js','js/duel-ui.js','js/reports.js','js/sync.js','js/storage.js','data/words.js','js/results.js','js/result-image.js','js/online-config.js','js/online-duel.js','js/app.js','data/words-de-1.js','data/words-de-2.js','data/words-de-2.1.js','data/words-de-2.2.js','data/word-quality-de-2.1.js','data/word-quality-de-2.js','data/word-quality.js','data/word-registry.js','js/selection.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/maskable-512.png','icons/apple-touch-icon.png'].map(p=>new URL(p,ROOT).href);
 self.addEventListener('install',event=>event.waitUntil((async()=>{const existed=(await caches.keys()).includes(CACHE);try{const cache=await caches.open(CACHE);await cache.addAll(ASSETS);}catch(error){if(!existed)await caches.delete(CACHE);throw error;}})()));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

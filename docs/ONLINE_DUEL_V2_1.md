@@ -1,5 +1,9 @@
 # WORDLE DE 2.1 · Online-Duelle · isolierte Testversion
 
+**Nachtrag:** Der Produktivrelease wurde am 11.10.2026 ausdrücklich freigegeben.
+Die aktuelle Live-Konfiguration steht in [RELEASE_2_1.md](RELEASE_2_1.md).
+Der folgende Bericht dokumentiert die davor abgeschlossene Testbereitstellung.
+
 Stand: 11. Oktober 2026. Ausschließlich `feature/duel-online-v2-1`.
 
 Test-PWA und API: https://wordle-de-duel-test.wordle-de-flegik-test.workers.dev

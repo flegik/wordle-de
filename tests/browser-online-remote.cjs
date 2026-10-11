@@ -1,14 +1,14 @@
-// Real deployed TEST origin only; fresh profiles and one disposable test duel.
+// Fresh profiles and one disposable duel; defaults to the isolated test origin.
 const assert=require('node:assert/strict'),{chromium}=require('playwright');
-const base='https://wordle-de-duel-test.wordle-de-flegik-test.workers.dev';
+const base=process.env.WORDLE_TEST_URL||'https://wordle-de-duel-test.wordle-de-flegik-test.workers.dev';
 (async()=>{let browser;try{
  browser=await chromium.launch({channel:'msedge',headless:true});const ca=await browser.newContext({viewport:{width:360,height:640},serviceWorkers:'block'}),cb=await browser.newContext({viewport:{width:430,height:932},serviceWorkers:'block'}),a=await ca.newPage(),b=await cb.newPage(),errors=[];for(const p of [a,b])p.on('pageerror',e=>errors.push(e.message));
- await a.goto(base);assert((await a.locator('#app').innerText()).includes('TEST'));await a.locator('[data-mode="online"]').click();await a.locator('[data-online="create"]').click();await a.locator('[data-online="sync"]:not([disabled])').waitFor();const code=await a.evaluate(()=>JSON.parse(localStorage.getItem(WordleOnline.KEY)).rooms[0].code);
+ await a.goto(base);assert.equal((await a.locator('#app').innerText()).includes('2.1 TEST'),!process.env.WORDLE_PRODUCTION);await a.locator('[data-mode="online"]').click();await a.locator('[data-online="create"]').click();await a.locator('[data-online="sync"]:not([disabled])').waitFor();const code=await a.evaluate(()=>JSON.parse(localStorage.getItem(WordleOnline.KEY)).rooms[0].code);
  await b.goto(base);await b.locator('[data-mode="online"]').click();await b.locator('#online-code').fill(code);await b.locator('[data-online="join"]').click();await b.locator('[data-online="sync"]:not([disabled])').waitFor();await a.locator('[data-online="sync"]').click();await a.locator('[data-online="sync"]:not([disabled])').waitFor();
  const words=await a.evaluate(()=>WordRegistry.active().solutions[5].slice(0,6));
  for(const p of [a,b]){for(const word of words){const playing=await p.evaluate(()=>JSON.parse(localStorage.getItem(WordleOnline.KEY)).rooms[0].snapshot.you.status==='playing');if(!playing)break;for(const c of word)await p.locator(`[data-key="${c}"]`).click();await p.locator('[data-key="Enter"]').click();await p.locator('[data-online="sync"]:not([disabled])').waitFor();}}
  await a.locator('[data-online="sync"]').click();await a.locator('[data-online="sync"]:not([disabled])').waitFor();const state=await a.evaluate(()=>JSON.parse(localStorage.getItem(WordleOnline.KEY)).rooms[0].snapshot);assert(state.complete);assert.equal(state.you.rows.length,state.you.revision);assert.equal(state.opponent.rows.length,state.opponent.revision);assert.equal(await a.locator('.board').count(),2);assert.equal(await b.locator('.board').count(),2);
  for(const p of [a,b]){assert.equal(await p.evaluate(()=>localStorage.getItem('wordle-de:v2')),null);assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
- const unauth=await a.request.get(base+'/api/rooms/'+code);assert.equal(unauth.status(),401);assert.equal(unauth.headers()['cache-control'],'no-store');assert.deepEqual(errors,[]);
+ const apiBase=await a.evaluate(()=>globalThis.WORDLE_ONLINE_API);const unauth=await a.request.get(apiBase+'/api/rooms/'+code);assert.equal(unauth.status(),401);assert.equal(unauth.headers()['cache-control'],'no-store');assert.deepEqual(errors,[]);
  console.log('✓ Deployed Free Worker/D1: two isolated mobile browser contexts, code entry, complete synchronized authentic boards, winner '+state.winner+', protected API, no classical statistics writes');await ca.close();await cb.close();
 }finally{await browser?.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
