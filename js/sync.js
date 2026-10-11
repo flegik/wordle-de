@@ -4,7 +4,9 @@
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null),V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const clone=v=>JSON.parse(JSON.stringify(v)),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 // Exact raw source, rather than a collision-prone digest. It remains local and in backups.
-function validate(state){if(state.legacySource!==undefined&&state.legacySource!==null){if(typeof state.legacySource!=='string'||state.legacySource.length>20*1024*1024)throw Error('Ungültige alte Speicherquelle.');const s=JSON.parse(state.legacySource);if(!E.validate(s,V.daily())||s.schema!==1)throw Error('Ungültiger alter Speichervertrag.');}}
+function validate(state){if(state.legacySource!==undefined&&state.legacySource!==null&&(typeof state.legacySource!=='string'||state.legacySource.length>20*1024*1024))throw Error('Ungültige alte Speicherquelle.');}
+// The checkpoint is opaque: a deliberately recovered corrupt original remains intact.
+
 function covered(state,old){if(old.events.some(e=>!state.events.some(n=>same(e,n))))return false;if(Object.entries(old.daily).some(([d,id])=>state.daily[d]!==id))return false;for(const [key,g] of Object.entries(old.games)){const own=state.games[key];if(own?.id===g.id){if(!same(own,g)&&!state.events.some(e=>e.id===g.id))return false;}else if(!state.events.some(e=>e.id===g.id))return false;}return true;}
 function checkpoint(state,raw){return {...state,legacySource:raw};}
 function guardLegacy(state,raw){if(state.legacySource!==undefined&&state.legacySource!==raw)throw Error('Ältere PWA hat Daten geändert. Beide Stände sichern und Konflikt auflösen.');}
