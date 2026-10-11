@@ -24,7 +24,7 @@ test('Invalid cross-tab writes are protected; a valid replacement restores persi
  h.store.set(S.KEY,'broken-other-tab');h.context.window.handlers.storage({key:S.KEY,newValue:'broken-other-tab'});
  h.type('A');assert.equal(h.store.get(S.KEY),'broken-other-tab');h.click('settings');
  assert(h.html().includes('Geschützte Originaldaten sichern'));h.click('recover');assert.equal(h.downloads.length,1);
- h.store.set(S.KEY,valid);h.context.window.handlers.storage({key:S.KEY,newValue:valid});h.click('resume',{mode:'random'});h.type('A');
+ h.store.set(S.KEY,valid);h.context.window.handlers.storage({key:S.KEY,newValue:valid});h.get('#confirm-action').onclick();h.click('resume',{mode:'random'});h.type('A');
  assert.equal(h.state().games.random.input,'A');
 });
 test('Physical German keyboard inputs preserve umlauts and sharp S as single letters',()=>{

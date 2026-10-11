@@ -1,6 +1,7 @@
 /* Sequential Tower rules on the existing canonical GameSession history. */
 (function(root){
 'use strict';
+const V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
 const G=root.Sessions||(typeof require==='function'?require('./sessions.js'):null);
 const clone=value=>JSON.parse(JSON.stringify(value));
@@ -15,7 +16,7 @@ function progress(s){
  else if(s.status==='lost')reached=s.attempts.length?Math.max(...s.attempts.map(a=>s.rounds.findIndex(r=>r.id===a.roundIds[0])))+1:1;
  return {rounds,solved,index,active:rounds[index],used:s.attempts.length,remaining:BUDGET-s.attempts.length,reached};
 }
-function validate(s,words){
+function validate(s,words){words=V.resolve(s.wordVersion,words);
  G.validate(s,words);
  if(s.mode!=='tower'||s.rounds.length!==4||s.attemptBudget!==BUDGET||s.rounds.some((r,i)=>r.length!==i+4||r.attemptLimit!==BUDGET||r.hard))throw Error('Tower benötigt vier Etagen (4–7), ohne Hard Mode und mit 20 gemeinsamen Versuchen.');
  let floor=0;
@@ -37,7 +38,7 @@ function create({id,targets,started},words){
  const s=G.createSession({id,mode:'tower',started,attemptBudget:BUDGET,rounds:targets.map((target,i)=>G.createRound({id:'floor-'+(i+1),length:i+4,target,attemptLimit:BUDGET,hard:false},words))},words);
  s.input='';s.pendingTransition=null;return validate(s,words);
 }
-function error(s,word,words){
+function error(s,word,words){words=V.resolve(s.wordVersion,words);
  const r=progress(s).active,w=E.normalize(word);
  if(E.letters(w).length!==r.length)return `${r.length} Buchstaben bitte.`;
  if(!words.accepted[r.length].includes(w))return 'Dieses Wort steht nicht in der Wortliste.';

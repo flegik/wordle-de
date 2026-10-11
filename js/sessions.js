@@ -1,6 +1,7 @@
 /* Session foundation only: no arcade UI or mode-specific scoring yet. */
 (function(root){
 'use strict';
+const V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
 const MODES=Object.freeze(['double','tower','speedrun','theme','duel']);
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
@@ -8,7 +9,7 @@ const id=v=>typeof v==='string'&&v.length>0&&v.length<=128;
 const integer=(v,min,max)=>Number.isSafeInteger(v)&&v>=min&&v<=max;
 const clone=v=>JSON.parse(JSON.stringify(v));
 function fail(message){throw Error(message);}
-function dictionary(words,version){if(!words||words.version!==version)fail('Unbekannte Session-Wortversion.');return words;}
+function dictionary(words,version){return V.resolve(version,words);}
 
 // Round configuration is stored once. Guesses, colors and status are projections
 // of the session's canonical attempts; double-board inputs are never duplicated.
@@ -43,7 +44,7 @@ function validate(session,words){
     !['playing','won','lost','completed','abandoned'].includes(session.status)||
     !Array.isArray(session.rounds)||!integer(session.rounds.length,1,1000)||
     !Array.isArray(session.attempts)||session.attempts.length>1000)fail('Ungültige Session.');
- dictionary(words,session.wordVersion);
+ words=dictionary(words,session.wordVersion);
  if(session.attemptBudget!==undefined&&!integer(session.attemptBudget,1,1000))fail('Ungültiges Versuchsbudget.');
  if(session.attemptBudget!==undefined&&session.attempts.length>session.attemptBudget)fail('Versuchsbudget überschritten.');
  const rounds=new Map(),histories=new Map();
@@ -91,6 +92,7 @@ function result(session,date){
  return event;
 }
 function validateEvent(event,words){
+ words=dictionary(words,event?.wordVersion);
  if(!object(event)||!id(event.id)||!MODES.includes(event.mode)||event.wordVersion!==words.version||
     !['won','lost','completed','abandoned'].includes(event.status)||
     event.status==='completed'&&event.mode!=='speedrun'||

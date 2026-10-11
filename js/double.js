@@ -1,10 +1,11 @@
 /* Double Wordle rules. All letters and evaluations use the existing Wordle core. */
 (function(root){
 'use strict';
+const V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
 const G=root.Sessions||(typeof require==='function'?require('./sessions.js'):null);
 function views(s){return s.rounds.map(r=>G.roundView(s,r.id));}
-function validate(s,words){
+function validate(s,words){words=V.resolve(s.wordVersion,words);
  G.validate(s,words);
  if(s.mode!=='double'||s.rounds.length!==2||s.attemptBudget!==8||s.rounds.some(r=>r.length!==5||r.attemptLimit!==8||r.hard)||s.rounds[0].target===s.rounds[1].target)throw Error('Doppel benötigt zwei verschiedene Fünfbuchstabenwörter und acht gemeinsame Versuche.');
  const solved=new Set(),seen=new Set();
@@ -25,7 +26,7 @@ function create({id,targets,started},words){
  const s=G.createSession({id,mode:'double',started,attemptBudget:8,rounds:targets.map((target,i)=>G.createRound({id:i?'b':'a',length:5,target,attemptLimit:8,hard:false},words))},words);
  s.input='';s.activeRoundId='a';return validate(s,words);
 }
-function error(s,word,words){
+function error(s,word,words){words=V.resolve(s.wordVersion,words);
  const w=E.normalize(word);
  if(E.letters(w).length!==5)return '5 Buchstaben bitte.';
  if(!words.accepted[5].includes(w))return 'Dieses Wort steht nicht in der Wortliste.';

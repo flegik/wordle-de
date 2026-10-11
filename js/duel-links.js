@@ -1,6 +1,7 @@
 /* Bounded, canonical challenge codec. Encoding/checksum is NOT encryption. */
 (function(root){
 'use strict';
+const V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
 const MESSAGE='Diese Herausforderung ist ungültig oder wird von deiner Spielversion nicht unterstützt.';
 const keys=['version','type','id','length','word','wordVersion','rules'];
@@ -10,7 +11,7 @@ function exact(v,names){if(!v||typeof v!=='object'||Array.isArray(v)||Object.key
 function validId(id){return typeof id==='string'&&uuid.test(id);}
 function limit(n){return n<6?6:7;}
 function checksum(text){let n=2166136261;for(const c of text){n=Math.imul(n^c.charCodeAt(0),16777619)>>>0;}return n.toString(16).padStart(8,'0');}
-function validate(c,words){exact(c,keys);if(c.version!==1||!['random','wish'].includes(c.type)||typeof c.id!=='string'||!uuid.test(c.id)||![4,5,6,7].includes(c.length)||typeof c.word!=='string'||c.word!==E.normalize(c.word)||!/^[A-ZÄÖÜẞ]{4,7}$/u.test(c.word)||E.letters(c.word).length!==c.length||c.wordVersion!==words.version||c.rules!=='normal-1'||!(c.type==='random'?words.solutions:words.accepted)[c.length].includes(c.word))fail();return c;}
+function validate(c,words){exact(c,keys);words=V.resolve(c.wordVersion,words);if(c.version!==1||!['random','wish'].includes(c.type)||typeof c.id!=='string'||!uuid.test(c.id)||![4,5,6,7].includes(c.length)||typeof c.word!=='string'||c.word!==E.normalize(c.word)||!/^[A-ZÄÖÜẞ]{4,7}$/u.test(c.word)||E.letters(c.word).length!==c.length||c.wordVersion!==words.version||c.rules!=='normal-1'||!(c.type==='random'?words.solutions:words.accepted)[c.length].includes(c.word))fail();return c;}
 function canonical(c){return JSON.stringify(Object.fromEntries(keys.map(k=>[k,c[k]])));}
 function encode(text){return btoa(unescape(encodeURIComponent(text))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
 function decode(text){if(!/^[A-Za-z0-9_-]+$/.test(text)||text.length>1400||text.length%4===1)fail();try{const raw=decodeURIComponent(escape(atob(text.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-text.length%4)%4))));if(encode(raw)!==text||raw.length>1024)fail();return raw;}catch{fail();}}

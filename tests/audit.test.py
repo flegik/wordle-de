@@ -10,7 +10,8 @@ spec.loader.exec_module(module)
 
 generated = module.outputs()
 for path, expected in generated.items():
-    assert path.read_text(encoding='utf-8') == expected, 'Stale audit output: ' + str(path)
+    actual = ROOT / 'docs/WORD_REVIEW_DE_1.md' if path.name == 'WORD_REVIEW.md' else path
+    assert actual.read_text(encoding='utf-8') == expected, 'Stale audit output: ' + str(path)
 print('✓ All four audit outputs reproduce byte-for-byte')
 words = module.read_words()
 audit = json.loads(generated[ROOT / 'data/review/word-audit-de-1.json'])

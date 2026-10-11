@@ -1,6 +1,7 @@
 /* Speedrun v1: canonical attempts + explicit round endings. No wall-clock timer. */
 (function(root){
 'use strict';
+const V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
 const G=root.Sessions||(typeof require==='function'?require('./sessions.js'):null);
 const BUDGET=180000,SKIP=10000,POINTS=Object.freeze({4:100,5:150,6:200,7:250});
@@ -20,7 +21,7 @@ function create({id,started,length,target},words){
  const s=G.createSession({id,mode:'speedrun',started,rounds:[round({length,target},1,words)]},words);
  Object.assign(s,{speedrunVersion:1,activeMs:0,resumeRequired:true,roundEnds:[],input:''});return validate(s,words);
 }
-function validate(s,words){
+function validate(s,words){words=V.resolve(s.wordVersion,words);
  G.validate(s,words);
  if(s.mode!=='speedrun'||s.speedrunVersion!==1||s.resumeRequired!==true||!finite(s.activeMs)||s.activeMs>BUDGET||s.attemptBudget!==undefined||!Array.isArray(s.roundEnds)||!['playing','completed','abandoned'].includes(s.status))fail();
  if(s.rounds.some((r,i)=>r.id!=='word-'+(i+1)||r.hard||r.attemptLimit!==(r.length<6?6:7)))fail();
@@ -51,9 +52,9 @@ function validate(s,words){
  if(typeof s.input!=='string'||E.normalize(s.input)!==s.input||!/^[A-ZÄÖÜẞ]*$/u.test(s.input)||E.letters(s.input).length>active(s).length||s.status!=='playing'&&s.input!=='')fail();
  return s;
 }
-function error(s,word,words){const r=active(s),w=E.normalize(word);return E.letters(w).length!==r.length?`${r.length} Buchstaben bitte.`:!words.accepted[r.length].includes(w)?'Dieses Wort steht nicht in der Wortliste.':r.guesses.includes(w)?'Dieses Wort hast du schon versucht.':null;}
+function error(s,word,words){words=V.resolve(s.wordVersion,words);const r=active(s),w=E.normalize(word);return E.letters(w).length!==r.length?`${r.length} Buchstaben bitte.`:!words.accepted[r.length].includes(w)?'Dieses Wort steht nicht in der Wortliste.':r.guesses.includes(w)?'Dieses Wort hast du schon versucht.':null;}
 function at(s,ms,words){validate(s,words);if(s.status!=='playing'||!finite(ms)||ms<s.activeMs||remaining(s,ms)===0)throw Error('Zeit abgelaufen oder Run pausiert.');const next=clone(s);next.activeMs=ms;return next;}
-function closeRound(s,reason,ms,ended,words,choose){
+function closeRound(s,reason,ms,ended,words,choose){words=V.resolve(s.wordVersion,words);
  s.roundEnds.push({roundId:s.rounds.at(-1).id,reason,attemptIndex:s.attempts.length,atMs:ms});s.input='';
  if(remaining(s)===0)return finish(s,'completed',ended,words);
  if(typeof choose!=='function')throw Error('Nächstes Wort erforderlich.');

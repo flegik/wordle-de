@@ -1,13 +1,14 @@
 /* Single-round theme contract and independently versioned editorial bags. */
 (function(root){
 'use strict';
+const V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null),G=root.Sessions||(typeof require==='function'?require('./sessions.js'):null);
 const P=root.ThemePools||(typeof require==='function'?require('../data/themes.js'):null),clone=v=>JSON.parse(JSON.stringify(v));
-function pack(version=P.current,words,registry=P){const p=registry.versions[version];if(!p||p.version!==version||p.baseWordVersion!==words.version)throw Error('Unbekannte Themen- oder Basiswortversion.');return p;}
+function pack(version=P.current,words,registry=P){const p=registry.versions[version];if(!p)throw Error('Unbekannte Themenversion.');words=V.resolve(p.baseWordVersion,words);if(p.version!==version||p.baseWordVersion!==words.version)throw Error('Unbekannte Themen- oder Basiswortversion.');return p;}
 function category(version,id,words,registry=P){const c=pack(version,words,registry).categories.find(c=>c.id===id);if(!c)throw Error('Unbekannte Themenkategorie.');return c;}
 function pool(version,id,n,words,registry=P){const c=category(version,id,words,registry);if(!c.lengths.includes(n)||!c.solutions[n]||c.solutions[n].length<pack(version,words,registry).minimum)throw Error('Diese Themenwortlänge ist noch nicht freigeschaltet.');return c.solutions[n];}
 function hasContract(s){return ['themeVersion','categoryId','themeContract'].some(k=>k in s);}
-function validate(s,words,registry=P){
+function validate(s,words,registry=P){words=V.resolve(s.wordVersion,words);
  G.validate(s,words);const c=category(s.themeVersion,s.categoryId,words,registry),r=s.rounds[0];
  if(typeof s.themeVersion!=='string'||s.mode!=='theme'||s.themeContract!==1||s.rounds.length!==1||r.id!=='word'||r.attemptLimit!==(r.length<6?6:7)||s.attemptBudget!==undefined||!pool(s.themeVersion,c.id,r.length,words,registry).includes(r.target)||s.score!==undefined||!['playing','won','lost','abandoned'].includes(s.status))throw Error('Ungültige Themenrunde.');
  const v=G.roundView(s,r.id);
@@ -19,7 +20,7 @@ function create({id,categoryId,length,target,started,hard=false,themeVersion=P.c
  const s=G.createSession({id,mode:'theme',started,rounds:[G.createRound({id:'word',length,target,hard},words)]},words);
  Object.assign(s,{themeContract:1,themeVersion,categoryId,input:''});return validate(s,words);
 }
-function error(s,word,words){const r=G.roundView(s,'word'),w=E.normalize(word);return E.letters(w).length!==r.length?`${r.length} Buchstaben bitte.`:!words.accepted[r.length].includes(w)?'Dieses Wort steht nicht in der Wortliste.':r.guesses.includes(w)?'Dieses Wort hast du schon versucht.':r.hard?E.hardError(w,r.guesses,r.target):null;}
+function error(s,word,words){words=V.resolve(s.wordVersion,words);const r=G.roundView(s,'word'),w=E.normalize(word);return E.letters(w).length!==r.length?`${r.length} Buchstaben bitte.`:!words.accepted[r.length].includes(w)?'Dieses Wort steht nicht in der Wortliste.':r.guesses.includes(w)?'Dieses Wort hast du schon versucht.':r.hard?E.hardError(w,r.guesses,r.target):null;}
 function submit(s,word,ended,words){validate(s,words);const err=error(s,word,words);if(err)throw Error(err);let next=G.appendAttempt(s,word,['word'],words);next.input='';const v=G.roundView(next,'word');if(v.status!=='playing')next=G.finish(next,v.status,Math.max(ended,s.started),words);return validate(next,words);}
 function abandon(s,ended,words){validate(s,words);const next=G.finish(s,'abandoned',Math.max(ended,s.started),words);next.input='';return validate(next,words);}
 function result(s,date){return {...G.result(s,date),themeContract:1,themeVersion:s.themeVersion,categoryId:s.categoryId,length:s.rounds[0].length};}
