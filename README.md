@@ -1,15 +1,30 @@
-# Entwicklungsstand WORDLE DE 2.0 · Phase 1
+# Entwicklungsstand WORDLE DE 2.0 · Phase 2
 
-Dieser Stand gehört ausschließlich auf `feature/arcade-v2`. Die Live-Version
-auf `main` bleibt WORDLE DE 1.0. Keine neuen Arcade-Modi sind bereits spielbar;
-enthalten sind Session-Grundlage, verlustfreie Schema-1→2-Migration und Wortaudit.
-Keine Zwischenversion auf den produktiven Pages-Origin veröffentlichen.
+Ausschließlich `feature/arcade-v2`. Doppeltes Wordle ist hier spielbar:
+zwei unterschiedliche Fünfbuchstabenwörter, acht gemeinsame Versuche, eigene
+Statistik, gespeicherte Sessions und spoilerfreies Teilen. `main` bleibt Version 1.0.
+Keine Veröffentlichung, keine produktive Pages-Änderung und kein Merge.
 
-- Architektur: [docs/ARCHITECTURE_V2.md](docs/ARCHITECTURE_V2.md)
+- Phase 2 / Funktionen, Architektur, Risiken: [docs/PHASE_2_REPORT.md](docs/PHASE_2_REPORT.md)
+- Tatsächliche Tests und offene Gerätechecks: [TESTING.md](TESTING.md)
+- Grundlage: [docs/ARCHITECTURE_V2.md](docs/ARCHITECTURE_V2.md)
 - Wortqualität: [WORD_REVIEW.md](WORD_REVIEW.md)
 - Geplanter de-2-Umstieg: [docs/WORD_VERSION_PLAN.md](docs/WORD_VERSION_PLAN.md)
-- Phasenbericht: [docs/PHASE_1_REPORT.md](docs/PHASE_1_REPORT.md)
-- Alle automatisierten Checks: `python tools/test_all.py` (Python 3 + Node.js)
+- Historischer Phase-1-Bericht: [docs/PHASE_1_REPORT.md](docs/PHASE_1_REPORT.md)
+- Abhängigkeitfreie Checks: `python tools/test_all.py` (Python 3 + Node.js)
+
+## Entwicklungsstand lokal prüfen
+
+Branch auschecken, dann `python -m http.server 8020 --bind 127.0.0.1` im
+Projektordner und `http://localhost:8020` öffnen. Im Menü **Arcade → Doppeltes
+Wordle** wählen. Eine laufende Session wird über denselben Menüeintrag fortgesetzt.
+Nur auf einem separaten Entwicklungs-Origin testen; den bestehenden Live-Origin
+und dessen Worker/Statistik nicht für Zwischenversionen verwenden. Falls der
+Localhost-Port schon eine ältere Testversion cached, einen frischen Port verwenden.
+
+Die folgenden Installations-/Pages-Anleitungen dokumentieren Version 1.0.
+Sie sind **keine Freigabe**, diesen Entwicklungsbranch zu veröffentlichen.
+Es wurde in Phase 2 keine neue eingebettete Einzeldatei erstellt.
 
 ---
 

@@ -1,3 +1,64 @@
+# Phase 2 · Doppeltes Wordle, ausschließlich Entwicklungsbranch
+
+Tatsächlich ausgeführt: `python tools/test_all.py` — **62 Testgruppen bestanden**.
+
+| Suite | Gruppen | Art |
+|---|---:|---|
+| `tests/engine.test.cjs` | 8 | Regeln, Daten, Konfiguration |
+| `tests/app.test.cjs` | 8 | Bisherige Modi, DOM-Adapter |
+| `tests/sw.test.cjs` | 4 | Offline-/Precache-Adapter |
+| `tests/double.test.cjs` | 10 | Doppel-Regeln, Statistik, Backups |
+| `tests/double-app.test.cjs` | 11 | Doppel-Bedienung, DOM-Adapter |
+| `tests/storage.test.cjs` | 10 | Schema-1/2, Sessions, Tagesrätsel |
+| `tests/app-storage.test.cjs` | 6 | Migration in der UI, DOM-Adapter |
+| `tests/audit.test.py` | 5 | Unveränderte Wortbasis, Audit |
+| **Gesamt** | **62** | **Bestanden** |
+
+Zusätzlich: Syntaxprüfung von sieben Runtime-JS-Dateien, Syntaxprüfung des
+optionalen Browserchecks und `git diff --check`. Der DOM-Adapter lädt jetzt die
+Scripts in der tatsächlichen Reihenfolge aus `index.html`; dadurch werden fehlende
+Einstiegsdatei-Abhängigkeiten mitgeprüft. Offline-Adapter deckt alle 15 Assets ab.
+
+## Browserprüfung: versucht, nicht bestanden / nicht ausgeführt
+
+Playwright ist in der Entwicklungsumgebung vorhanden, Chromium jedoch nicht.
+Der Installationsversuch scheiterte an einem unbrauchbaren Downloadarchiv.
+`tests/browser-double.cjs` wurde gestartet und scheiterte beim Browserstart:
+„Executable doesn't exist“. Es wurde **kein Layout gerendert**, keine reale
+Touchbedienung, Geräteinstallation oder Offline-Browserprüfung durchgeführt.
+Dies ist kein Fehler in einem ausgeführten Spieltest und kein Browser-Pass.
+
+Optionaler reproduzierbarer Browserlauf auf einer Umgebung mit Playwright und
+Chromium: `node tests/browser-double.cjs`. Diese Entwicklungsabhängigkeit ist
+nicht Teil der App. Das Script startet einen temporären lokalen Server und prüft
+320, 360, 390, 430 und 1000 Pixel, Touch-Taps, Hardwareeingaben, Rasterwechsel,
+Spielgewinn, horizontalen Überlauf und Offline-Neuladen im Unterverzeichnis.
+Sein Ablauf konnte hier noch nicht in einem Browser validiert werden.
+
+## Noch notwendige manuelle Doppel-Checks
+
+- [ ] Android Chrome, Samsung Internet, iPhone Safari und installierte iPhone-PWA.
+- [ ] Breiten 320/360/390/430 px, insbesondere 320 × 568 und 360 × 640:
+  acht Zeilen, beide Karten und Tastatur; bei nötigem Scrollen bleibt alles erreichbar.
+- [ ] Desktop ab 800 px: beide Raster sichtbar, gewählte Tastatur eindeutig.
+- [ ] Alle acht Kartenhinweise lesbar; Antippen und horizontales Wischen wechseln.
+- [ ] Flip beider Karten, aktives großes Raster und Gewinnübergang visuell passend;
+  reduzierte Bewegung im OS und in den Einstellungen deaktiviert Animationen.
+- [ ] Fingerbedienung und physische Ä/Ö/Ü/ß/ẞ, Enter, Backspace; rasches Tippen.
+- [ ] Ein Wort lösen, pausieren, Browser vollständig beenden, fortsetzen;
+  Ziele, Eingabe, Hinweise, Auswahl und gelöstes Raster bleiben erhalten.
+- [ ] Abbruch zunächst ablehnen, danach bestätigen; genau eine Niederlage.
+- [ ] Share-Sheet Android/iOS, Clipboard, verweigerte Berechtigung, manueller Dialog;
+  kein Lösungswort im Text, keine zusätzlichen Rasterzeilen nach einem Sieg.
+- [ ] JSON auf dem Handy herunterladen, im zweiten Browser importieren;
+  Import abbrechen/bestätigen; klassische Daten bleiben erhalten.
+- [ ] Auf isoliertem HTTPS-/Localhost-Origin installieren, Flugmodus, Neustart;
+  sämtliche neuen Dateien verfügbar. Produktives Cache-Update erst beim Gesamt-Release.
+
+---
+
+## Historischer Prüfstand Phase 1
+
 # Phase 1 · WORDLE DE 2.0, ausschließlich Entwicklungsbranch
 
 Gesamtlauf: `python tools/test_all.py` (Python 3 + Node.js, keine Pakete).
