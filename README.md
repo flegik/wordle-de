@@ -1,3 +1,37 @@
+# Phase 6 · Wort-Duell im Entwicklungsbranch
+
+Nur `feature/arcade-v2`, keine Veröffentlichung. Unter **ENTDECKEN & FREUNDE →
+Wort-Duell** eine Zufalls-Challenge mit 4–7 Buchstaben erstellen, Link teilen und
+selbst spielen; oder ein gültiges Wunschwort festlegen und Freunde raten lassen.
+Wunschwort-Erstellung zählt nicht als Spiel des Erstellers. Globale Hard-Einstellung
+bleibt erhalten, Duelle verwenden normale Regeln.
+
+Links öffnen zunächst eine Einladung. Derselbe Link setzt die gespeicherte
+Challenge fort oder zeigt das abgeschlossene Ergebnis. Mehrere Herausforderungen
+bleiben im Duell-Menü verfügbar. Pause bewahrt Draft/Hinweise, bestätigter Abbruch
+beendet dieselbe lokale Challenge endgültig. Schema-2-Backups umfassen alles.
+
+Zufalls-Ergebnisse als Emoji/Text zurückschicken und optional den Ergebniscode
+im Ergebnisbildschirm vergleichen. Weniger erfolgreiche Versuche gewinnt, keine
+Zeitwertung. Checksumme/Encoding sind keine Verschlüsselung, Fremdergebnisse nicht
+verifiziert. Eigene Duellstatistik zählt gelöste Rätsel, keine Vergleichssiege.
+
+**Noch keine öffentlich nutzbaren 2.0-Links:** Live 1.0 versteht Duelle nicht.
+Für Tests auf isoliertem Origin lokal `python -m http.server 8080` im Projekt
+starten, Desktop `http://localhost:8080/` öffnen. Eigener HTTPS-Testhost für
+Freundes-/Gerätetests; produktive Pages dafür nicht verändern. Dateiöffnung kann
+spielen, lokale Datei-Links lassen sich nicht öffentlich mit Freunden verwenden.
+PWA/Service Worker brauchen HTTPS oder localhost. Safari und installierte PWA
+können getrennte Speicher/Linkwege haben; automatisch in der PWA öffnen wird
+nicht garantiert. Ohne vorhandenes Offline-Paket braucht Erstöffnung Internet.
+
+Prüfungen: `python tools/test_all.py` → **253 Gruppen bestanden**. Browsercheck
+`node tests/browser-duel.cjs` versucht, Chromium fehlt; reale Gerätechecks offen.
+Details: [Phase 6](docs/PHASE_6_REPORT.md), [Linkformat](docs/DUEL_FORMAT.md),
+[Tests](TESTING.md), [Wortversionsplan](docs/WORD_VERSION_PLAN.md).
+
+---
+
 # Entwicklungsstand WORDLE DE 2.0 · Phase 5
 
 Ausschließlich `feature/arcade-v2`. Doppeltes Wordle und Wordle Tower sind hier

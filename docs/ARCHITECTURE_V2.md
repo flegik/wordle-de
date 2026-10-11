@@ -223,3 +223,32 @@ weiter aus `DoubleUI.keyboard`. Controller in `app.js` schützt Eingaben, bestä
 Abbruch/Ersetzung und speichert über den gemeinsamen `storeSession`. Das Raster
 nutzt einen begrenzten Scrollbereich mit aktueller Zeile, Tastatur/Kategorie bleiben
 außerhalb. Drei neue Runtime-Assets sind im Precache; Cache-Version bleibt v1.
+
+
+## Phase 6 · Duellvertrag und versionierte Einladungen
+
+`duel-links.js` prüft begrenztes kanonisches Fragment-JSON, Format/Wort-/Regel-
+version, UUID, Unicode und variantenspezifischen Pool vor Session-Erstellung.
+`duel.js` verwendet genau eine bestehende Round und die kanonischen Attempts;
+keine neue Wordle-Auswertung. `duelContract:1` aktiviert den strengen Modusvertrag,
+alte unmarkierte Prototypen bleiben kompatibel. Session-ID = `duel:<challengeId>`.
+
+Noch ungespielte eigene Einladungen optional in `duelChallenges`; nach Annahme
+random in Session umwandeln und Pending löschen. Eigenes Wunschwort ist bereits
+bekannt, deshalb nur Sharing statt eigener Teilnahme. Fremde Links öffnen zuerst
+Einladung ohne Session/Event. Dieselbe ID startet nie ein zweites gewertetes Spiel;
+abweichender Inhalt wird zurückgewiesen, andere IDs können parallel bestehen.
+
+Storage validiert neue Verträge, Pending und exakt passenden Event-Snapshot in
+Schema 2. Ergebnisstatistik separat, klassischer Durchschnitt unverändert.
+Kurzlebiger lokaler Freundesvergleich bleibt ausschließlich im UI-Arbeitsspeicher
+und enthält keine eigene Wertung. Sharing/Code/Checksumme nicht authentifiziert.
+
+`ThemeUI.wordGame` ist die gezielt extrahierte gemeinsame Ein-Runden-Ansicht,
+mit vorhandener Tastatur und innerem Scrollbereich. Themen bleiben Wrapper mit
+Kategorie/Hard Mode; Duell übergibt Titel, Variante und normale Keyboardfarben.
+Drei neue Runtime-Assets im Entwicklungs-SW; Cache v1 unverändert.
+
+Vollständige Verträge/Grenzen: DUEL_FORMAT.md und PHASE_6_REPORT.md. Historisches
+de-1 zur späteren Wortregistry behalten; Duell-Link enthält immer exaktes Wort
+und Originalversion, nie veränderlichen Listenindex. Keine de-2-Aktivierung hier.

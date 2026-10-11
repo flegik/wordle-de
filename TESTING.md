@@ -1,3 +1,45 @@
+# Phase 6 · tatsächliche Prüfungen und offene Gerätechecks
+
+Baseline 188 erneut erfolgreich. `python tools/test_all.py`: **253 Gruppen
+bestanden** (188 bisherige + 33 Duell-Codec/Regeln/Storage + 32 Controller/Sharing).
+17 Runtime-Syntaxchecks, Browser-Script-Syntax und `git diff --check` bestanden.
+25 Precache-URLs im SW-Adapter. de-1-Wörter/Audit und Tagesfixtures unverändert.
+
+`node tests/browser-duel.cjs` versucht: **Chromium-Executable fehlt**, vor Start
+abgebrochen. Kein Download, keine ausgeführten Layout-/Touch-/PWA-Gerätetests.
+VM-/SW-Adapter und gefakte Share-APIs sind keine Browser-/Gerätezertifizierung.
+Browser-Skript vorbereitet für 320×568, 360×640, 390×844, 430×932, Desktop und
+Querformat, jeweils zwei unabhängige Kontexte, Touch/Hardware, Reload, Vergleich,
+sowie Offline unter `/wordle-de/`; Ablauf noch real zu prüfen.
+
+## Manuell vor Release · ausschließlich isolierter Test-Origin
+
+- Android Chrome, Samsung Internet, iPhone Safari, Desktop; Dark/Light,
+  reduzierte Bewegung, 320/360/390/430px, Querformat, Safe Areas und Texteingabe.
+- Zwei Geräte: Zufalls-Duell teilen, unbekanntes exakt gleiches Wort spielen,
+  Ergebnisse zurückschicken, weniger Versuche/gleich/unsolved vergleichen.
+- Wunschwort (LEGAT, MICH, KÄSE, STRAẞE), Ersteller nicht mitgewertet,
+  Umlaute/Hardware/Touch, Auto-Korrektur, native Keyboard nur beim Erstellen.
+- Einladung aus WhatsApp, nativer Share, Clipboard erlaubt/verweigert,
+  manuelle Kopie; initialer Link und Linkwechsel, ungültiger/alter Versionslink.
+- Browser/PWA schließen, Reload mit Draft, laufende/abgeschlossene Challenge
+  erneut öffnen, mehrere parallel, Abbruch bestätigen/abbrechen. Keine neue Wertung.
+- Ankommender Link während Speedrun/Flip, nichts überschreiben; Hintergrund/
+  Vordergrund, Browser-Tabs/gleichzeitige gespeicherte Änderungen.
+- Installierte Android-/iPhone-PWA und Safari-Kontext getrennt prüfen;
+  automatische Appöffnung/Speicherteilung nicht voraussetzen.
+- Offline-Paket laden, Verbindung trennen, gespeicherte Duelle fortsetzen,
+  vorhandenen Link im gecachten Kontext öffnen. Erstöffnung ohne Paket braucht Netz.
+- Schema-1/2/Arcade/Duell-Backup exportieren und nach Bestätigung importieren,
+  Ergebnisse/IDs/Drafts erhalten; beschädigten Import abweisen. Quota-Fehler prüfen.
+- Live v1→v2-Upgrade erst nach Releasefreigabe mit neuer Cacheversion und
+  dem in WORD_VERSION_PLAN beschriebenen noch offenen Konfliktkonzept prüfen.
+
+Es fand kein produktives Update statt. Vergleichscodes sind keine Signaturen;
+kontrolliert manipulierte gültige Payloads sind technisch konstruierbar.
+
+---
+
 # Phase 5 · Themen-Wordle, ausschließlich Entwicklungsbranch
 
 Tatsächlich ausgeführt: `python tools/test_all.py` — **188 Testgruppen bestanden**.
