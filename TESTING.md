@@ -1,3 +1,56 @@
+# Phase 5 · Themen-Wordle, ausschließlich Entwicklungsbranch
+
+Tatsächlich ausgeführt: `python tools/test_all.py` — **188 Testgruppen bestanden**.
+Baseline vor Änderungen: 145 Gruppen aus Phase 4 bestanden. Neu: 23 Themen-
+Regel-/Daten-/Storage-Gruppen, 17 Controller-Gruppen und 3 Build-/Redaktionschecks.
+14 Runtime-Syntaxprüfungen; `node --check tests/browser-theme.cjs` und
+`git diff --check` bestanden. SW-Adapter prüft **22 Precache-URLs** vollständig,
+auch unter Unterverzeichnis. Alle bisherigen 145 Gruppen, 1461 Tagesrätsel-
+Fixtures und der reproduzierbare de-1-Audit bestehen weiterhin.
+
+Datenchecks sind objektiv: Kategorie-IDs, Quellen-/Auditabgleich, gültige
+Basislösungen, NFC/ẞ/Längen, Duplikate, Mindestpoolgröße und genau neun aktive
+Kombinationen. Redaktionelle Themenzugehörigkeit/Bekanntheit ist ausdrücklich
+keine automatisch beweisbare Eigenschaft; vollständige Listen und Zweifelsfälle
+stehen in `docs/THEME_WORDS.md`. Keine angebliche linguistische Zertifizierung.
+
+Regel-/Controllerchecks: Allgemeinwörter außerhalb des Themas als Tipps,
+klassische Limits, bestehender Hard Mode mit Mehrfachbuchstaben, Sieg/Verlust,
+Doppel-Enter, Kategorie-/Längenwechsel nur nach Bestätigung, Pause/Reload/Draft,
+Hard-Konfiguration am Start, einmalige Abbruch-/Ergebniswertung, neue Runde in
+selber Auswahl, getrennte Statistiken mit Kategorien-/Längenfilter, Backups,
+Beuteldurchlauf/Refill und nahezu erschöpfter Cross-Kategorie-Pool, manipulierte
+Versionen/Kategorien/Beutel, historische Version über Registry und sharing ohne Ziele.
+
+**Browserstatus:** `node tests/browser-theme.cjs` tatsächlich gestartet, scheitert
+vor Browserstart am fehlenden Chromium-Executable. Kein Download versucht.
+Keine erfolgreichen tatsächlichen Render-/Touch-/Android-/Safari-/PWA-/Offline-
+Browsertests. Der optionale Check ist syntaktisch gültig, sein Browserablauf
+bleibt unbestätigt. Mit Playwright und Chromium als Entwicklungswerkzeugen:
+`node tests/browser-theme.cjs` (isolierter Localhost-Origin mit Unterverzeichnis).
+Vorgesehene Größen: 320×568, 360×640, 390×844, 430×932, 1000×800 und 640×360.
+
+## Offene manuelle Checks Phase 5
+
+- Alle vier Kategorie- und neun Längen-Auswahlen, gesperrte Controls, Lesbarkeit,
+  lange Namen, Dark/Light und reduzierte Bewegung auf kleinen Geräten/Querformat.
+- Android Chrome/Samsung Internet und iPhone Safari, Browser und installierte PWA:
+  Safe Areas, vollständige Tastatur, aktuelle Zeile, Scrollen ohne Fehleingaben,
+  Hardware-/Touch-Enter/Backspace sowie Ä/Ö/Ü/ẞ.
+- Hard Mode mit gelben/grünen und mehrfach vorkommenden Buchstaben; Änderung
+  der globalen Einstellung darf laufende Runden nicht verändern.
+- Reload/Pause/Kategoriewechsel/Abbruchbestätigung, Backup-Import/-Export aus
+  Schema 1 und 2, fremde Kategorien und korrupte Daten, Quota-/Zugriffsfehler.
+- Echter Web Share/Clipboard-/manueller Fallback ohne Lösungswörter.
+- Erstinstallation, Offline-Kategorien und vollständige Offline-Runden auf
+  **frischem Test-Origin**. Späteres Upgrade braucht eigene Release-Cache-Version.
+- Redaktionelle gemeinsame Zweitprüfung der expliziten Listen vor Veröffentlichung;
+  keine unbekannten Begriffe zur Erfüllung eines Zahlenziels nachschieben.
+
+---
+
+## Historischer Prüfstand Phase 4
+
 # Phase 4 · Speedrun, ausschließlich Entwicklungsbranch
 
 Ausgeführt: `python tools/test_all.py` — **145 Testgruppen bestanden**.

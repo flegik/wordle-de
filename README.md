@@ -1,11 +1,14 @@
-# Entwicklungsstand WORDLE DE 2.0 · Phase 4
+# Entwicklungsstand WORDLE DE 2.0 · Phase 5
 
 Ausschließlich `feature/arcade-v2`. Doppeltes Wordle und Wordle Tower sind hier
-spielbar. Speedrun ergänzt 180 Sekunden aktive Vordergrundzeit, zufällige
+spielbar. Themen-Wordle bietet vier kuratierte Kategorien und neun freigegebene
+Kategorie-Längen-Kombinationen. Speedrun ergänzt 180 Sekunden aktive Vordergrundzeit, zufällige
 Wortlängen, Punkte und eigene Highscores. Tower bietet vier Etagen (4→5→6→7), ein gemeinsames Budget von 20
 Versuchen, gespeicherte Übergänge und eigene Rekorde. `main` bleibt Version 1.0.
 Keine Veröffentlichung, keine produktive Pages-Änderung und kein Merge.
 
+- Phase 5 / Themenmodus und Wortqualität: [docs/PHASE_5_REPORT.md](docs/PHASE_5_REPORT.md)
+- Themenlisten vollständig und prüfbar: [docs/THEME_WORDS.md](docs/THEME_WORDS.md)
 - Phase 4 / Speedrun, Timer und Grenzen: [docs/PHASE_4_REPORT.md](docs/PHASE_4_REPORT.md)
 - Phase 3 / Tower-System, Befunde, Risiken: [docs/PHASE_3_REPORT.md](docs/PHASE_3_REPORT.md)
 - Phase 2 / Funktionen, Architektur, Risiken: [docs/PHASE_2_REPORT.md](docs/PHASE_2_REPORT.md)
@@ -29,6 +32,14 @@ Bei Hintergrundwechsel oder Pause steht die Uhr; „Speedrun fortsetzen“ nimmt
 das gespeicherte Budget wieder auf. Kein Countdown und keine Lade-Wartezeit.
 Zum Abbrechen erst pausieren, dann ausdrücklich bestätigen. Highscores und
 Statistiken sind vollständig von den anderen Modi getrennt.
+
+Themen-Wordle: **Entdecken & Freunde → Themen-Wordle**. Kategorie und verfügbare
+Wortlänge wählen, dann „Themenrunde starten“. Tiere: 5; Natur und Essen: 4–6;
+Haushalt: 5–6. Gesperrte Längen haben weniger als 25 kuratierte Lösungen.
+Nur die Lösung gehört zum Thema; alle allgemeinen Wörter bleiben als Tipps erlaubt.
+Eine laufende Runde lässt sich fortsetzen; ein Wechsel benötigt eine Bestätigung,
+bevor die alte Runde als Abbruch erfasst wird. „Nächstes Themenwort“ behält
+Kategorie/Länge. Hard Mode wird beim Start übernommen, Themenstatistiken sind getrennt.
 
 Nur auf einem separaten Entwicklungs-Origin testen; den bestehenden Live-Origin
 und dessen Worker/Statistik nicht für Zwischenversionen verwenden. Falls der

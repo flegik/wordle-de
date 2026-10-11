@@ -174,3 +174,52 @@ Punkte, gelöste Wörter, weniger Versuche, dann vorheriger (älterer) Rekord.
 Die zwei neuen Runtime-Dateien sind im Entwicklungs-Precache. Cache v1 bleibt
 unverändert; für den gemeinsamen Release ist eine neue eindeutige Cache-Version
 und ein echter Upgrade-/Offline-Test erforderlich.
+
+
+## Phase 5: Themes-1 und Single-Word-Theme-Vertrag
+
+`data/themes.js` hält `current` und eine Registry unveränderlicher Themenpakete.
+Jedes Paket hat seine eigene Version, Basiswortversion, Mindestgröße und Kategorien
+mit stabilen IDs, Anzeigenamen, Icons, Beschreibung, indexierten Pools und
+aktivierten Längen. `tools/build_themes.py` kompiliert explizite redaktionelle
+Entscheidungen aus `data/themes/editorial-themes-1.json`; kein Klassifikator.
+Nur Kombinationen mit mindestens 25 beibehaltenen Basislösungen sind verfügbar.
+Globale Wörterbuchdaten und Tageshash bleiben unverändert.
+
+`js/theme.js` ergänzt einen schlanken Modusvertrag `themeContract: 1` mit
+`themeVersion` und `categoryId`, einer einzigen `WordRound` und dem Draft `input`.
+`Sessions`-Verträge, `Engine.evaluate` und `Engine.hardError` bleiben unverändert.
+Hard wird beim Start in die Round kopiert. Themenpool betrifft nur die Lösung;
+Eingaben kommen immer aus dem allgemeinen Wörterbuch der gespeicherten Wortversion.
+
+Schema bleibt 2, Schlüssel bleibt `wordle-de:v2`. Optional `themeBags`:
+`{ '<themeVersion>:<categoryId>:<length>': {remaining: [...], last: 'WORD'} }`.
+Optional `themeLast` vermeidet unmittelbare Wiederholung über Kategorien hinweg.
+Die allgemeine `bags`-/`last`-Struktur wird weder umbenannt noch geändert.
+Pooldurchlauf per Fisher-Yates-Beutel, erst nach Ausschöpfung neu mischen.
+Seltene Ausnahme: besteht der Rest aus genau dem zuletzt in einer anderen Kategorie
+gezogenen Wort, wird ein anderes Poolwort gezogen und der Rest für den nächsten
+Zug behalten. Damit hat unmittelbare Wiederholungsvermeidung Vorrang vor dem
+ansonsten vollständigen Durchlauf. Auswahl und jeder Tipp werden sofort gespeichert.
+
+Storage prüft Theme-Vertrag, Versionszugehörigkeit, aktive Länge, Ziel, Abschluss,
+Draft, Beutel und Ergebnis-Snapshots. Alte Schema-2-Daten benötigen diese Felder
+nicht. Generische historische Theme-Prototypen ohne Vertragsfelder bleiben erhalten,
+werden aber nicht als freigegebene Themenrunden umgedeutet. Unvollständiger neuer
+Vertrag wird abgewiesen. Ergebnisse ergänzen flach Kategorie, Themenversion und
+Länge; einmalige IDs/Abgleich mit Session verhindern doppelte Wertung.
+Eigene E.summary-Projektion zählt nur Theme-Events, mit Kategorie-/Längenfiltern.
+
+Neue Poolversionen müssen **hinzugefügt**, nicht in themes-1 hineineditiert werden.
+Historische Sessions und Beutel lösen ihr gespeichertes Paket auf. Ein späteres
+de-2 benötigt zusätzlich die bereits geplante globale Wortversionsregistry, um
+alte Wortpakete bereitzustellen; diese Migration bleibt offen. Ein Test simuliert
+eine neue aktuelle Themenversion und validiert themes-1 weiterhin unverändert.
+Neue Kategorienversionen brauchen außerdem Statistikfilter für die Vereinigungsmenge
+historisch bekannter IDs, falls Kategorien jemals aus der aktuellen Auswahl entfallen.
+
+`js/theme-ui.js` rendert Auswahl, Spiel, Ergebnis und Statistik, die Tastatur stammt
+weiter aus `DoubleUI.keyboard`. Controller in `app.js` schützt Eingaben, bestätigt
+Abbruch/Ersetzung und speichert über den gemeinsamen `storeSession`. Das Raster
+nutzt einen begrenzten Scrollbereich mit aktueller Zeile, Tastatur/Kategorie bleiben
+außerhalb. Drei neue Runtime-Assets sind im Precache; Cache-Version bleibt v1.
