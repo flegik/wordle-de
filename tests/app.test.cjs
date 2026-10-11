@@ -1,22 +1,8 @@
 /* A minimal DOM adapter exercises application state, not browser layout. */
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.join(__dirname,'..');
-function harness(store=new Map()){
- const timers=new Map();let seq=0;
- class El{constructor(){this.innerHTML='';this.textContent='';this.dataset={};this.open=false;this.classList={add(){},remove(){},toggle(){}};this.handlers={};}addEventListener(k,fn){this.handlers[k]=fn;}querySelector(){return new El();}querySelectorAll(){return [];}showModal(){this.open=true;}close(){this.open=false;}append(){}click(){}remove(){}select(){}}
- const els=new Map();const get=s=>{if(!els.has(s))els.set(s,new El());return els.get(s);};
- const doc=new El();doc.querySelector=get;doc.body=new El();doc.createElement=()=>new El();
- const win=new El();const downloads=[];class TestURL extends URL{static createObjectURL(blob){downloads.push(blob);return 'blob:test';}static revokeObjectURL(){}}
- let seed=123456;const seededMath=Object.create(Math);seededMath.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
- const context={console,document:doc,window:win,navigator:{},location:{protocol:'file:'},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setTimeout:(fn)=>{timers.set(++seq,fn);return seq;},clearTimeout:id=>timers.delete(id),setInterval(){},matchMedia:()=>({matches:false}),Blob,URL:TestURL,Date,Math:seededMath,crypto:require('node:crypto').webcrypto,isSecureContext:false};
- vm.createContext(context);for(const f of ['data/words.js','js/engine.js','js/app.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),context,{filename:f});
- const app=get('#app');
- const click=(action,data={})=>app.handlers.click({target:{closest:()=>({dataset:{action,...data}})}});
- const type=word=>{for(const c of word)app.handlers.click({target:{closest:()=>({dataset:{key:c}})}});};
- const enter=()=>app.handlers.click({target:{closest:()=>({dataset:{key:'Enter'}})}});
- const flush=()=>{for(let i=0;timers.size&&i<20;i++){const batch=[...timers.values()];timers.clear();batch.forEach(f=>f());}};
- return {context,store,downloads,click,type,enter,flush,html:()=>app.innerHTML,state:()=>JSON.parse(store.get('wordle-de:v1')),get,app};
-}
+const harness=require('./helpers/app-harness.cjs');
+
 let count=0;function test(name,fn){fn();count++;console.log('✓ '+name);}
 function setup(n){const h=harness();h.click('classic');h.click('length',{n:String(n)});h.click('launch-classic');return h;}
 test('All 4–7 letter UI rounds can be won and reload into a valid save',()=>{for(const n of [4,5,6,7]){const h=setup(n);assert.equal(h.state().games.classic.length,n);h.type(h.state().games.classic.target);h.enter();assert.equal(h.state().events.length,1);h.flush();assert(h.html().includes('Dein persönlicher Vergleich'));const r=harness(h.store);assert.equal(r.state().events.length,1);}});
@@ -24,11 +10,11 @@ test('Rapid input while flip is active cannot submit twice',()=>{const h=setup(5
 test('Typing and pause/reload preserve the unfinished round',()=>{const h=setup(7);h.type('ÄÖẞ');const original=h.state().games.classic.target;h.click('home');assert.equal(h.state().events.length,0);const r=harness(h.store);r.click('resume',{mode:'classic'});assert.equal(r.state().games.classic.input,'ÄÖẞ');assert.equal(r.state().games.classic.target,original);});
 test('Daily is deterministic and completion is counted once',()=>{const h=harness();h.click('start',{mode:'daily'});const target=h.state().games['daily:'+new Date().toISOString().slice(0,10)].target;const h2=harness();h2.click('start',{mode:'daily'});assert.equal(h2.state().games['daily:'+new Date().toISOString().slice(0,10)].target,target);h.type(target);h.enter();h.flush();h.click('next');h.click('start',{mode:'daily'});assert.equal(h.state().events.length,1);assert(h.html().includes('Dein persönlicher Vergleich'));});
 test('Streak wins increment; abandonment ends the series with confirmation',()=>{const h=harness();h.click('start',{mode:'streak'});h.type(h.state().games.streak.target);h.enter();h.flush();assert.equal(h.state().streak.current,1);h.click('next');h.click('game-menu');h.get('#abandon').onclick();assert.equal(h.state().events.length,1);h.get('#confirm-action').onclick();assert.equal(h.state().streak.current,0);assert.equal(h.state().streak.best,1);assert.equal(h.state().events[1].abandoned,true);harness(h.store);});
-test('A shuffled pool does not repeat before exhaustion; LEGAT is selectable',()=>{const h=setup(5);let s=h.state();s.bags[5]=['LEGAT'];h.store.set('wordle-de:v1',JSON.stringify(s));const r=harness(h.store);r.click('resume',{mode:'classic'});r.type(r.state().games.classic.target);r.enter();r.flush();r.click('next');assert.equal(r.state().games.classic.target,'LEGAT');r.type('legat');r.enter();r.flush();assert.equal(r.state().games.classic.status,'won');r.click('next');const seen=new Set();for(let i=0;i<60;i++){const target=r.state().games.classic.target;assert(!seen.has(target));seen.add(target);r.type(target);r.enter();r.flush();r.click('next');}});
+test('A shuffled pool does not repeat before exhaustion; LEGAT is selectable',()=>{const h=setup(5);let s=h.state();s.bags[5]=['LEGAT'];h.store.set('wordle-de:v2',JSON.stringify(s));const r=harness(h.store);r.click('resume',{mode:'classic'});r.type(r.state().games.classic.target);r.enter();r.flush();r.click('next');assert.equal(r.state().games.classic.target,'LEGAT');r.type('legat');r.enter();r.flush();assert.equal(r.state().games.classic.status,'won');r.click('next');const seen=new Set();for(let i=0;i<60;i++){const target=r.state().games.classic.target;assert(!seen.has(target));seen.add(target);r.type(target);r.enter();r.flush();r.click('next');}});
 test('Random draws lengths before words and exercises all four lengths',()=>{const h=harness(),seen=new Set();for(let i=0;i<50;i++){h.click('start',{mode:'random'});seen.add(h.state().games.random.length);h.type(h.state().games.random.target);h.enter();h.flush();h.click('next');}assert.equal(seen.size,4);});
 (async()=>{
  const h=setup(4);h.type(h.state().games.classic.target);h.enter();h.flush();h.click('export');const backup=JSON.parse(await h.downloads[0].text());assert.equal(backup.events.length,1);
  const r=harness();const file={size:2000,text:async()=>JSON.stringify(backup)};await r.get('#import-file').handlers.change({target:{files:[file],value:'backup.json'}});assert.equal(r.store.size,0);r.get('#confirm-action').onclick();assert.equal(r.state().events.length,1);assert.equal(r.state().games.classic.status,'won');
- const bad={...backup,schema:999};await r.get('#import-file').handlers.change({target:{files:[{size:100,text:async()=>JSON.stringify(bad)}],value:'bad.json'}});assert.equal(r.state().schema,1);console.log('✓ JSON export and validated import require confirmation; invalid versions are rejected');count++;
+ const bad={...backup,schema:999};await r.get('#import-file').handlers.change({target:{files:[{size:100,text:async()=>JSON.stringify(bad)}],value:'bad.json'}});assert.equal(r.state().schema,2);console.log('✓ JSON export and validated import require confirmation; invalid versions are rejected');count++;
  console.log(`${count} application state checks passed (DOM adapter; no real browser).`);
 })().catch(e=>{console.error(e);process.exitCode=1;});
