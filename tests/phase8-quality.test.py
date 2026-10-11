@@ -3,7 +3,7 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('builder',R/'tools/build_quality_v2.py');b=importlib.util.module_from_spec(spec);spec.loader.exec_module(b)
 for p,text in b.outputs().items():assert p.read_text()==text,p
-old=b.read(R/'data/words-de-2.js');new=b.read(R/'data/words-de-2.1.js');q=b.read(R/'data/word-quality.js');review=json.loads((R/'data/quality/phase8/review.json').read_text())
+old=b.read(R/'data/words-de-2.js');new=b.read(R/'data/words-de-2.2.js');q=b.read(R/'data/word-quality.js');review=json.loads((R/'data/quality/phase8/review.json').read_text())
 assert len(review['records'])==5568 and len({r['word'] for r in review['records']})==5568
 assert new['accepted']==old['accepted']
 assert all(r['reasonId']<len(review['reasons']) for r in review['records'])

@@ -1,4 +1,4 @@
-# Wortqualität – Phase 8 / de-2.1
+# Wortqualität – Phase 8 / de-2.2
 
 Der gesamte Phase-7-Bestand von 5.568 Lösungen ist im reproduzierbaren KI-Ledger erfasst. Alle 3.195 ursprünglich offenen Wörter sowie die A-Liste wurden als vollständige Wortlisten gelesen. Keine externe oder menschliche Einzelfreigabe, keine empirische Bekanntheitsmessung.
 
@@ -18,10 +18,10 @@ Der gesamte Phase-7-Bestand von 5.568 Lösungen ist im reproduzierbaren KI-Ledge
 
 Beispiele: DUDEN/TARZAN als problematische Eigennamen; LIIEREN/PESEN wegen geringer voraussichtlicher Wiedererkennbarkeit; ASTA wegen Abkürzungscharakter; APSIS/FUDER/RIEFE als voraussichtlich zu spezialisierte Rätsel. Damit wird keine fehlerhafte Schreibweise oder erfundene Wortbedeutung behauptet. C enthält etwa LEGAT, HAIKU, MARIMBA, PROTON und ROCHADE; es ist keine Restklasse ausschließlich ungeklärter Wörter. Einige Einordnungen werden Spieler anders beurteilen. Lokale Wortmeldungen und spätere redaktionelle Korrekturen bleiben sinnvoll.
 
-2.720 explizite Entscheidungen, 2.848 konservativ beibehaltene Einträge. `reviewStatus: ai-editorial` ist der maßgebliche Prüfstatus. `provisional:false` bedeutet Abschluss dieser KI-Prüfphase, keine Bekanntheitsgarantie.
+2.715 explizite Entscheidungen, 2.853 konservativ beibehaltene Einträge. `reviewStatus: ai-editorial` ist der maßgebliche Prüfstatus. `provisional:false` bedeutet Abschluss dieser KI-Prüfphase, keine Bekanntheitsgarantie.
 
 ## Kompatibilität
 
-de-1 und de-2 bleiben unverändert verfügbar. Aktive historische Lösungen, Duelle, Tagesrätsel, Statistiken und Backups behalten ihre Versionskennung. Neu klassifizierte Auswahlbeutel werden gezielt migriert, ohne bereits verbrauchte Wörter wieder einzufüllen. Keine Schema-3-Migration. Themenversion themes-1 bleibt unverändert.
+de-1, de-2 und der frühe Entwicklungsstand de-2.1 bleiben unverändert verfügbar. Aktive historische Lösungen, Duelle, Tagesrätsel, Statistiken und Backups behalten ihre Versionskennung. Neu klassifizierte Auswahlbeutel werden gezielt migriert, ohne bereits verbrauchte Wörter wieder einzufüllen. Keine Schema-3-Migration. Themenversion themes-1 bleibt unverändert.
 
 Historische Berichte: [de-1](docs/WORD_REVIEW_DE_1.md), [Phase-7/de-2](docs/WORD_REVIEW_DE_2.md).

@@ -23,15 +23,15 @@ def outputs():
   if decision['action']=='remove':excluded.append(w)
   else:classes[w]=decision['action']
   records.append({'word':w,'length':len(w),**decision,'previousClass':q['classes'][w],'sourceAudit':'data/review/word-audit-de-1.json','sourceClassification':r['classification'],'uncertainty':'Spielbekanntheit ist subjektiv; KI-Einschätzung, kein empirischer Bekanntheitsnachweis.'})
- new={'version':'de-2.1','solutions':{n:[w for w in a if w not in excluded] for n,a in old['solutions'].items()},'accepted':old['accepted']}
- quality={'reviewStatus':'ai-editorial','version':'quality-2','wordVersion':'de-2.1','classes':classes,'provisional':False,'pendingReview':[],'policy':'data/quality/phase8/editorial-groups.json','reviewLimit':'AI editorial estimates. Retained group-reviewed words were not individually dictionary-researched.','auditSha256':q['auditSha256']}
+ new={'version':'de-2.2','solutions':{n:[w for w in a if w not in excluded] for n,a in old['solutions'].items()},'accepted':old['accepted']}
+ quality={'reviewStatus':'ai-editorial','version':'quality-3','wordVersion':'de-2.2','classes':classes,'provisional':False,'pendingReview':[],'policy':'data/quality/phase8/editorial-groups.json','reviewLimit':'AI editorial estimates. Retained group-reviewed words were not individually dictionary-researched.','auditSha256':q['auditSha256']}
  reasons=list(dict.fromkeys(r['reason'] for r in records))
  for r in records:
   r['reasonId']=reasons.index(r.pop('reason'));r.pop('reviewer');r.pop('sourceAudit');r.pop('uncertainty')
- review={'reviewer':policy['reviewer'],'sourceAudit':'data/review/word-audit-de-1.json','uncertainty':'Spielbekanntheit ist subjektiv; KI-Einschätzung, kein empirischer Bekanntheitsnachweis.','reasons':reasons,'schema':1,'version':'quality-2','baseWordVersion':'de-2','wordVersion':'de-2.1','method':policy['method'],'ignoredNonSolutionTokens':sorted(set(ignored)),'counts':{c:sum(v==c for v in classes.values()) for c in 'ABC'},'excludedCount':len(excluded),'explicitCount':len(decisions),'retainedCount':len(pool)-len(decisions),'records':records}
+ review={'reviewer':policy['reviewer'],'sourceAudit':'data/review/word-audit-de-1.json','uncertainty':'Spielbekanntheit ist subjektiv; KI-Einschätzung, kein empirischer Bekanntheitsnachweis.','reasons':reasons,'schema':1,'version':'quality-3','baseWordVersion':'de-2','wordVersion':'de-2.2','method':policy['method'],'ignoredNonSolutionTokens':sorted(set(ignored)),'counts':{c:sum(v==c for v in classes.values()) for c in 'ABC'},'excludedCount':len(excluded),'explicitCount':len(decisions),'retainedCount':len(pool)-len(decisions),'records':records}
  for n,a in new['solutions'].items():assert len(a)>150 and all(w in new['accepted'][n] for w in a)
  assert all(classes[w]==c for w,c in {'LEGAT':'C','MONARCH':'B','ZWINGE':'B'}.items())
- return {D/'words-de-2.1.js':'/* AI editorial subset; historic packages unchanged. See WORDLISTS.md. */\nglobalThis.WORDS_DE_21 = '+json.dumps(new,ensure_ascii=False)+';\n',D/'word-quality.js':'/* AI editorial game classes; individual and retained decisions in quality/phase8/review.json. */\nglobalThis.WordQuality = '+json.dumps(quality,ensure_ascii=False)+';\n',D/'quality/phase8/review.json':json.dumps(review,ensure_ascii=False,separators=(',',':'))+'\n'}
+ return {D/'words-de-2.2.js':'/* AI editorial subset; historic packages unchanged. See WORDLISTS.md. */\nglobalThis.WORDS_DE_22 = '+json.dumps(new,ensure_ascii=False)+';\n',D/'word-quality.js':'/* AI editorial game classes; individual and retained decisions in quality/phase8/review.json. */\nglobalThis.WordQuality = '+json.dumps(quality,ensure_ascii=False)+';\n',D/'quality/phase8/review.json':json.dumps(review,ensure_ascii=False,separators=(',',':'))+'\n'}
 if __name__=='__main__':
  for p,text in outputs().items():p.write_text(text)
- print('Generated de-2.1 and complete AI decision ledger; de-1/de-2 preserved.')
+ print('Generated de-2.2 and complete AI decision ledger; de-1/de-2 preserved.')

@@ -1,0 +1,96 @@
+tests/browser-double.cjs exit=1
+browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /workspace/scratch/213b95aacd00/wordle-de/tests/browser-double.cjs:17:26
+    at Object.<anonymous> (/workspace/scratch/213b95aacd00/wordle-de/tests/browser-double.cjs:46:3) {
+  log: [],
+  name: 'Error'
+}
+
+tests/browser-tower.cjs exit=1
+browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /workspace/scratch/213b95aacd00/wordle-de/tests/browser-tower.cjs:16:26
+    at Object.<anonymous> (/workspace/scratch/213b95aacd00/wordle-de/tests/browser-tower.cjs:35:3) {
+  log: [],
+  name: 'Error'
+}
+
+tests/browser-speedrun.cjs exit=1
+browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /workspace/scratch/213b95aacd00/wordle-de/tests/browser-speedrun.cjs:16:26
+    at Object.<anonymous> (/workspace/scratch/213b95aacd00/wordle-de/tests/browser-speedrun.cjs:44:3) {
+  log: [],
+  name: 'Error'
+}
+
+tests/browser-theme.cjs exit=1
+browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /workspace/scratch/213b95aacd00/wordle-de/tests/browser-theme.cjs:16:26
+    at Object.<anonymous> (/workspace/scratch/213b95aacd00/wordle-de/tests/browser-theme.cjs:29:3) {
+  log: [],
+  name: 'Error'
+}
+
+tests/browser-duel.cjs exit=1
+browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /workspace/scratch/213b95aacd00/wordle-de/tests/browser-duel.cjs:6:25
+    at Object.<anonymous> (/workspace/scratch/213b95aacd00/wordle-de/tests/browser-duel.cjs:18:106) {
+  log: [],
+  name: 'Error'
+}
+
+tests/browser-results.cjs exit=1
+browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /workspace/scratch/213b95aacd00/wordle-de/tests/browser-results.cjs:5:51
+    at Object.<anonymous> (/workspace/scratch/213b95aacd00/wordle-de/tests/browser-results.cjs:8:62) {
+  log: [],
+  name: 'Error'
+}
+

@@ -373,3 +373,13 @@ Speedrun Hintergrund/Foreground/pagehide; alte PWA parallel zu neuer;
 Storage-Quoten, gleichzeitige Tabs, bestätigte Übernahme und Sicherung beider
 Stände; echte Installation/Offline/atomare Cache-Aktualisierung mit neuer
 Release-Cache-Version. Noch keine Release-Freigabe.
+
+## Phase 8: Ergebnisse, PNG und Release-Gates
+
+`python tools/test_all.py`: vollständige Engine-, Controller-, Daten-, Migrations- und Service-Worker-Adaptertests. Neue Prüfungen: echte Ergebniszeilen aller Modi, keine erfundenen Doppel-/Tower-Zeilen, auswählbare Speedrun-Runden, historische Wortpakete/Beutel, wiederaufrufbare klassische Ergebnisse, PNG-Spoilergrenze, native Capability-Erkennung und fehlgeschlagene atomare Cache-Installation.
+
+`node tools/verify_result_png.cjs`: native Canvas-Testadaption, echte PNG-Signatur und Decoder, alle Modi, Gewinne/Niederlagen/Abbrüche, Sonderzeichen, lange Tower-Historie, identischer wiederholter Export und unveränderte Session-/Statistikdaten. Kein Browsernachweis.
+
+`node tests/browser-results.cjs`: vorbereitete isolierte localhost-Prüfung bei 320×568, 360×640, 390×844, 430×932, Desktop und Querformat, Touch, Raster, PNG-Decodierung und Offline-Start. Native Sharing wird dabei nur gemockt. Alle sechs Browser-Skripte wurden gestartet, scheiterten hier schon vor Browserstart an fehlendem Chromium; Installation scheiterte an ungültigem Downloadarchiv.
+
+Offen vor Veröffentlichung: dieselben Breiten real rendern; Hardwaretastatur und Scrollbedienung; Safari/iPhone Datei-Sharing, Download/Long-Press und Safe Area; Chrome/Android/Samsung Internet Datei-Sharing; installierte PWA; Altversion-Update bei aktiven Runden/Speedrun; Hintergrund/Foreground, Offline-Neustart, fehlgeschlagenes Update, parallele Tabs/alte PWA und Geräte-Speichergrenzen. Keine dieser Geräteprüfungen wird als bestanden behauptet. Produktive Origin nicht verwenden.

@@ -1,3 +1,7 @@
+# Phase-8-Aktualisierung
+
+Aktiv im Entwicklungsbranch ist **de-2.2 / quality-3**. de-1, de-2 und der erste Phase-8-Zwischenstand de-2.1 bleiben historische Kompatibilitätspakete. `tools/build_quality.py` schreibt nun den historischen Index `data/word-quality-de-2.js`; `tools/build_quality_v2.py` erzeugt den aktiven Index und den vollständigen KI-Ledger. Die unten stehenden Phase-7-Angaben sind historisch. Endgültige Zahlen und Grenzen: [PHASE_8_REPORT.md](PHASE_8_REPORT.md), [WORD_REVIEW.md](../WORD_REVIEW.md).
+
 # de-2 Qualität und Reproduktion
 
 `python tools/build_quality.py` erzeugt offline `words-de-1.js`,

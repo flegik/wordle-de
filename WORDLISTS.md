@@ -40,3 +40,7 @@ Qualitätsdaten: `data/word-quality.js`, Policy und manuelle Prüfliste unter
 Details und reale Zahlen: WORD_REVIEW.md und docs/WORD_QUALITY.md.
 Reproduktion: `python tools/build_quality.py`; alte Quellen/Generator bleiben
 unverändert. Die ursprünglichen Audit-Belege werden vollständig erhalten.
+
+## Phase 8: de-2.2
+
+Der neue Lösungspool ist eine redaktionelle Teilmenge der bisherigen Wörter, mit unverändertem Eingabepool. Keine neue externe Datenquelle; sämtliche bestehenden Quellen-/Lizenzhinweise gelten weiterhin. Klassifikation und Bekanntheitsschätzungen stammen von KI, nicht von einer externen lexikografischen Freigabe. Historische de-1/de-2/de-2.1-Daten bleiben verfügbar. Der vollständige Entscheidungsledger und Generator liegen unter `data/quality/phase8/` bzw. `tools/build_quality_v2.py`. Details: WORD_REVIEW.md.

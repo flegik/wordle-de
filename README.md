@@ -201,3 +201,15 @@ Simulation: `node tools/simulate_selection.cjs`.
 Messung: `node tools/benchmark_phase7.cjs`.
 Berichte: docs/PHASE_7_REPORT.md, WORD_REVIEW.md, docs/WORD_SELECTION.md,
 docs/SELECTION_SIMULATION.md, docs/WORD_VERSION_PLAN.md.
+
+## Phase 8 – Entwicklungsstand, keine Veröffentlichung
+
+Ergebnisraster und lokales PNG-Sharing sind für alle neun Modi integriert. „Als Bild teilen“ öffnet eine spoilerfreie Vorschau; Buchstaben/Lösungen erfordern die ausdrückliche Spoiler-Auswahl. Nach Fertigstellung des Bildes öffnet „Bild teilen“ bei unterstütztem Datei-Sharing das native Menü. Sonst „PNG speichern“ oder die Vorschau lange drücken. Text-/Emoji-Sharing bleibt separat verfügbar.
+
+Gespeicherte Ergebnisse sind über die Statistik erreichbar (die letzten 20 vorhandenen Historien, ohne ältere Daten zu löschen). Alte reine Statistikeinträge ohne Wortverlauf können kein Raster liefern. Neue klassische Abschlüsse speichern Eingaben, keine redundanten Farbraster; Arcade-Historien verwenden vorhandene Sessions. Backup enthält beides.
+
+Aktive Wort-/Qualitätsversion: `de-2.2 / quality-3`; Schema und Schlüssel bleiben 2 / `wordle-de:v2`. Alle vorherigen Wörterbücher bleiben verfügbar. Tagesrätsel und themes-1 bleiben unverändert. KI-Prüfung und ihre Grenzen: [WORD_REVIEW.md](WORD_REVIEW.md).
+
+Prüfen: `python tools/test_all.py`. Optionale echte Browserprüfung: `node tests/browser-results.cjs` mit installiertem Playwright/Chromium. Native Canvas-QA: `node tools/verify_result_png.cjs` mit einer nur für Entwicklung erforderlichen `@napi-rs/canvas`-Installation; die Anwendung selbst hat keine externe Laufzeitabhängigkeit.
+
+Der vorbereitete PWA-Cache `v2-final-20261011-b` gehört ausschließlich zum Entwicklungsbranch. Isolierten HTTPS-/localhost-Origin verwenden; nicht auf der produktiven Pages-URL testen. Keine automatische Releasefreigabe. Bericht und offene Gerätetests: [docs/PHASE_8_REPORT.md](docs/PHASE_8_REPORT.md).
