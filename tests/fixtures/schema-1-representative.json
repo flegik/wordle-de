@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "wordVersion": "de-1",
+  "settings": {
+    "light": true,
+    "reduced": true,
+    "sound": false,
+    "hard": true
+  },
+  "events": [
+    {
+      "id": "classic-old",
+      "mode": "classic",
+      "length": 4,
+      "guesses": 2,
+      "win": true,
+      "abandoned": false,
+      "date": "2026-09-01"
+    },
+    {
+      "id": "random-old",
+      "mode": "random",
+      "length": 7,
+      "guesses": 7,
+      "win": false,
+      "abandoned": false,
+      "date": "2026-09-02"
+    },
+    {
+      "id": "streak-1",
+      "mode": "streak",
+      "length": 5,
+      "guesses": 3,
+      "win": true,
+      "abandoned": false,
+      "date": "2026-09-03"
+    },
+    {
+      "id": "streak-2",
+      "mode": "streak",
+      "length": 6,
+      "guesses": 4,
+      "win": true,
+      "abandoned": false,
+      "date": "2026-09-03"
+    },
+    {
+      "id": "streak-3",
+      "mode": "streak",
+      "length": 4,
+      "guesses": 0,
+      "win": false,
+      "abandoned": true,
+      "date": "2026-09-03"
+    },
+    {
+      "id": "daily-old",
+      "mode": "daily",
+      "length": 5,
+      "guesses": 1,
+      "win": true,
+      "abandoned": false,
+      "date": "2026-09-15"
+    }
+  ],
+  "games": {
+    "daily:2026-09-15": {
+      "id": "daily-old",
+      "mode": "daily",
+      "length": 5,
+      "target": "RUDEL",
+      "guesses": [
+        "RUDEL"
+      ],
+      "input": "",
+      "status": "won",
+      "hard": false,
+      "date": "2026-09-15",
+      "started": 1789426800000
+    },
+    "classic": {
+      "id": "paused-umlaut",
+      "mode": "classic",
+      "length": 6,
+      "target": "STRAẞE",
+      "guesses": [
+        "GARTEN"
+      ],
+      "input": "ÄÖẞ",
+      "status": "playing",
+      "hard": true,
+      "date": "2026-10-10",
+      "started": 1791620000000
+    },
+    "random": {
+      "id": "paused-hunni",
+      "mode": "random",
+      "length": 5,
+      "target": "HUNNI",
+      "guesses": [],
+      "input": "HU",
+      "status": "playing",
+      "hard": false,
+      "date": "2026-10-10",
+      "started": 1791620000001
+    }
+  },
+  "bags": {
+    "4": [
+      "ADEL",
+      "ÄHRE"
+    ],
+    "5": [
+      "LEGAT",
+      "HUNNI"
+    ],
+    "6": [
+      "GARTEN",
+      "STRAẞE"
+    ],
+    "7": [
+      "FENSTER"
+    ]
+  },
+  "last": {
+    "4": "AUTO",
+    "5": "HUNNI",
+    "6": "STRAẞE",
+    "7": "FENSTER"
+  },
+  "streak": {
+    "current": 0,
+    "best": 2
+  },
+  "daily": {
+    "2026-09-15": "daily-old"
+  }
+}

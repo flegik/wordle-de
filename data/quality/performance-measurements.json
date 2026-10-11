@@ -1,0 +1,24 @@
+{
+  "runtime": "v24.19.0",
+  "note": "Synthetic legacy events; local Node measurements, not mobile results. Session replay costs and localStorage quota still require device QA.",
+  "runs": [
+    {
+      "events": 100,
+      "validationMs": 1.858,
+      "summaryMs": 0.274,
+      "backupBytes": 17601
+    },
+    {
+      "events": 1000,
+      "validationMs": 1.322,
+      "summaryMs": 0.223,
+      "backupBytes": 174201
+    },
+    {
+      "events": 10000,
+      "validationMs": 12.928,
+      "summaryMs": 0.862,
+      "backupBytes": 1749201
+    }
+  ]
+}

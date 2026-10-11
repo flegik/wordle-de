@@ -23,3 +23,24 @@ Alle Listen werden mit NFC normalisiert, `ß`/`ẞ` als ein Buchstabe vereinheit
 Keine künstlich erzeugten Wörter zum Erhöhen der Zahlen. Die Grundwortquelle ist extern kuratiert, zusätzlich wurde eine Stichprobe geprüft. **Keine vollständige manuelle Einzelprüfung aller 5.574 Lösungen.** Anglizismen wie WRAP, seltenere Fachbegriffe und vereinzelte Grenzfälle sind möglich. Erlaubte Eingaben sind bewusst breiter und enthalten auch Eigennamen; nicht jede Beugung jedes deutschen Wortes ist enthalten. Ein korrektes Wort kann daher abgelehnt werden. Quellen und Lizenzangaben wurden aus den tatsächlich heruntergeladenen Repository-Dateien übernommen; eine darüber hinausgehende historische Herkunftsprüfung der einzelnen Worte ist nicht erfolgt.
 
 Die originalen Quelldateien brauchen nicht im Offline-Cache zu liegen: Zur Laufzeit reicht das generierte `words.js`. Sie bleiben im Projekt zur Lizenzdokumentation und reproduzierbaren Verarbeitung erhalten.
+
+## Phase 7: de-2 ohne Austausch historischer Daten
+
+Neue freie Spiele verwenden auf dem Entwicklungsbranch `data/words-de-2.js`:
+5.568 Lösungen / 15.138 Eingaben. Ausschließlich sechs ausdrücklich freigegebene
+Lösungen und PESEL als Eingabe entfallen. LEGAT bleibt Lösung/Eingabe.
+`data/words-de-1.js` ist bytegleich mit dem eingefrorenen `data/words.js`.
+Daily, historische Spiele und historische Challenges verwenden weiter de-1.
+Beide Pakete unterliegen denselben oben dokumentierten Quellen-/Lizenzbedingungen.
+Die vorhandenen Quellen und Lizenzdateien sind weiter offline im Repository.
+
+Qualitätsdaten: `data/word-quality.js`, Policy und manuelle Prüfliste unter
+`data/quality/`. A/B/C sind vorläufige redaktionelle Spielbalance-Schätzungen;
+3.195 B-Wörter benötigen noch manuelle Bekanntheits-/Rätselprüfung.
+Details und reale Zahlen: WORD_REVIEW.md und docs/WORD_QUALITY.md.
+Reproduktion: `python tools/build_quality.py`; alte Quellen/Generator bleiben
+unverändert. Die ursprünglichen Audit-Belege werden vollständig erhalten.
+
+## Phase 8: de-2.2
+
+Der neue Lösungspool ist eine redaktionelle Teilmenge der bisherigen Wörter, mit unverändertem Eingabepool. Keine neue externe Datenquelle; sämtliche bestehenden Quellen-/Lizenzhinweise gelten weiterhin. Klassifikation und Bekanntheitsschätzungen stammen von KI, nicht von einer externen lexikografischen Freigabe. Historische de-1/de-2/de-2.1-Daten bleiben verfügbar. Der vollständige Entscheidungsledger und Generator liegen unter `data/quality/phase8/` bzw. `tools/build_quality_v2.py`. Details: WORD_REVIEW.md.

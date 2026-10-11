@@ -1,4 +1,95 @@
+# Phase 6 · Wort-Duell im Entwicklungsbranch
+
+Nur `feature/arcade-v2`, keine Veröffentlichung. Unter **ENTDECKEN & FREUNDE →
+Wort-Duell** eine Zufalls-Challenge mit 4–7 Buchstaben erstellen, Link teilen und
+selbst spielen; oder ein gültiges Wunschwort festlegen und Freunde raten lassen.
+Wunschwort-Erstellung zählt nicht als Spiel des Erstellers. Globale Hard-Einstellung
+bleibt erhalten, Duelle verwenden normale Regeln.
+
+Links öffnen zunächst eine Einladung. Derselbe Link setzt die gespeicherte
+Challenge fort oder zeigt das abgeschlossene Ergebnis. Mehrere Herausforderungen
+bleiben im Duell-Menü verfügbar. Pause bewahrt Draft/Hinweise, bestätigter Abbruch
+beendet dieselbe lokale Challenge endgültig. Schema-2-Backups umfassen alles.
+
+Zufalls-Ergebnisse als Emoji/Text zurückschicken und optional den Ergebniscode
+im Ergebnisbildschirm vergleichen. Weniger erfolgreiche Versuche gewinnt, keine
+Zeitwertung. Checksumme/Encoding sind keine Verschlüsselung, Fremdergebnisse nicht
+verifiziert. Eigene Duellstatistik zählt gelöste Rätsel, keine Vergleichssiege.
+
+**Noch keine öffentlich nutzbaren 2.0-Links:** Live 1.0 versteht Duelle nicht.
+Für Tests auf isoliertem Origin lokal `python -m http.server 8080` im Projekt
+starten, Desktop `http://localhost:8080/` öffnen. Eigener HTTPS-Testhost für
+Freundes-/Gerätetests; produktive Pages dafür nicht verändern. Dateiöffnung kann
+spielen, lokale Datei-Links lassen sich nicht öffentlich mit Freunden verwenden.
+PWA/Service Worker brauchen HTTPS oder localhost. Safari und installierte PWA
+können getrennte Speicher/Linkwege haben; automatisch in der PWA öffnen wird
+nicht garantiert. Ohne vorhandenes Offline-Paket braucht Erstöffnung Internet.
+
+Prüfungen: `python tools/test_all.py` → **253 Gruppen bestanden**. Browsercheck
+`node tests/browser-duel.cjs` versucht, Chromium fehlt; reale Gerätechecks offen.
+Details: [Phase 6](docs/PHASE_6_REPORT.md), [Linkformat](docs/DUEL_FORMAT.md),
+[Tests](TESTING.md), [Wortversionsplan](docs/WORD_VERSION_PLAN.md).
+
+---
+
+# Entwicklungsstand WORDLE DE 2.0 · Phase 5
+
+Ausschließlich `feature/arcade-v2`. Doppeltes Wordle und Wordle Tower sind hier
+spielbar. Themen-Wordle bietet vier kuratierte Kategorien und neun freigegebene
+Kategorie-Längen-Kombinationen. Speedrun ergänzt 180 Sekunden aktive Vordergrundzeit, zufällige
+Wortlängen, Punkte und eigene Highscores. Tower bietet vier Etagen (4→5→6→7), ein gemeinsames Budget von 20
+Versuchen, gespeicherte Übergänge und eigene Rekorde. `main` bleibt Version 1.0.
+Keine Veröffentlichung, keine produktive Pages-Änderung und kein Merge.
+
+- Phase 5 / Themenmodus und Wortqualität: [docs/PHASE_5_REPORT.md](docs/PHASE_5_REPORT.md)
+- Themenlisten vollständig und prüfbar: [docs/THEME_WORDS.md](docs/THEME_WORDS.md)
+- Phase 4 / Speedrun, Timer und Grenzen: [docs/PHASE_4_REPORT.md](docs/PHASE_4_REPORT.md)
+- Phase 3 / Tower-System, Befunde, Risiken: [docs/PHASE_3_REPORT.md](docs/PHASE_3_REPORT.md)
+- Phase 2 / Funktionen, Architektur, Risiken: [docs/PHASE_2_REPORT.md](docs/PHASE_2_REPORT.md)
+- Tatsächliche Tests und offene Gerätechecks: [TESTING.md](TESTING.md)
+- Grundlage: [docs/ARCHITECTURE_V2.md](docs/ARCHITECTURE_V2.md)
+- Wortqualität: [WORD_REVIEW.md](WORD_REVIEW.md)
+- Geplanter de-2-Umstieg: [docs/WORD_VERSION_PLAN.md](docs/WORD_VERSION_PLAN.md)
+- Historischer Phase-1-Bericht: [docs/PHASE_1_REPORT.md](docs/PHASE_1_REPORT.md)
+- Checks ohne Zusatzpakete: `python tools/test_all.py` (Python 3 + Node.js)
+
+## Entwicklungsstand lokal prüfen
+
+Branch auschecken, dann `python -m http.server 8020 --bind 127.0.0.1` im
+Projektordner und `http://localhost:8020` öffnen. Im Menü **Arcade → Wordle Tower**
+wählen, dann „Tower starten“. Zum Fortsetzen wieder
+Wordle Tower öffnen und „Tower fortsetzen“ wählen; auch ein offener Etagenübergang
+wird wiederhergestellt. Doppeltes Wordle bleibt über seinen Menüeintrag erreichbar.
+Speedrun: **Arcade → Speedrun → Speedrun starten**. Jeder gelöste Vierer/Fünfer/
+Sechser/Siebener bringt 100/150/200/250 Punkte. Skip kostet 10 Sekunden.
+Bei Hintergrundwechsel oder Pause steht die Uhr; „Speedrun fortsetzen“ nimmt
+das gespeicherte Budget wieder auf. Kein Countdown und keine Lade-Wartezeit.
+Zum Abbrechen erst pausieren, dann ausdrücklich bestätigen. Highscores und
+Statistiken sind vollständig von den anderen Modi getrennt.
+
+Themen-Wordle: **Entdecken & Freunde → Themen-Wordle**. Kategorie und verfügbare
+Wortlänge wählen, dann „Themenrunde starten“. Tiere: 5; Natur und Essen: 4–6;
+Haushalt: 5–6. Gesperrte Längen haben weniger als 25 kuratierte Lösungen.
+Nur die Lösung gehört zum Thema; alle allgemeinen Wörter bleiben als Tipps erlaubt.
+Eine laufende Runde lässt sich fortsetzen; ein Wechsel benötigt eine Bestätigung,
+bevor die alte Runde als Abbruch erfasst wird. „Nächstes Themenwort“ behält
+Kategorie/Länge. Hard Mode wird beim Start übernommen, Themenstatistiken sind getrennt.
+
+Nur auf einem separaten Entwicklungs-Origin testen; den bestehenden Live-Origin
+und dessen Worker/Statistik nicht für Zwischenversionen verwenden. Falls der
+Localhost-Port schon eine ältere Testversion cached, einen frischen Port verwenden.
+
+Die folgenden Installations-/Pages-Anleitungen dokumentieren Version 1.0.
+Sie sind **keine Freigabe**, diesen Entwicklungsbranch zu veröffentlichen.
+Für diesen Entwicklungsstand wurde keine neue eingebettete Einzeldatei erstellt.
+
+---
+
 # WORDLE DE · Dein Wortmoment
+
+Aktuelle Release-Prüfung für 2.0: [Release Candidate](docs/RELEASE_CANDIDATE_2_0.md)
+und [kurze isolierte Geräte-/Upgrade-Abnahme](docs/MANUAL_RELEASE_QA.md).
+Die Live-Version bleibt bis zur ausdrücklichen Freigabe unverändert.
 
 Fertiges, clientseitiges deutsches Wortspiel, Version 1.0. Keine Anmeldung, keine Laufzeitpakete, keine externen Schriftarten oder Dienste.
 
@@ -91,3 +182,38 @@ python tools/build_words.py
 ```
 
 Node/Python sind ausschließlich Entwicklungswerkzeuge, keine Laufzeitabhängigkeiten. Beim Ändern der Offline-Dateien die Cache-Version in `sw.js` erhöhen. Updates warten, bis der Spieler sie in den Einstellungen aktiviert. `de-1`-Lösungspools und deren Reihenfolge **nicht** nachträglich verändern, weil sich sonst gemeinsame Tagesrätsel verschieben. Neue Wortlisten brauchen eine neue Version und bewusst implementierte Datenmigration.
+
+## Entwicklungsstand Phase 7
+
+Nur `feature/arcade-v2`, weiterhin keine Veröffentlichung. Neue freie Spiele
+nutzen intern de-2, Tagesrätsel/historische Spielstände behalten de-1. Beide
+Wörterbücher liegen offline vor. Gemeinsame gewichtete Beutel verhindern
+Wiederholungen über alle freien Modi. A/B/C-Klassen sind vorläufig; die manuelle
+Prüfliste ist vor Veröffentlichung redaktionell zu bearbeiten.
+
+Ergebnisbildschirme bieten „Wortqualität melden“: lokal speichern, Grund und
+optionale Notiz, JSON-Export in Einstellungen. Meldungen sind auch im normalen
+Backup enthalten; keine automatische Übermittlung oder Wortentfernung.
+
+Bei geänderten alten PWA-/anderen Tab-Daten werden Schreibzugriffe geschützt.
+Beide Stände sichern, erst dann bewusst übernehmen/importieren. Backup-Import
+überschreibt nach Bestätigung; er vereinigt nicht automatisch konkurrierende Runs.
+
+Prüfen: `python tools/test_all.py`.
+Reproduzieren: `python tools/build_quality.py`.
+Simulation: `node tools/simulate_selection.cjs`.
+Messung: `node tools/benchmark_phase7.cjs`.
+Berichte: docs/PHASE_7_REPORT.md, WORD_REVIEW.md, docs/WORD_SELECTION.md,
+docs/SELECTION_SIMULATION.md, docs/WORD_VERSION_PLAN.md.
+
+## Phase 8 – Entwicklungsstand, keine Veröffentlichung
+
+Ergebnisraster und lokales PNG-Sharing sind für alle neun Modi integriert. „Als Bild teilen“ öffnet eine spoilerfreie Vorschau; Buchstaben/Lösungen erfordern die ausdrückliche Spoiler-Auswahl. Nach Fertigstellung des Bildes öffnet „Bild teilen“ bei unterstütztem Datei-Sharing das native Menü. Sonst „PNG speichern“ oder die Vorschau lange drücken. Text-/Emoji-Sharing bleibt separat verfügbar.
+
+Gespeicherte Ergebnisse sind über die Statistik erreichbar (die letzten 20 vorhandenen Historien, ohne ältere Daten zu löschen). Alte reine Statistikeinträge ohne Wortverlauf können kein Raster liefern. Neue klassische Abschlüsse speichern Eingaben, keine redundanten Farbraster; Arcade-Historien verwenden vorhandene Sessions. Backup enthält beides.
+
+Aktive Wort-/Qualitätsversion: `de-2.2 / quality-3`; Schema und Schlüssel bleiben 2 / `wordle-de:v2`. Alle vorherigen Wörterbücher bleiben verfügbar. Tagesrätsel und themes-1 bleiben unverändert. KI-Prüfung und ihre Grenzen: [WORD_REVIEW.md](WORD_REVIEW.md).
+
+Prüfen: `python tools/test_all.py`. Optionale echte Browserprüfung: `node tests/browser-results.cjs` mit installiertem Playwright/Chromium. Native Canvas-QA: `node tools/verify_result_png.cjs` mit einer nur für Entwicklung erforderlichen `@napi-rs/canvas`-Installation; die Anwendung selbst hat keine externe Laufzeitabhängigkeit.
+
+Der vorbereitete PWA-Cache `v2-final-20261011-b` gehört ausschließlich zum Entwicklungsbranch. Isolierten HTTPS-/localhost-Origin verwenden; nicht auf der produktiven Pages-URL testen. Keine automatische Releasefreigabe. Bericht und offene Gerätetests: [docs/PHASE_8_REPORT.md](docs/PHASE_8_REPORT.md).

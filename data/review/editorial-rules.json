@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "wordVersion": "de-1",
+  "note": "Redaktionelle Audit-Regeln, keine freigegebene Löschliste. Kein Laufzeitimport.",
+  "reject": {
+    "HUNNI": "Vom Auftrag ausdrücklich als künftig ungeeignete Lösung benannt; salopper Ausdruck, kein Rechtschreibfehler.",
+    "MBIT": "Einheitenabkürzung (DIC-Eintrag MBit), entgegen der Lösungsregel möglichst keine Abkürzungen.",
+    "PESEL": "Vom Nutzer ausdrücklich wegen mangelnder Alltagstauglichkeit abgelehnt; als Wort belegt, künftig weder Lösung noch Eingabe."
+  },
+  "keep": {
+    "LEGAT": "Ausdrücklich geschütztes reguläres Lösungswort; DIC-Grundwort vorhanden.",
+    "FENSTER": "Eigenständiger DIC-Eintrag; sinnvolles Substantiv.",
+    "BERUF": "Eigenständiger DIC-Eintrag; sinnvolles Substantiv.",
+    "SALBE": "Eigenständiger DIC-Eintrag; kein Ausschluss aufgrund der Referenzgrafik.",
+    "LIIEREN": "Duden bestätigt die Schreibweise mit zwei I und eine Verbgrundform; kein Tippfehler."
+  },
+  "reviewGroups": [
+    {
+      "code": "function-word",
+      "priority": 1,
+      "words": "ALLE ETWAS AUẞER UNTER HINTER VIEL WENIG NEIN",
+      "reason": "Funktionswort-/Pronomen-/Partikel-Kandidat; mögliche andere Lesarten vor Ausschluss prüfen."
+    },
+    {
+      "code": "inflected-form",
+      "priority": 1,
+      "words": "GRÜẞ HEIẞT MÖCHTE ÖFTER GRÖẞER GRÖẞTE WEIẞE WEIẞEN SÜẞE SÜẞEN GRÜẞE DERBE",
+      "reason": "Beugungs-, Vergleichs- oder Imperativ-Kandidat; substantivische oder infinitivische Lesarten prüfen, keine automatische Entfernung."
+    },
+    {
+      "code": "noun-plural",
+      "priority": 2,
+      "words": "ÄHREN ÄRZTE BÄREN BÜROS FÜẞE HÄNDE HÜTTEN KÜCHEN LÖWEN ÖFEN STRAẞEN TÜREN GRÖẞEN GÄRTEN",
+      "reason": "Gebräuchlicher Substantivplural bzw. mehrdeutige Form; für de-2 eine konsistente Singular-/Plural-Politik festlegen."
+    },
+    {
+      "code": "slang-shortening",
+      "priority": 1,
+      "words": "ZWANNI KNOBI PERSO MAUSI MUCKE MONETEN BRUMMI FLUPPE SCHIRI SCHOKO HIWI ZIVI AZUBI KRIPO PROFI PROMI MUTTI MAMI PAPI DADDY JOKE NICE HAPPY CRINGE",
+      "reason": "Redaktioneller Kandidat für Umgangssprache, Kurzform oder englischen Ausdruck; Akzeptabilität und Spielwert einzeln prüfen."
+    },
+    {
+      "code": "name-brand",
+      "priority": 1,
+      "words": "HULK TARZAN DUDEN EMMY GRAMMY ASPIRIN VALIUM RITALIN SEGWAY RIESTER WIFI ASTA FIDSCHI PFALZ ALPEN ALSTER OLYMP OLYMPIA TABASCO JEEP CARITAS",
+      "reason": "Eigenname-, Marken-, Ortsnamen- oder Akronym-Kandidat; mögliche eingebürgerte Allgemeinwort-Lesart einzeln prüfen."
+    },
+    {
+      "code": "regional-or-spelling",
+      "priority": 2,
+      "words": "PESEL PESEN HAIA CROC SCENE COYOTE SKOOTER TATTRIG LEGGINS",
+      "reason": "Regionale Form, Fremdwort oder Schreibvarianten-Kandidat; kein Fehlerurteil. PESEL und PESEN sind im Duden belegt."
+    }
+  ],
+  "verifiedReferences": [
+    {
+      "word": "HUNNI",
+      "url": "https://www.duden.de/rechtschreibung/Hunni",
+      "checked": "2026-10-11",
+      "finding": "Substantiv, Gebrauch salopp; Ausschluss ist eine Spielqualitätsentscheidung."
+    },
+    {
+      "word": "PESEL",
+      "url": "https://www.duden.de/rechtschreibung/Pesel",
+      "checked": "2026-10-11",
+      "finding": "Eigenständiges Substantiv; regionaler Gebrauch. Nicht als erfundenes Wort behandeln."
+    },
+    {
+      "word": "PESEN",
+      "url": "https://www.duden.de/rechtschreibung/pesen",
+      "checked": "2026-10-11",
+      "finding": "Eigenständiger Wörterbucheintrag; nicht als offensichtlichen Schreibfehler behandeln."
+    },
+    {
+      "word": "LIIEREN",
+      "url": "https://www.duden.de/rechtschreibung/liieren",
+      "checked": "2026-10-11",
+      "finding": "Belegte Verbgrundform und korrekte Schreibweise."
+    }
+  ],
+  "usagePolicy": {
+    "frequentMaxRank": 10000,
+    "reviewAboveRank": 30000,
+    "note": "Ranggrenzen sind redaktionelle Prüfschwellen im Untertitelkorpus, keine objektive Bekanntheitsmessung. Fehlende Wörter nicht automatisch löschen.",
+    "familiarityRule": "Selten benutzt ist erlaubt, aber beim Lesen der Lösung wiedererkennbar. Wörter, deren Bedeutung erst nachgeschlagen werden muss, sollen heraus; Häufigkeit ist nur ein Indiz. Sinnvolle bekannte Fachbegriffe und LEGAT dürfen bleiben."
+  },
+  "acceptedExclusions": {
+    "PESEL": "Ausdrückliche Nutzerentscheidung: selbst als Rateversuch zu unbekannt; erst bei de-2 freigeben."
+  }
+}

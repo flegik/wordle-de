@@ -1,0 +1,24 @@
+{
+  "runtime": "v24.19.0",
+  "note": "Node fixtures; storage quotas and mobile responsiveness not certified.",
+  "runs": [
+    {
+      "results": 100,
+      "validationMs": 3.776,
+      "exportMs": 2.414,
+      "backupBytes": 53095
+    },
+    {
+      "results": 1000,
+      "validationMs": 23.338,
+      "exportMs": 14.643,
+      "backupBytes": 531895
+    },
+    {
+      "results": 10000,
+      "validationMs": 129.737,
+      "exportMs": 137.613,
+      "backupBytes": 5355895
+    }
+  ]
+}

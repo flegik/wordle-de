@@ -1,0 +1,20 @@
+{
+  "version": "quality-1", "baseVersion": "de-1", "targetVersion": "de-2",
+  "note": "Project-owner decisions are binding. Other classes are conservative gameplay estimates, not human/external certification.",
+  "excludeSolutions": {
+    "HUNNI": "Auftrag: salopp, keine Standardlösung; Eingabe bleibt.",
+    "MUMPS": "Auftrag: redaktionell keine Standardlösung; korrektes Wort, Eingabe bleibt.",
+    "COUP": "Auftrag: ungewöhnlicher Charakter/Schreibweise; Eingabe bleibt.",
+    "CLOU": "Auftrag: ungewöhnlicher Charakter/Schreibweise; Eingabe bleibt.",
+    "MBIT": "Auftrag: Abkürzung, keine Standardlösung; Eingabe bleibt.",
+    "PESEL": "Auftrag: zu unbekannt, auch keine Eingabe."
+  },
+  "excludeAccepted": {"PESEL": "Ausdrückliche Projektentscheidung, keine Behauptung eines falschen Wortes."},
+  "classes": {"LEGAT":"C","MONARCH":"B","ZWINGE":"B","KATZE":"A","WOLKE":"A","BLUME":"A","GARTEN":"A","REGEN":"A","TISCH":"A"},
+  "protected": ["LEGAT","ZWINGE","MONARCH"],
+  "accessibleSignal": {"maxSubtitleRank":20000,"requiresStandaloneDictionary":true,"excludesEditorialReviewGroups":true},
+  "defaultClass":"B",
+  "defaultStatus":"provisional-review",
+  "rarePolicy":"Only explicitly approved C words. Low frequency alone never creates C or excludes a word.",
+  "sources": ["data/review/word-audit-de-1.json","licenses/frequencywords-notice.txt","WORDLISTS.md"]
+}
