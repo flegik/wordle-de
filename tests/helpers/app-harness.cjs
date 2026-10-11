@@ -9,7 +9,7 @@ function harness(store=new Map()){
  const win=new El();const downloads=[];class TestURL extends URL{static createObjectURL(blob){downloads.push(blob);return 'blob:test';}static revokeObjectURL(){}}
  let seed=123456;const seededMath=Object.create(Math);seededMath.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
  const context={console,document:doc,window:win,navigator:{},location:{protocol:'file:'},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setTimeout:(fn)=>{timers.set(++seq,fn);return seq;},clearTimeout:id=>timers.delete(id),setInterval(){},matchMedia:()=>({matches:false}),Blob,URL:TestURL,Date,Math:seededMath,crypto:require('node:crypto').webcrypto,isSecureContext:false};
- vm.createContext(context);for(const f of ['data/words.js','js/engine.js','js/sessions.js','js/storage.js','js/app.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),context,{filename:f});
+ vm.createContext(context);for(const f of [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/<script[^>]*src="([^"]+)"/g)].map(m=>m[1]))vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),context,{filename:f});
  const app=get('#app');
  const click=(action,data={})=>app.handlers.click({target:{closest:()=>({dataset:{action,...data}})}});
  const type=word=>{for(const c of word)app.handlers.click({target:{closest:()=>({dataset:{key:c}})}});};

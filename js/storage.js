@@ -3,6 +3,7 @@
 'use strict';
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
 const G=root.Sessions||(typeof require==='function'?require('./sessions.js'):null);
+const D=root.DoubleWordle||(typeof require==='function'?require('./double.js'):null);
 const KEY='wordle-de:v2',LEGACY_KEY='wordle-de:v1',SCHEMA=2;
 const clone=v=>JSON.parse(JSON.stringify(v));
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
@@ -14,9 +15,9 @@ function validate(state,words){
  if(!object(state.sessions)||!Array.isArray(state.sessionEvents)||state.sessionEvents.length>100000)
   throw Error('Ungültige Session-Datensammlungen.');
  const ids=new Set(state.events.map(e=>e.id));
- for(const event of state.sessionEvents){G.validateEvent(event,words);if(ids.has(event.id))throw Error('Doppelte Wertung.');ids.add(event.id);}
+ for(const event of state.sessionEvents){G.validateEvent(event,words);if(event.mode==='double')D.validateEvent(event,words);if(ids.has(event.id))throw Error('Doppelte Wertung.');ids.add(event.id);}
  for(const [key,session] of Object.entries(state.sessions)){
-  if(key!==session?.id)throw Error('Ungültiger Session-Schlüssel.');G.validate(session,words);
+  if(key!==session?.id)throw Error('Ungültiger Session-Schlüssel.');G.validate(session,words);if(session.mode==='double')D.validate(session,words);
   if(state.events.some(e=>e.id===session.id)||Object.values(state.games).some(g=>g.id===session.id))throw Error('Session-ID kollidiert mit Wortrunde.');
   const event=state.sessionEvents.find(e=>e.id===session.id);
   if(session.status==='playing'&&event)throw Error('Laufende Session bereits gewertet.');

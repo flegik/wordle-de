@@ -43,7 +43,7 @@ test('Physical German keyboard inputs preserve umlauts and sharp S as single let
  assert.equal(damaged.get(S.KEY),'broken');r.get('#confirm-action').onclick();
  assert.deepEqual(r.state().events,fixture.events);assert.equal(r.state().schema,2);
  console.log('✓ Schema-1 UI backup import/export retains history and overwrites only after confirmation');count++;
- const round={id:'future',mode:'double',wordVersion:'de-1',rounds:[{id:'f',length:5,target:'LEGAT',hard:false,attemptLimit:8}],attempts:[],status:'playing',started:0};
+ const round={id:'future',mode:'double',wordVersion:'de-1',attemptBudget:8,rounds:[{id:'f',length:5,target:'LEGAT',hard:false,attemptLimit:8},{id:'g',length:5,target:'SEGEL',hard:false,attemptLimit:8}],attempts:[],status:'playing',started:0};
  const state=r.state();state.sessions.future=round;damaged.set(S.KEY,JSON.stringify(state));
  const withSession=harness(damaged);withSession.click('export');
  const exported=JSON.parse(await withSession.downloads[0].text());assert.deepEqual(exported.sessions.future,round);
