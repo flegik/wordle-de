@@ -374,6 +374,19 @@ Storage-Quoten, gleichzeitige Tabs, bestätigte Übernahme und Sicherung beider
 Stände; echte Installation/Offline/atomare Cache-Aktualisierung mit neuer
 Release-Cache-Version. Noch keine Release-Freigabe.
 
+## Release Candidate: echte 1.0-Speicher und offene Browser-Gates
+
+Gesamtsuite erneut: **308 Gruppen bestanden**. Drei zusätzliche Gruppen führen
+den bytegefrorenen echten 1.0-Controller aus, erzeugen Spielstände, laden sie mit
+2.0, prüfen Backup/Reload/Idempotenz und schützen spätere alte Tab-Schreibzugriffe.
+`node tests/release-upgrade.test.cjs` ist weiterhin ein State-/DOM-Adaptertest,
+kein installierter PWA-Update-Test. Protokoll: `docs/qa/release-automated-tests.log`.
+
+Private HTTPS-Testfassung und kurzer Samsung/iPhone- sowie echter Same-Path-
+Upgrade-Ablauf: [MANUAL_RELEASE_QA.md](docs/MANUAL_RELEASE_QA.md).
+Cloud-Chrome erreicht nur die Anmeldung; keine reale Spiel-/Geräteabnahme erfolgt.
+Offene Gates, Dateihashes, Messungen und Rollback: [Release Candidate](docs/RELEASE_CANDIDATE_2_0.md).
+
 ## Phase 8: Ergebnisse, PNG und Release-Gates
 
 `python tools/test_all.py`: vollständige Engine-, Controller-, Daten-, Migrations- und Service-Worker-Adaptertests. Neue Prüfungen: echte Ergebniszeilen aller Modi, keine erfundenen Doppel-/Tower-Zeilen, auswählbare Speedrun-Runden, historische Wortpakete/Beutel, wiederaufrufbare klassische Ergebnisse, PNG-Spoilergrenze, native Capability-Erkennung und fehlgeschlagene atomare Cache-Installation.

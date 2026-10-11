@@ -87,6 +87,10 @@ Für diesen Entwicklungsstand wurde keine neue eingebettete Einzeldatei erstellt
 
 # WORDLE DE · Dein Wortmoment
 
+Aktuelle Release-Prüfung für 2.0: [Release Candidate](docs/RELEASE_CANDIDATE_2_0.md)
+und [kurze isolierte Geräte-/Upgrade-Abnahme](docs/MANUAL_RELEASE_QA.md).
+Die Live-Version bleibt bis zur ausdrücklichen Freigabe unverändert.
+
 Fertiges, clientseitiges deutsches Wortspiel, Version 1.0. Keine Anmeldung, keine Laufzeitpakete, keine externen Schriftarten oder Dienste.
 
 ## Online spielen
