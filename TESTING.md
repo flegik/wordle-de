@@ -1,3 +1,21 @@
+# Online-Duell 2.1 · Prüfungen vom 11.10.2026
+
+`PYTHONUTF8=1 python tools/test_all.py`: vollständige Baseline und Regression
+bestanden, einschließlich 16 neuer API-/SQLite- und 7 Client-/Storage-/SW-Gruppen.
+Git-LF-Dateien verwenden; Windows-Autokonvertierung verändert eingefrorene Hashes.
+
+Mit lokalem Wrangler/D1 und installiertem Playwright/Edge:
+`node tests/browser-online.cjs`. Reale Zwei-Spieler-Kontexte, mobile Breiten,
+verlorene Antwort/Retry, Reload, automatischer Vergleich und echtes Offline-Paket
+bestanden. `node tests/browser-online-remote.cjs`: deployed Test-Worker/D1 mit
+Raumcodebeitritt, echten Boards, korrektem Vergleich und geschützter API bestanden.
+Beide Browserchecks brauchen ausschließlich frische isolierte Browserprofile.
+
+Echte Android-/iPhone-Geräte und installierte mobile PWAs sind weiterhin offen.
+[Ausführlicher Bericht](docs/ONLINE_DUEL_V2_1.md).
+
+---
+
 # Phase 6 · tatsächliche Prüfungen und offene Gerätechecks
 
 Baseline 188 erneut erfolgreich. `python tools/test_all.py`: **253 Gruppen

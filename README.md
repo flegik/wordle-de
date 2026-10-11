@@ -1,3 +1,18 @@
+# WORDLE DE 2.1 · isolierte Online-Duell-Testversion
+
+Entwicklungsbranch: `feature/duel-online-v2-1`. Test-PWA:
+https://wordle-de-duel-test.wordle-de-flegik-test.workers.dev
+
+Zwei Spieler treten per sechsstelligen Raumcode oder Link bei, spielen dasselbe
+serverseitig ausgewählte Wort und erhalten nach beiderseitigem Abschluss die
+realen Ratewörter, Farben und den Vergleich. Lokale Modi und bisherige Statistiken
+bleiben getrennt. GitHub Pages und main bleiben auf der produktiven Version 2.0.
+
+Architektur, Sicherheit, Bereitstellung, Free-Limits und echte/offene Prüfungen:
+[Online-Duell 2.1](docs/ONLINE_DUEL_V2_1.md). Keine produktive Veröffentlichung.
+
+---
+
 # Phase 6 · Wort-Duell im Entwicklungsbranch
 
 Nur `feature/arcade-v2`, keine Veröffentlichung. Unter **ENTDECKEN & FREUNDE →
