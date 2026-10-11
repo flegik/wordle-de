@@ -1,0 +1,224 @@
+[
+  {
+    "path": "data/themes.js",
+    "status": 200,
+    "bytes": 4632,
+    "match": true
+  },
+  {
+    "path": "data/word-quality-de-2.1.js",
+    "status": 200,
+    "bytes": 81117,
+    "match": true
+  },
+  {
+    "path": "data/word-quality-de-2.js",
+    "status": 200,
+    "bytes": 115620,
+    "match": true
+  },
+  {
+    "path": "data/word-quality.js",
+    "status": 200,
+    "bytes": 81043,
+    "match": true
+  },
+  {
+    "path": "data/word-registry.js",
+    "status": 200,
+    "bytes": 845,
+    "match": true
+  },
+  {
+    "path": "data/words-de-1.js",
+    "status": 200,
+    "bytes": 205768,
+    "match": true
+  },
+  {
+    "path": "data/words-de-2.1.js",
+    "status": 200,
+    "bytes": 204069,
+    "match": true
+  },
+  {
+    "path": "data/words-de-2.2.js",
+    "status": 200,
+    "bytes": 204023,
+    "match": true
+  },
+  {
+    "path": "data/words-de-2.js",
+    "status": 200,
+    "bytes": 205680,
+    "match": true
+  },
+  {
+    "path": "data/words.js",
+    "status": 200,
+    "bytes": 205768,
+    "match": true
+  },
+  {
+    "path": "icons/apple-touch-icon.png",
+    "status": 200,
+    "bytes": 2018,
+    "match": true
+  },
+  {
+    "path": "icons/icon-192.png",
+    "status": 200,
+    "bytes": 2223,
+    "match": true
+  },
+  {
+    "path": "icons/icon-512.png",
+    "status": 200,
+    "bytes": 6091,
+    "match": true
+  },
+  {
+    "path": "icons/maskable-512.png",
+    "status": 200,
+    "bytes": 6091,
+    "match": true
+  },
+  {
+    "path": "index.html",
+    "status": 200,
+    "bytes": 2397,
+    "match": true
+  },
+  {
+    "path": "js/app.js",
+    "status": 200,
+    "bytes": 66946,
+    "match": true
+  },
+  {
+    "path": "js/double-ui.js",
+    "status": 200,
+    "bytes": 6445,
+    "match": true
+  },
+  {
+    "path": "js/double.js",
+    "status": 200,
+    "bytes": 5204,
+    "match": true
+  },
+  {
+    "path": "js/duel-links.js",
+    "status": 200,
+    "bytes": 3959,
+    "match": true
+  },
+  {
+    "path": "js/duel-ui.js",
+    "status": 200,
+    "bytes": 8765,
+    "match": true
+  },
+  {
+    "path": "js/duel.js",
+    "status": 200,
+    "bytes": 8030,
+    "match": true
+  },
+  {
+    "path": "js/engine.js",
+    "status": 200,
+    "bytes": 5832,
+    "match": true
+  },
+  {
+    "path": "js/reports.js",
+    "status": 200,
+    "bytes": 1316,
+    "match": true
+  },
+  {
+    "path": "js/result-image.js",
+    "status": 200,
+    "bytes": 2874,
+    "match": true
+  },
+  {
+    "path": "js/results.js",
+    "status": 200,
+    "bytes": 3940,
+    "match": true
+  },
+  {
+    "path": "js/selection.js",
+    "status": 200,
+    "bytes": 6757,
+    "match": true
+  },
+  {
+    "path": "js/sessions.js",
+    "status": 200,
+    "bytes": 7133,
+    "match": true
+  },
+  {
+    "path": "js/speedrun-ui.js",
+    "status": 200,
+    "bytes": 7637,
+    "match": true
+  },
+  {
+    "path": "js/speedrun.js",
+    "status": 200,
+    "bytes": 10558,
+    "match": true
+  },
+  {
+    "path": "js/storage.js",
+    "status": 200,
+    "bytes": 8107,
+    "match": true
+  },
+  {
+    "path": "js/sync.js",
+    "status": 200,
+    "bytes": 3298,
+    "match": true
+  },
+  {
+    "path": "js/theme-ui.js",
+    "status": 200,
+    "bytes": 6986,
+    "match": true
+  },
+  {
+    "path": "js/theme.js",
+    "status": 200,
+    "bytes": 7627,
+    "match": true
+  },
+  {
+    "path": "js/tower-ui.js",
+    "status": 200,
+    "bytes": 8269,
+    "match": true
+  },
+  {
+    "path": "js/tower.js",
+    "status": 200,
+    "bytes": 6689,
+    "match": true
+  },
+  {
+    "path": "manifest.webmanifest",
+    "status": 200,
+    "bytes": 639,
+    "match": true
+  },
+  {
+    "path": "style.css",
+    "status": 200,
+    "bytes": 21773,
+    "match": true
+  }
+]
