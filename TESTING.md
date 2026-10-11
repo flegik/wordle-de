@@ -1,3 +1,45 @@
+# Phase 1 · WORDLE DE 2.0, ausschließlich Entwicklungsbranch
+
+Gesamtlauf: `python tools/test_all.py` (Python 3 + Node.js, keine Pakete).
+
+| Suite | Testgruppen | Ausgeführt |
+|---|---:|---|
+| `tests/engine.test.cjs` | 8 | Bestanden |
+| `tests/app.test.cjs` | 8 | Bestanden, DOM-Adapter |
+| `tests/sw.test.cjs` | 4 | Bestanden, Cache-Adapter |
+| `tests/storage.test.cjs` | 10 | Bestanden |
+| `tests/app-storage.test.cjs` | 6 | Bestanden, DOM-Adapter |
+| `tests/audit.test.py` | 5 | Bestanden |
+| **Gesamt** | **41** | **Bestanden** |
+
+Zusätzlich Syntaxprüfung der fünf Runtime-JS-Dateien, `git diff --check`,
+vollständiger bytegleicher Abgleich der ursprünglichen 30 Dateien gegen GitHub,
+1461 eingefrorene de-1-Tagesrätsel, reproduzierbarer Audit aller 5574 Lösungen.
+
+Die Schema-1-Fixture ist **repräsentativ**, kein echter Nutzerdatenexport. Sie
+enthält Siege/Niederlagen/Abbruch, alle bisherigen Modi, abgeschlossene
+Tageswertung, Streak-Rekord, Wortbeutel, pausiertes HUNNI und eine Umlaut-/ẞ-Runde.
+Sie wurde zunächst mit der unveränderten Engine validiert. Migration muss sämtliche
+alten Felder erhalten, wiederholbar sein und keine weiteren Ereignisse erzeugen.
+
+Neu getestet: mehrere Boards mit einer gemeinsamen Eingabe und getrennten Farben,
+Budgets, Hard Mode, ID-Kollisionen, getrennte Rekorde, Schema-1/2-Backups,
+beschädigte/unknown Speicher, Quota-/Zugriffsfehler, geschützter Originalexport,
+Bestätigung vor Import, ungültige Schreibzugriffe aus anderem Tab, physische
+deutsche Tasten im Adapter und vollständige HTML-Asset-Precache-Abdeckung.
+
+**Nicht durchgeführt:** echte Android-/iOS-/Desktop-Browser-Tests, Layout- und
+Touchprüfung, reale Installation, Offline-Neustart und Worker-Update eines
+bestehenden Spielergeräts. Diese bleiben manuelle Release-Checks. Das neue
+Offline-Paket wurde nur im Cache-Adapter überprüft; v1-Cache darf vor Release
+auf einem schon produktiv besuchten Origin nicht mit diesen Assets verwendet werden.
+
+Die gemeinsame Live-Veröffentlichung und de-2-Migration sind noch nicht freigegeben.
+Konfliktübernahme von parallel weitergeschriebenen v1-Speichern und die
+Tagesrätsel-Versionspolitik stehen als Release-Kriterien im Wortversionsplan.
+
+---
+
 # Qualitätskontrolle
 
 ## Tatsächlich ausgeführt

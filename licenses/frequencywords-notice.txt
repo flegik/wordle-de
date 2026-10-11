@@ -1,0 +1,17 @@
+FrequencyWords / OpenSubtitles 2018 German frequency data
+Creator / repository: Hermit Dave, https://github.com/hermitdave/FrequencyWords
+Pinned commit: 525f9b560de45753a5ea01069454e72e9aa541c6
+Source: content/2018/de/de_50k.txt
+Corpus source: https://opus.nlpl.eu/OpenSubtitles2018.php
+Content license stated in the source README: CC BY-SA 4.0
+https://creativecommons.org/licenses/by-sa/4.0/
+License text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+The repository's MIT License applies to code, not these content files.
+The word-frequency file and derived frequency/rank evidence in the audit are
+redistributed under CC BY-SA 4.0, with attribution to Hermit Dave and the
+OpenSubtitles/OPUS corpus. Source tokens/counts retained; NFC/case/ß normalization
+and grouping into game-word evidence are adaptations by WORDLE DE (2026).
+Audit-only data: no additions to runtime solutions or accepted dictionaries.
+Subtitle frequencies are domain-biased evidence of usage, not proof of general
+word familiarity, lexical correctness, or an exclusion decision.

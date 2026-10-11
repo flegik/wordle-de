@@ -1,3 +1,18 @@
+# Entwicklungsstand WORDLE DE 2.0 · Phase 1
+
+Dieser Stand gehört ausschließlich auf `feature/arcade-v2`. Die Live-Version
+auf `main` bleibt WORDLE DE 1.0. Keine neuen Arcade-Modi sind bereits spielbar;
+enthalten sind Session-Grundlage, verlustfreie Schema-1→2-Migration und Wortaudit.
+Keine Zwischenversion auf den produktiven Pages-Origin veröffentlichen.
+
+- Architektur: [docs/ARCHITECTURE_V2.md](docs/ARCHITECTURE_V2.md)
+- Wortqualität: [WORD_REVIEW.md](WORD_REVIEW.md)
+- Geplanter de-2-Umstieg: [docs/WORD_VERSION_PLAN.md](docs/WORD_VERSION_PLAN.md)
+- Phasenbericht: [docs/PHASE_1_REPORT.md](docs/PHASE_1_REPORT.md)
+- Alle automatisierten Checks: `python tools/test_all.py` (Python 3 + Node.js)
+
+---
+
 # WORDLE DE · Dein Wortmoment
 
 Fertiges, clientseitiges deutsches Wortspiel, Version 1.0. Keine Anmeldung, keine Laufzeitpakete, keine externen Schriftarten oder Dienste.

@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "wordVersion": "de-1",
+  "targetWordVersion": "de-2",
+  "scope": "accepted-only",
+  "approved": false,
+  "protectedWords": [
+    "LEGAT"
+  ],
+  "candidates": [
+    {
+      "word": "PESEL",
+      "length": 5,
+      "approved": false,
+      "reason": "Ausdrückliche Nutzerentscheidung: selbst als Rateversuch zu unbekannt; erst bei de-2 freigeben."
+    }
+  ]
+}
