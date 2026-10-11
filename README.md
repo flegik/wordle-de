@@ -1,30 +1,33 @@
-# Entwicklungsstand WORDLE DE 2.0 · Phase 2
+# Entwicklungsstand WORDLE DE 2.0 · Phase 3
 
-Ausschließlich `feature/arcade-v2`. Doppeltes Wordle ist hier spielbar:
-zwei unterschiedliche Fünfbuchstabenwörter, acht gemeinsame Versuche, eigene
-Statistik, gespeicherte Sessions und spoilerfreies Teilen. `main` bleibt Version 1.0.
+Ausschließlich `feature/arcade-v2`. Doppeltes Wordle und Wordle Tower sind hier
+spielbar. Tower bietet vier Etagen (4→5→6→7), ein gemeinsames Budget von 20
+Versuchen, gespeicherte Übergänge und eigene Rekorde. `main` bleibt Version 1.0.
 Keine Veröffentlichung, keine produktive Pages-Änderung und kein Merge.
 
+- Phase 3 / Tower-System, Befunde, Risiken: [docs/PHASE_3_REPORT.md](docs/PHASE_3_REPORT.md)
 - Phase 2 / Funktionen, Architektur, Risiken: [docs/PHASE_2_REPORT.md](docs/PHASE_2_REPORT.md)
 - Tatsächliche Tests und offene Gerätechecks: [TESTING.md](TESTING.md)
 - Grundlage: [docs/ARCHITECTURE_V2.md](docs/ARCHITECTURE_V2.md)
 - Wortqualität: [WORD_REVIEW.md](WORD_REVIEW.md)
 - Geplanter de-2-Umstieg: [docs/WORD_VERSION_PLAN.md](docs/WORD_VERSION_PLAN.md)
 - Historischer Phase-1-Bericht: [docs/PHASE_1_REPORT.md](docs/PHASE_1_REPORT.md)
-- Abhängigkeitfreie Checks: `python tools/test_all.py` (Python 3 + Node.js)
+- Checks ohne Zusatzpakete: `python tools/test_all.py` (Python 3 + Node.js)
 
 ## Entwicklungsstand lokal prüfen
 
 Branch auschecken, dann `python -m http.server 8020 --bind 127.0.0.1` im
-Projektordner und `http://localhost:8020` öffnen. Im Menü **Arcade → Doppeltes
-Wordle** wählen. Eine laufende Session wird über denselben Menüeintrag fortgesetzt.
+Projektordner und `http://localhost:8020` öffnen. Im Menü **Arcade → Wordle Tower**
+wählen, dann „Tower starten“. Zum Fortsetzen wieder
+Wordle Tower öffnen und „Tower fortsetzen“ wählen; auch ein offener Etagenübergang
+wird wiederhergestellt. Doppeltes Wordle bleibt über seinen Menüeintrag erreichbar.
 Nur auf einem separaten Entwicklungs-Origin testen; den bestehenden Live-Origin
 und dessen Worker/Statistik nicht für Zwischenversionen verwenden. Falls der
 Localhost-Port schon eine ältere Testversion cached, einen frischen Port verwenden.
 
 Die folgenden Installations-/Pages-Anleitungen dokumentieren Version 1.0.
 Sie sind **keine Freigabe**, diesen Entwicklungsbranch zu veröffentlichen.
-Es wurde in Phase 2 keine neue eingebettete Einzeldatei erstellt.
+Für diesen Entwicklungsstand wurde keine neue eingebettete Einzeldatei erstellt.
 
 ---
 

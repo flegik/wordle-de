@@ -1,3 +1,65 @@
+# Phase 3 · Wordle Tower, ausschließlich Entwicklungsbranch
+
+Ausgeführt: `python tools/test_all.py` — **93 Testgruppen bestanden**, davon
+31 neu für Tower. Die 62 vorhandenen Gruppen aus Phase 2 bestehen weiterhin.
+
+| Suite | Gruppen | Prüfung |
+|---|---:|---|
+| `tests/engine.test.cjs` | 8 | Regeln / Daten / Konfiguration |
+| `tests/app.test.cjs` | 8 | Klassische Modi, DOM-Adapter |
+| `tests/sw.test.cjs` | 4 | Cache-Adapter, jetzt 17 Runtime-Assets |
+| `tests/double.test.cjs` | 10 | Doppel-Regeln / Statistik / Backups |
+| `tests/double-app.test.cjs` | 11 | Doppel-Controller, DOM-Adapter |
+| `tests/tower.test.cjs` | 17 | Tower-Regeln / Budget / Statistik / Backups |
+| `tests/tower-app.test.cjs` | 14 | Tower-Controller / UI-Zustand / Scroll-Geometrie, Adapter |
+| `tests/storage.test.cjs` | 10 | Migration / Sessions / Tagesrätsel |
+| `tests/app-storage.test.cjs` | 6 | Migration in der UI, DOM-Adapter |
+| `tests/audit.test.py` | 5 | Reproduzierbarer Audit / unverändertes de-1 |
+| **Gesamt** | **93** | **Bestanden** |
+
+Zusätzlich: neun Runtime-JS-Syntaxprüfungen, Syntaxprüfung von
+`tests/browser-tower.cjs`, `git diff --check`, unveränderte 1461 Tagesrätsel-Fixtures.
+Der DOM-Adapter lädt die Scripts aus der tatsächlichen `index.html`.
+
+Der Browserstart wurde erneut versucht: Playwright vorhanden, Chromium-Executable
+fehlt. Auch `tests/browser-tower.cjs` wurde gestartet und scheitert an genau dieser
+Voraussetzung. **Keine** tatsächlichen Render-/Layout-, Touch-, Geräte-, PWA-
+Installations- oder Offline-Browsertests durchgeführt. In Phase 3 wurde kein
+neuer Browserdownload versucht; der fehlgeschlagene Download stammt aus Phase 2.
+
+Optional mit installiertem Playwright und Chromium:
+`node tests/browser-tower.cjs`. Kein App-Laufzeitpaket nötig. Der Check startet
+einen isolierten lokalen Server und ist für 320/360/390/430/1000 px, langen
+Verlauf, aktuelle Eingabe, Tastatur, Touch-Taps, Hardwareeingabe, Reload eines
+Übergangs, vollständigen Aufstieg und Offline-Bootstrap vorgesehen. Sein Ablauf
+ist hier noch nicht im Browser validiert.
+
+## Offene manuelle Tower-Prüfung
+
+- [ ] Android Chrome, Samsung Internet, iPhone Safari und installierte iPhone-PWA.
+- [ ] 320 × 568, 360 × 640, 390 und 430 px, Desktop und Querformat:
+  Safe Areas, Etagenleiste, Restbudget, aktuelle Zeile und Tastatur sichtbar.
+- [ ] 15–19 Tipps auf derselben Etage: Historie scrollen, „Aktuelle Zeile“ wählen;
+  aktuelle Eingabe bleibt sichtbar, keine versehentlichen Tastendrücke beim Scrollen.
+- [ ] Touch und Hardwaretastatur einschließlich Ä/Ö/Ü/ß/ẞ/Enter/Backspace;
+  rasches Enter während Flip erzeugt nur einen Versuch.
+- [ ] Etage lösen, während Flip schließen, Übergang wieder öffnen, weitergehen;
+  Budget, Hinweise, Ziele und Übergang sind unverändert.
+- [ ] Pause und Browserneustart; Abbruch ablehnen, danach bestätigen;
+  erreichte/abgeschlossene Etage und einmalige Wertung stimmen.
+- [ ] Vier vollständige Etagen, Verlust auf jeder Etage und letzter Versuch:
+  vierte Lösung mit Tipp 20 gewinnt, frühere Lösung mit Tipp 20 verliert.
+- [ ] Dark/Light, OS-/App-Animationseinstellungen, Gewinn-/Rekordeffekt und Sound.
+- [ ] Getrennte Tower-/Doppel-/Klassiker-Statistiken, mobile Backups, Bestätigung
+  vor Import, beschädigte Backups ohne Überschreiben vorhandener Daten.
+- [ ] Android/iOS Share-Sheet, Clipboard und manueller Kopierdialog ohne Lösungen.
+- [ ] Offline-Neustart auf isoliertem Origin, alle 17 Assets und Unterverzeichnis;
+  Worker-Update auf bestehender PWA erst als späterer Release-Test.
+
+---
+
+## Historischer Prüfstand Phase 2
+
 # Phase 2 · Doppeltes Wordle, ausschließlich Entwicklungsbranch
 
 Tatsächlich ausgeführt: `python tools/test_all.py` — **62 Testgruppen bestanden**.
