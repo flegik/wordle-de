@@ -4,20 +4,20 @@
   "runs": [
     {
       "results": 100,
-      "validationMs": 4.164,
-      "exportMs": 2.091,
+      "validationMs": 3.776,
+      "exportMs": 2.414,
       "backupBytes": 53095
     },
     {
       "results": 1000,
-      "validationMs": 24.159,
-      "exportMs": 17.951,
+      "validationMs": 23.338,
+      "exportMs": 14.643,
       "backupBytes": 531895
     },
     {
       "results": 10000,
-      "validationMs": 136.96,
-      "exportMs": 201.973,
+      "validationMs": 129.737,
+      "exportMs": 137.613,
       "backupBytes": 5355895
     }
   ]

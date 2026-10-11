@@ -6,7 +6,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 for file in ['js/results.js','js/result-image.js','js/reports.js', 'js/sync.js', 'js/selection.js', 'data/word-registry.js', 'data/word-quality.js', 'data/words-de-2.js', 'js/engine.js', 'js/sessions.js', 'js/double.js', 'js/double-ui.js', 'js/tower.js', 'js/tower-ui.js', 'js/speedrun.js', 'js/speedrun-ui.js', 'data/themes.js', 'js/theme.js', 'js/theme-ui.js', 'js/duel-links.js', 'js/duel.js', 'js/duel-ui.js', 'js/storage.js', 'js/app.js', 'sw.js']:
     subprocess.run(['node', '--check', file], cwd=ROOT, check=True)
-for file in ['tests/sw-failure.test.cjs','tests/phase8.test.cjs','tests/phase7.test.cjs', 'tests/engine.test.cjs', 'tests/app.test.cjs', 'tests/sw.test.cjs',
+for file in ['tests/release-upgrade.test.cjs','tests/sw-failure.test.cjs','tests/phase8.test.cjs','tests/phase7.test.cjs', 'tests/engine.test.cjs', 'tests/app.test.cjs', 'tests/sw.test.cjs',
              'tests/double.test.cjs', 'tests/double-app.test.cjs', 'tests/tower.test.cjs', 'tests/tower-app.test.cjs', 'tests/speedrun.test.cjs', 'tests/speedrun-app.test.cjs', 'tests/duel.test.cjs', 'tests/duel-app.test.cjs', 'tests/theme.test.cjs', 'tests/theme-app.test.cjs', 'tests/storage.test.cjs', 'tests/app-storage.test.cjs']:
     subprocess.run(['node', file], cwd=ROOT, check=True)
 subprocess.run([sys.executable, 'tests/themes-build.test.py'], cwd=ROOT, check=True)

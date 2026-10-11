@@ -1,0 +1,66 @@
+{
+  "codeRemote": "310f8b6f0f87da0740afc25cbf38f079a38b0441",
+  "cache": "v2-final-20261011-b",
+  "precacheEntries": 38,
+  "uniqueRuntimeFiles": 37,
+  "runtimeBytes": 1536169,
+  "files": {
+    "data/themes.js": "2f30227f2349097d6fcb29a0b01731f70f4d2c01c7544347fe9905352a84b0f8",
+    "data/word-quality-de-2.1.js": "e84a07d417ada349d8c10d01ad23b638f364c650b3bc24d5765895f0e953485b",
+    "data/word-quality-de-2.js": "7bef9b76bed10d443ff67d5633558942781e58a849122c824d9c282f4609400f",
+    "data/word-quality.js": "6e88ad98be8382625846073fc7c21e0012fa0199f3127d710d62a65d70d1769e",
+    "data/word-registry.js": "bd3d9f3f31978bb736b99d0ccb2a706ee20daab6478c93db8826dd45f4d27818",
+    "data/words-de-1.js": "b0f7c90eeab551a01d72e5b12ddb27135bb2c485aa44a7f23a73efaeaa427623",
+    "data/words-de-2.1.js": "21936a1cf34b3d2d1040efa5f5ab06081d2699145a13027eaa0754bad43228af",
+    "data/words-de-2.2.js": "a1b254103f30e06c04fff7828e8d8b873aa6d291f5d20150db83c02cb1c6fc36",
+    "data/words-de-2.js": "15b79ced886696da9bdf56ea839448ba972d336dc843bd017d951528fde357bb",
+    "data/words.js": "b0f7c90eeab551a01d72e5b12ddb27135bb2c485aa44a7f23a73efaeaa427623",
+    "icons/apple-touch-icon.png": "b86e88c33ad0e0d2229826184d731768238f4429194d4173576a758f159f1947",
+    "icons/icon-192.png": "700335753bfc2aca00e0910b0a1a42f1d27e5b5d627313f901474c1d1e1ca29f",
+    "icons/icon-512.png": "02f6e9d0968fd9fb163c677813a0e100f0bfcfc901e1c6403a55c358ec72ca77",
+    "icons/maskable-512.png": "02f6e9d0968fd9fb163c677813a0e100f0bfcfc901e1c6403a55c358ec72ca77",
+    "index.html": "97bd0ee0abb1ab8319331195804647985c71491d2380ba828ef14a259a9b64cb",
+    "js/app.js": "c5edabc101cacdb8e24cbda0444ea9d8a57fc135bc4b6672b9fe1c8bebf281e3",
+    "js/double-ui.js": "15ee7ddcbc31d0b45531cd22db0255da2d425ccaa72e69bcff1a70fcb658b54f",
+    "js/double.js": "9e8854a432e5c168cac94d812aed5969171336fecddd2c3cbd322b8bb0bc074f",
+    "js/duel-links.js": "6f40e675934411898b08c86f51a699c9dc6e4e4455e9461e766a440b23c7deee",
+    "js/duel-ui.js": "e1ef255ad8d52dd97635ead0546f58edc11f7cb6b726785a0d0b8743eb78682a",
+    "js/duel.js": "fb64ebdcae77ad43012fe1394c4eff0393750929d30240b8c088201c9d669a0e",
+    "js/engine.js": "02e472898fc5d0a898d2ea3186722148d0146c77bfdcf18d806ff0e02d804f2a",
+    "js/reports.js": "65bbaceeed5febc6acb9bee04be3f997287a800e944fb7e2351b7c08b15f4e5b",
+    "js/result-image.js": "617dba12349ff9cb1bd24c4ecded68a6fda9ed5da2660944ea57d3550fcb0770",
+    "js/results.js": "90356867a54e1c9d5f2225a0afe3ff2a3fb70edfd67f7eab1c7bbccf4355241b",
+    "js/selection.js": "7ab363ac6a036893eae37c010aa1bdcb4cfe992bc3571204668e68d5ec1209fe",
+    "js/sessions.js": "59ae65f3031979839bb79ee9f19fcadf6c79e6330a498cf191a29ad4ba437e97",
+    "js/speedrun-ui.js": "8c8ffaec6f8480955e0e8bcf4ab530fd3a6458544d317b677aa3e59f4445ee36",
+    "js/speedrun.js": "3cbccc816a2a46a8c418181ee631478d61cde0ee43cc22b06c888cf7989f34f9",
+    "js/storage.js": "1fb36f53c0aa55df414f70316c9f37061eceac7433808e7ff567e0d0d4eb5feb",
+    "js/sync.js": "df125c695a7905be440842dd3fa96ca770b0f657417334572031b9df3e03ecae",
+    "js/theme-ui.js": "f8807b939c4430b69ea5916697060e56d9e3f5931bb0dbea1ccf67d216ad42a1",
+    "js/theme.js": "6648ede8669ad8fbb3879d54109c59515648978bc1ba71dbaf2fbbc01dc729fc",
+    "js/tower-ui.js": "3cc3541b6303b57bdb95410b7c06359c27df53a15472cc2bd57f29e8ba29c458",
+    "js/tower.js": "4831874ebef71969ecf31c232417137ed272a27b3cbdaa8da39e8860d0d5f625",
+    "manifest.webmanifest": "8f54d859598e53e655329733e6459327657fe58b7937a813ef64a9ee917a6f05",
+    "style.css": "cbbac8d5d9d54634971300ff02bad7373566df4ccca7f828aa991808e907f356"
+  },
+  "icons": {
+    "icons/icon-512.png": {
+      "width": 512,
+      "height": 512
+    },
+    "icons/icon-192.png": {
+      "width": 192,
+      "height": 192
+    },
+    "icons/maskable-512.png": {
+      "width": 512,
+      "height": 512
+    },
+    "icons/apple-touch-icon.png": {
+      "width": 180,
+      "height": 180
+    }
+  },
+  "mainRollback": "22331471b9179d408879cec10f5aa1e1291cf26e",
+  "deviceVerification": false
+}
