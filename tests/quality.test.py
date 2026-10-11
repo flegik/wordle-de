@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('quality',ROOT/'tools/build_quality.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 for p,text in m.outputs().items():assert p.read_text()==text,p
 print('✓ de-2, frozen de-1 and quality index reproduce byte-for-byte')
-old=m.read_words(ROOT/'data/words.js');new=m.read_words(ROOT/'data/words-de-2.js');q=m.read_words(ROOT/'data/word-quality.js')
+old=m.read_words(ROOT/'data/words.js');new=m.read_words(ROOT/'data/words-de-2.js');q=m.read_words(ROOT/'data/word-quality-de-2.js')
 assert sum(map(len,new['solutions'].values()))==5568
 assert sum(map(len,new['accepted'].values()))==15138
 assert {w for n in old['solutions'] for w in old['solutions'][n] if w not in new['solutions'][n]}=={'HUNNI','MUMPS','COUP','CLOU','MBIT','PESEL'}

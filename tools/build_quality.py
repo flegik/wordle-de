@@ -24,7 +24,7 @@ def outputs():
     assert set(classes)=={w for a in new['solutions'].values() for w in a}
     assert all(w in new['solutions'][str(len(w))] for w in policy['protected'])
     q={'version':policy['version'],'wordVersion':'de-2','classes':classes,'provisional':True,'pendingReview':pending,'policy':'data/quality/policy-de-2.json','auditSha256':hashlib.sha256((D/'review/word-audit-de-1.json').read_bytes()).hexdigest()}
-    return {D/'quality/manual-review-de-2.txt':'# Provisional B words requiring manual familiarity/gameplay review. Not approved exclusions.\n'+'\n'.join(pending)+'\n',D/'words-de-1.js':base.decode(),D/'words-de-2.js':'/* Derived dictionaries retain their original licenses. See WORDLISTS.md. */\nglobalThis.WORDS_DE_2 = '+json.dumps(new,ensure_ascii=False)+';\n',D/'word-quality.js':'/* Gameplay classes are provisional estimates; source/limits in docs/WORD_QUALITY.md. */\nglobalThis.WordQuality = '+json.dumps(q,ensure_ascii=False)+';\n'}
+    return {D/'quality/manual-review-de-2.txt':'# Provisional B words requiring manual familiarity/gameplay review. Not approved exclusions.\n'+'\n'.join(pending)+'\n',D/'words-de-1.js':base.decode(),D/'words-de-2.js':'/* Derived dictionaries retain their original licenses. See WORDLISTS.md. */\nglobalThis.WORDS_DE_2 = '+json.dumps(new,ensure_ascii=False)+';\n',D/'word-quality-de-2.js':'/* Gameplay classes are provisional estimates; source/limits in docs/WORD_QUALITY.md. */\nglobalThis.WordQualityV1 = '+json.dumps(q,ensure_ascii=False)+';\n'}
 if __name__=='__main__':
     for path,text in outputs().items():path.write_text(text)
     print('de-2 and unchanged de-1 archive reproduced.')
