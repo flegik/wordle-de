@@ -1,0 +1,25 @@
+name = "wordle-de-duel-test"
+main = "index.mjs"
+compatibility_date = "2026-10-11"
+workers_dev = true
+
+[observability]
+enabled = false
+
+[vars]
+ALLOWED_ORIGINS = "https://wordle-de-duel-test.wordle-de-flegik-test.workers.dev,http://localhost:8081,http://127.0.0.1:8081,http://localhost:8787,http://127.0.0.1:8787"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "wordle-de-duel-test"
+# Replace only after creating the isolated test database. Never use production D1.
+database_id = "287419a5-70e7-4532-9ac6-d07f9203586b"
+migrations_dir = "migrations"
+
+[triggers]
+crons = ["17 3 * * *"]
+
+[assets]
+directory = "site"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
