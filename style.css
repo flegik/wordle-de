@@ -53,3 +53,7 @@
 #app.theme-fit{height:100dvh;min-height:0;overflow:hidden}.theme-game{height:100%;min-height:0;gap:8px}.theme-game header{flex-shrink:0;margin-bottom:6px}.theme-history{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:flex;align-items:safe center;padding:4px 0}.theme-history .board{margin:auto}.theme-game .keyboard{flex-shrink:0}.theme-hint{flex-shrink:0;font-size:10px;margin:2px 0}
 @media(max-height:650px){#app.theme-fit{padding-top:max(8px,env(safe-area-inset-top));padding-bottom:max(8px,env(safe-area-inset-bottom))}.theme-game{gap:4px}.theme-game .tile{max-height:35px}.theme-history .board{width:min(100%,280px)}.theme-game .key{min-height:38px}}
 @media(max-height:450px){.theme-game header{margin-bottom:0}.theme-game .key{min-height:30px}.theme-game .special .key{min-height:30px}.theme-game .tile{max-height:28px}.theme-game .game-top strong{font-size:12px}}
+
+/* Duels reuse the bounded single-round board, keyboard and safe areas. */
+.duel-field{display:block;width:100%;box-sizing:border-box;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:16px;margin:10px 0;min-height:48px}
+.duel-id{overflow-wrap:anywhere}.duel-field:focus{outline:2px solid var(--green);outline-offset:2px}

@@ -7,7 +7,8 @@ const D=root.DoubleWordle||(typeof require==='function'?require('./double.js'):n
 const T=root.WordleTower||(typeof require==='function'?require('./tower.js'):null);
 const R=root.WordleSpeedrun||(typeof require==='function'?require('./speedrun.js'):null);
 const H=root.WordleTheme||(typeof require==='function'?require('./theme.js'):null);
-const sessionResult=(session,date)=>session.mode==='theme'&&H.hasContract(session)?H.result(session,date):session.mode==='tower'?T.result(session,date):session.mode==='speedrun'&&R.hasContract(session)?R.result(session,date):G.result(session,date);
+const J=root.WordleDuel||(typeof require==='function'?require('./duel.js'):null);
+const sessionResult=(session,date)=>session.mode==='duel'&&J.hasContract(session)?J.result(session,date):session.mode==='theme'&&H.hasContract(session)?H.result(session,date):session.mode==='tower'?T.result(session,date):session.mode==='speedrun'&&R.hasContract(session)?R.result(session,date):G.result(session,date);
 const KEY='wordle-de:v2',LEGACY_KEY='wordle-de:v1',SCHEMA=2;
 const clone=v=>JSON.parse(JSON.stringify(v));
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
@@ -18,10 +19,11 @@ function validate(state,words){
  E.validate({...state,schema:1},words);H.validateBags(state,words);
  if(!object(state.sessions)||!Array.isArray(state.sessionEvents)||state.sessionEvents.length>100000)
   throw Error('Ungültige Session-Datensammlungen.');
+ J.validatePending(state,words);
  const ids=new Set(state.events.map(e=>e.id));
- for(const event of state.sessionEvents){G.validateEvent(event,words);if(event.mode==='theme'&&H.hasContract(event))H.validateEvent(event,words);if(event.mode==='double')D.validateEvent(event,words);if(event.mode==='tower')T.validateEvent(event,words);if(event.mode==='speedrun'&&R.hasContract(event))R.validateEvent(event,words);if(ids.has(event.id))throw Error('Doppelte Wertung.');ids.add(event.id);}
+ for(const event of state.sessionEvents){G.validateEvent(event,words);if(event.mode==='duel'&&J.hasContract(event))J.validateEvent(event,words);if(event.mode==='theme'&&H.hasContract(event))H.validateEvent(event,words);if(event.mode==='double')D.validateEvent(event,words);if(event.mode==='tower')T.validateEvent(event,words);if(event.mode==='speedrun'&&R.hasContract(event))R.validateEvent(event,words);if(ids.has(event.id))throw Error('Doppelte Wertung.');ids.add(event.id);}
  for(const [key,session] of Object.entries(state.sessions)){
-  if(key!==session?.id)throw Error('Ungültiger Session-Schlüssel.');G.validate(session,words);if(session.mode==='theme'&&H.hasContract(session))H.validate(session,words);if(session.mode==='double')D.validate(session,words);if(session.mode==='tower')T.validate(session,words);if(session.mode==='speedrun'&&R.hasContract(session))R.validate(session,words);
+  if(key!==session?.id)throw Error('Ungültiger Session-Schlüssel.');G.validate(session,words);if(session.mode==='duel'&&J.hasContract(session))J.validate(session,words);if(session.mode==='theme'&&H.hasContract(session))H.validate(session,words);if(session.mode==='double')D.validate(session,words);if(session.mode==='tower')T.validate(session,words);if(session.mode==='speedrun'&&R.hasContract(session))R.validate(session,words);
   if(state.events.some(e=>e.id===session.id)||Object.values(state.games).some(g=>g.id===session.id))throw Error('Session-ID kollidiert mit Wortrunde.');
   const event=state.sessionEvents.find(e=>e.id===session.id);
   if(session.status==='playing'&&event)throw Error('Laufende Session bereits gewertet.');
