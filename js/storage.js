@@ -4,6 +4,8 @@
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
 const G=root.Sessions||(typeof require==='function'?require('./sessions.js'):null);
 const D=root.DoubleWordle||(typeof require==='function'?require('./double.js'):null);
+const T=root.WordleTower||(typeof require==='function'?require('./tower.js'):null);
+const sessionResult=(session,date)=>session.mode==='tower'?T.result(session,date):G.result(session,date);
 const KEY='wordle-de:v2',LEGACY_KEY='wordle-de:v1',SCHEMA=2;
 const clone=v=>JSON.parse(JSON.stringify(v));
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
@@ -15,15 +17,15 @@ function validate(state,words){
  if(!object(state.sessions)||!Array.isArray(state.sessionEvents)||state.sessionEvents.length>100000)
   throw Error('Ungültige Session-Datensammlungen.');
  const ids=new Set(state.events.map(e=>e.id));
- for(const event of state.sessionEvents){G.validateEvent(event,words);if(event.mode==='double')D.validateEvent(event,words);if(ids.has(event.id))throw Error('Doppelte Wertung.');ids.add(event.id);}
+ for(const event of state.sessionEvents){G.validateEvent(event,words);if(event.mode==='double')D.validateEvent(event,words);if(event.mode==='tower')T.validateEvent(event,words);if(ids.has(event.id))throw Error('Doppelte Wertung.');ids.add(event.id);}
  for(const [key,session] of Object.entries(state.sessions)){
-  if(key!==session?.id)throw Error('Ungültiger Session-Schlüssel.');G.validate(session,words);if(session.mode==='double')D.validate(session,words);
+  if(key!==session?.id)throw Error('Ungültiger Session-Schlüssel.');G.validate(session,words);if(session.mode==='double')D.validate(session,words);if(session.mode==='tower')T.validate(session,words);
   if(state.events.some(e=>e.id===session.id)||Object.values(state.games).some(g=>g.id===session.id))throw Error('Session-ID kollidiert mit Wortrunde.');
   const event=state.sessionEvents.find(e=>e.id===session.id);
   if(session.status==='playing'&&event)throw Error('Laufende Session bereits gewertet.');
   if(session.status!=='playing'){
    if(!event)throw Error('Session-Ergebnis fehlt.');
-   const expected=G.result(session,event.date);
+   const expected=sessionResult(session,event.date);
    if(Object.keys(expected).some(k=>expected[k]!==event[k])||Object.keys(event).some(k=>!(k in expected)))
     throw Error('Widersprüchliches Session-Ergebnis.');
   }
@@ -58,7 +60,7 @@ function importBackup(text,words){return migrate(JSON.parse(text),words);}
 function exportBackup(state,words){validate(state,words);return JSON.stringify(state,null,2);}
 function recordSession(state,session,date,words){
  validate(state,words);G.validate(session,words);
- const event=G.result(session,date),previous=state.sessionEvents.find(e=>e.id===session.id);
+ const event=sessionResult(session,date),previous=state.sessionEvents.find(e=>e.id===session.id);
  if(previous){
   if(JSON.stringify(previous)!==JSON.stringify(event))throw Error('Session bereits mit anderem Ergebnis gewertet.');
   return clone(state);
