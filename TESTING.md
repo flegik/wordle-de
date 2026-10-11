@@ -1,6 +1,6 @@
 # Online-Duell 2.1 · Prüfungen vom 11.10.2026
 
-Die komplette Suite besteht auch mit dem Produktions-Cache `v2-1-release-20261011`.
+Die komplette Suite besteht auch mit dem Produktions-Cache `v2-1-release-20261011-b`.
 Produktiver Browsercheck: `WORDLE_TEST_URL=https://flegik.github.io/wordle-de/`
 und `WORDLE_PRODUCTION=1`, dann `node tests/browser-online-remote.cjs`.
 [Release-Konfiguration und Abnahme](docs/RELEASE_2_1.md).

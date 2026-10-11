@@ -13,11 +13,11 @@ einen eigenen Speicher; die eingefrorenen Wörterbücher bleiben unverändert.
 - D1: `wordle-de-duel`, ID `ac9e3358-87e5-46de-89bd-2f13e4231a57`, WEUR.
 - Migration `0001_rooms.sql` remote angewendet; Cron täglich 03:17 UTC.
 - Konfiguration: `online/wrangler.production.toml`; Worker-Version
-  `50fc295e-5e3f-48b3-a238-ce846a1fcf4c`.
+  `0b5fcc79-3bb3-4e06-ba36-61a9ebee7735`.
 - CORS: `https://flegik.github.io` und der eigene Produktions-Worker-Origin.
 - API bleibt HTTPS, Bearer-Zugang und `no-store`. Free-Tarif und die begrenzten
   App-Limits bleiben bestehen; es wurde kein kostenpflichtiger Tarif aktiviert.
-- Cache: `v2-1-release-20261011`. Die produktive Oberfläche zeigt keinen TEST-Zusatz.
+- Cache: `v2-1-release-20261011-b`. Die produktive Oberfläche zeigt keinen TEST-Zusatz.
 
 Die zuvor erstellte Test-Datenbank und der Test-Worker bleiben getrennt.
 `wordle-de-flegik-test.workers.dev` ist der bestehende Account-Subdomain;
@@ -47,8 +47,21 @@ Worker mit zwei frischen mobilen Edge-Browserkontexten: Beitritt, Abschluss,
 authentische Boards, Vergleich, 401 ohne Token und unveränderte klassische Daten.
 Die vorhandene GitHub-Pages-Konfiguration wurde authentifiziert geprüft.
 
-Die Abnahme des tatsächlichen Pages-Updates und PWA-Upgrades wird nach dem Push
-protokolliert. Echte Android-/iPhone-Hardware und installierte mobile PWAs wurden
+GitHub Pages hat den Releasecommit `ebd57811531b35625ab076bfd23ff9a348267957`
+erfolgreich gebaut. Ein komplettes Online-Duell über die bisherige Pages-Adresse
+und die Produktions-API hat mit zwei frischen Browserkontexten bestanden.
+Die öffentliche PWA installiert alle 40 Offline-Assets, hält API-URLs aus dem
+Cache und lädt/spielt den klassischen Modus ohne Netzwerk.
+
+Der ursprüngliche bytegenaue 2.0-Stand und die Release-Dateien wurden auf einem
+isolierten lokalen Origin mit echten Service Workern geprüft: gespeicherter
+Klassik-Entwurf, Update über den vorhandenen Einstellungsbutton, bytegleicher
+Spielstand, Entfernung des alten Caches und Offline-Neuladen bestanden.
+Der unmittelbar beim Pages-Deployment gestartete Upgradecheck wurde wegen eines
+Fehlers im asynchronen Testablauf nicht als bestanden gewertet; der korrigierte
+kontrollierte lokale Lifecycle-Test deckt diesen Ablauf ab.
+
+Echte Android-/iPhone-Hardware und installierte mobile PWAs wurden
 nicht zertifiziert. Alle Sicherheits- und Speichergrenzen des
 [Online-Duell-Berichts](ONLINE_DUEL_V2_1.md) gelten weiter.
 
