@@ -116,3 +116,61 @@ vollständiges Offline-Paket, reale Installations-/Update-Tests. Pages bleibt ma
 
 Phase 1 endet an dieser Grundlage. Keine neuen spielbaren Arcade-Modi und kein
 vorzeitiger Start von Phase 2.
+
+
+## Phase 4: Speedrun-Vertrag 1 innerhalb von Schema 2
+
+`js/speedrun.js` verwendet die unveränderten `Sessions`-Funktionen für Runden,
+Versuche, Projektionen und Abschluss. `speedrunVersion: 1` markiert den jetzt
+spielbaren Modusvertrag, **keine neue Speicher-Schemaversion**. Ein Round-Limit
+bleibt 6/7; nur die letzte offene Runde erhält eine kanonische Eingabe.
+
+Zusätzliche persistierte Felder:
+
+- `activeMs`: bisherige aktive monotone Vordergrundzeit in Millisekunden.
+- `roundEnds`: geordnete Grenzen `{roundId, reason, attemptIndex, atMs}`;
+  `reason` ist `won`, `lost` oder `skipped`. Skip ist keine gewöhnliche Niederlage.
+- `attempts[].atMs`: Bestätigungszeit im aktiven Zeitbudget, unabhängig vom Flip.
+- `resumeRequired: true`: jeder dauerhafte Checkpoint ist ein sicherer
+  Fortsetzenzustand. Ein laufender Browser hält seinen Timeranker ausschließlich
+  im RAM; das Feld behauptet nicht, dass während des Checkpoint-Writes die UI pausiert.
+- `input`: aktueller Draft, wie in den anderen Arcade-Modi.
+
+Restbudget = max(0, 180000 − activeMs − 10000 × Anzahl Skips). Punkte und
+Wortfortschritt werden aus bestätigten Rundenenden abgeleitet. Die Endsession
+und ihr Event enthalten einen geprüften Score-Snapshot für vorhandene
+Ergebnisverträge. Round-/Event-Replay und der Storage-Abgleich verhindern
+widersprüchliche Punkte, doppelte Grenzen und nachträgliche Tipps.
+
+`WordleSpeedrun.createClock(now)` erlaubt eine injizierbare monotone Quelle,
+Standard `performance.now()`. Countdown wird bewusst nicht verwendet.
+Checkpoint/Stop/Resume bilden den Timerzustand ab; Anker und Epochen werden
+niemals persistiert. UI-Updates alle 100 ms sind von der Zeitberechnung getrennt;
+dauerhafte Checkpoints alle 500 ms, zusätzlich Eingabe/Aktion/Pause/Lifecycle.
+Ein Vordergrundwechsel startet den Timer nie automatisch. Nach Crash zählt
+der letzte erfolgreiche Checkpoint; Event-Loop-Blockierung kann das nominelle
+500-ms-Fenster vergrößern. Keine lokale Anti-Cheat-Garantie.
+
+`js/speedrun-ui.js` rendert Start/Spiel/Pause/Ergebnis/Statistik. Controller und
+Lifecycle bleiben in `app.js`. Ein Abschluss wird vor visueller Animation
+persistiert; 200-ms-Eingabeschutz (30 ms bei reduzierter Bewegung) verhindert
+Doppelbestätigung. Die aktive Uhr läuft während dieser kurzen Auswertung weiter.
+
+Historische generische Speedrun-Prototypen aus Phase-1-Fixtures ohne neue
+Vertragsfelder bleiben unverändert importier-/exportierbar und durch `Sessions`
+validiert. Sie hatten keine spielbare Timer-/Punktelogik und werden deshalb nicht
+als neue Speedrun-Highscores interpretiert oder als neuer Run fortgesetzt.
+Sobald irgendein reserviertes Speedrun-Vertragsfeld vorhanden ist, verlangt
+Storage den vollständigen neuen Vertrag; Entfernen des Markers allein umgeht
+keine Prüfung. Classic, Daily, Streak, Double und Tower benötigen diese Felder nicht.
+
+Eigene Statistik-Events enthalten flache Snapshots: `speedrunVersion`, `score`,
+`lost`, `skipped`, `winningAttempts`, `solved4`…`solved7`, `activeMs`. Sie werden
+gegen die vollständige Session geprüft. Keine klassischen Gewinne werden erzeugt.
+Abbrüche behalten tatsächlich erspielte Punkte und können einen Highscore setzen;
+Ø Punkte berücksichtigt ausdrücklich nur regulär beendete Runs. Gleichstand:
+Punkte, gelöste Wörter, weniger Versuche, dann vorheriger (älterer) Rekord.
+
+Die zwei neuen Runtime-Dateien sind im Entwicklungs-Precache. Cache v1 bleibt
+unverändert; für den gemeinsamen Release ist eine neue eindeutige Cache-Version
+und ein echter Upgrade-/Offline-Test erforderlich.

@@ -1,10 +1,12 @@
-# Entwicklungsstand WORDLE DE 2.0 · Phase 3
+# Entwicklungsstand WORDLE DE 2.0 · Phase 4
 
 Ausschließlich `feature/arcade-v2`. Doppeltes Wordle und Wordle Tower sind hier
-spielbar. Tower bietet vier Etagen (4→5→6→7), ein gemeinsames Budget von 20
+spielbar. Speedrun ergänzt 180 Sekunden aktive Vordergrundzeit, zufällige
+Wortlängen, Punkte und eigene Highscores. Tower bietet vier Etagen (4→5→6→7), ein gemeinsames Budget von 20
 Versuchen, gespeicherte Übergänge und eigene Rekorde. `main` bleibt Version 1.0.
 Keine Veröffentlichung, keine produktive Pages-Änderung und kein Merge.
 
+- Phase 4 / Speedrun, Timer und Grenzen: [docs/PHASE_4_REPORT.md](docs/PHASE_4_REPORT.md)
 - Phase 3 / Tower-System, Befunde, Risiken: [docs/PHASE_3_REPORT.md](docs/PHASE_3_REPORT.md)
 - Phase 2 / Funktionen, Architektur, Risiken: [docs/PHASE_2_REPORT.md](docs/PHASE_2_REPORT.md)
 - Tatsächliche Tests und offene Gerätechecks: [TESTING.md](TESTING.md)
@@ -21,6 +23,13 @@ Projektordner und `http://localhost:8020` öffnen. Im Menü **Arcade → Wordle 
 wählen, dann „Tower starten“. Zum Fortsetzen wieder
 Wordle Tower öffnen und „Tower fortsetzen“ wählen; auch ein offener Etagenübergang
 wird wiederhergestellt. Doppeltes Wordle bleibt über seinen Menüeintrag erreichbar.
+Speedrun: **Arcade → Speedrun → Speedrun starten**. Jeder gelöste Vierer/Fünfer/
+Sechser/Siebener bringt 100/150/200/250 Punkte. Skip kostet 10 Sekunden.
+Bei Hintergrundwechsel oder Pause steht die Uhr; „Speedrun fortsetzen“ nimmt
+das gespeicherte Budget wieder auf. Kein Countdown und keine Lade-Wartezeit.
+Zum Abbrechen erst pausieren, dann ausdrücklich bestätigen. Highscores und
+Statistiken sind vollständig von den anderen Modi getrennt.
+
 Nur auf einem separaten Entwicklungs-Origin testen; den bestehenden Live-Origin
 und dessen Worker/Statistik nicht für Zwischenversionen verwenden. Falls der
 Localhost-Port schon eine ältere Testversion cached, einen frischen Port verwenden.

@@ -1,3 +1,59 @@
+# Phase 4 · Speedrun, ausschließlich Entwicklungsbranch
+
+Ausgeführt: `python tools/test_all.py` — **145 Testgruppen bestanden**.
+Baseline vor Änderungen: 93 Gruppen aus Phase 3 bestanden. Hinzu kommen
+27 Speedrun-Regel-/Timer-/Storage-Gruppen und 25 Controller-Gruppen.
+Elf Runtime-Dateien werden mit `node --check` geprüft. Der SW-Adapter
+prüft jetzt sämtliche **19 Precache-URLs**, auch unter einem Unterverzeichnis.
+`node --check tests/browser-speedrun.cjs` und `git diff --check` bestanden.
+
+Die Fake Clock wartet keine drei Minuten. Sie prüft Bestätigung bei
+179999,99 ms gegenüber 180000 ms, Ablauf während Flip, Zeitablauf ohne
+vorherigen Timer-Tick, periodische Checkpoints, neue monotone Epoche beim
+Reload, visibilitychange/pagehide, explizite Fortsetzung, Draft, Doppel-Enter,
+Doppel-Skip, Pause während Flip, Abort-Bestätigung und einmalige Wertung.
+Regeltests prüfen alle Punktewerte/Längen, separate Versuchslimits,
+verlorene/übersprungene/offene Wörter, chronologische Grenzen, Mehrfachbuchstaben,
+Unicode, reproduzierbare Punkte, Highscore-Gleichstände, getrennte Statistik,
+Backup-Roundtrip und beschädigte/manipulierte Zeit-/Ergebnisdaten.
+Alle 93 bestehenden Gruppen einschließlich 1461 Tagesrätsel-Fixtures und
+reproduzierbarem Wortaudit bestehen weiterhin. DOM-/SW-Adapter sind keine
+Browser-, Render- oder Gerätetests.
+
+**Browserstatus:** `node tests/browser-tower.cjs` und
+`node tests/browser-speedrun.cjs` tatsächlich gestartet, beide scheitern
+bereits an fehlendem Chromium-Executable. Kein Browserdownload in Phase 4.
+Keine erfolgreichen Render-, Touch-, Safari-, PWA- oder Offline-Browsertests
+behauptet. Der optionale Speedrun-Check ist syntaktisch geprüft, sein Ablauf
+im Browser bleibt unvalidiert. Bei vorhandenen Entwicklungswerkzeugen:
+`node tests/browser-speedrun.cjs` (Playwright + Chromium; keine App-Abhängigkeit).
+Er nutzt einen isolierten Localhost-Origin mit Unterverzeichnis und sieht
+320×568, 360×640, 390×844, 430×932, 1000×800 und 640×360 vor.
+
+## Offene manuelle Freigabechecks für Speedrun
+
+- Auf echten Android-Chrome-/Samsung-Internet- und iPhone-Safari-Geräten,
+  jeweils Browser und installierte PWA: Timer, Safe Areas, Tastatur, Skip und
+  aktuelle letzte Rasterzeile bei allen genannten Größen und Querformat.
+- Erfolg und Versuchslimit-Niederlage: schneller automatischer Wortwechsel,
+  korrektes Feedback, neue Tastaturfarben, keine überlappenden Controls.
+- 10/30-Sekunden-Warnung, letzter gültiger Tipp vor Deadline, Ablauf während
+  Animation, sehr schnelles mehrfaches Enter/Skip, reduzierte Bewegung/Sound.
+- Telefonanruf, Sperrbildschirm, WhatsApp, Homescreen, Tabwechsel, pagehide/BFCache:
+  Pause, keine Hintergrundzeit, Rückkehr nur über bewusste Fortsetzung.
+- Reload während Draft/Flip, Browserabsturz und Neustart: Restzeit aus letztem
+  Checkpoint, keine neuen Ziele, keine doppelte Wertung; Save-Fehler/Quota prüfen.
+- Share-Abbruch, Web Share, Clipboard und manuelle Kopie ohne Lösungen;
+  JSON-Export/-Import einschließlich abgeschlossenem Speedrun, Schema 1,
+  alten Schema-2-Sessions, Bestätigung vor Überschreiben.
+- Auf **frischem Test-Origin** erste Installation, Offline-Neustart,
+  Unterverzeichnis-Hosting und späteres Upgrade mit neuer Release-Cache-Version.
+  Produktions-Origin nicht zum Testen des Entwicklungsbranches verwenden.
+
+---
+
+## Historischer Prüfstand Phase 3
+
 # Phase 3 · Wordle Tower, ausschließlich Entwicklungsbranch
 
 Ausgeführt: `python tools/test_all.py` — **93 Testgruppen bestanden**, davon
