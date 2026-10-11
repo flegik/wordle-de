@@ -252,3 +252,29 @@ Drei neue Runtime-Assets im Entwicklungs-SW; Cache v1 unverändert.
 Vollständige Verträge/Grenzen: DUEL_FORMAT.md und PHASE_6_REPORT.md. Historisches
 de-1 zur späteren Wortregistry behalten; Duell-Link enthält immer exaktes Wort
 und Originalversion, nie veränderlichen Listenindex. Keine de-2-Aktivierung hier.
+
+## Phase 7: Wörterbuch-Kontext statt globalem Austausch
+
+`WordRegistry` löst jede gespeicherte `wordVersion` gegen de-1/de-2 auf.
+Die Engine bleibt unverändert; Sessions/Modusmodule validieren mit der tatsächlichen
+historischen Version. Neue klassische Runden tragen einen Versionstag, fehlende
+Tags bleiben de-1. `state.wordVersion` bleibt der legacy Kontext für alte Bags
+und Runden, nicht eine Behauptung, alle enthaltenen Spiele hätten dieselbe Version.
+Daily/Themen behalten ihre eigene de-1-Basis. Neue freie Spiele/zufällige Duelle
+verwenden die aktive Registry-Version de-2. Historische Wunsch-Duelle können
+weiter de-1-Eingaben wie PESEL verwenden.
+
+`WordSelection` ist die einzige freie Auswahlquelle; Zustand optional unter
+Schema 2, mit Qualitäts-/Datenversion, Anfangsbeständen, Restbeuteln und Cooldown.
+Keine zusätzlichen unabhängig gespeicherten Punkt-/Statistikwerte. Mode-spezifische
+Wortlängen bleiben unverändert. `WordleSync` schützt exakte alte Speicherquellen
+und v2-Schreib-Leases, vorbereitetes Merge nur bei eindeutigen Verhältnissen.
+Storage nutzt Map/Set für Ergebniszuordnung statt wiederholter linearer Suche.
+
+`WordReports`: optionale lokale Meldungen, streng validiert und mit normalen
+Backups exportiert/importiert; separate JSON-Ausgabe ohne Server. Erst auf
+Ergebnisbildschirmen verfügbar, beim verlorenen Tower nur für erreichte Etagen.
+UI, Modi, Punkte, Timer und Grundregeln verwenden weiterhin vorhandene Module.
+Gemeinsame Flip-Zeiten wurden verkürzt; Speedrun behält seine kurzen Spezialzeiten.
+Alle sieben neuen Runtime-Assets sind im vorbereiteten SW enthalten, v1-Cache
+unverändert bis zum späteren ausdrücklich freigegebenen gemeinsamen Release.

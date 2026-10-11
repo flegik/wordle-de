@@ -344,3 +344,32 @@ Auf iOS Safari, Android Chrome, Samsung Internet und Desktop jeweils:
 - [ ] Privatmodus/gesperrtes localStorage: sichtbarer Hinweis und Backup statt behaupteter Persistenz.
 
 Geräte- und Browserkompatibilität ist ein Implementierungsziel und kein hier bewiesenes Testergebnis.
+
+## Phase 7
+
+`python tools/test_all.py`: zusätzlich Qualitätsgenerator-Reproduktion und
+Phase-7-Integrationen für Klassen, vollständige globale Zyklen, Cooldown,
+Restbeutel-Migration, gemischte Wortversionen, alte HUNNI/PESEL-Runden/Duelle,
+Backup-Migration/Idempotenz, eigene Wortmeldungen und Speicher-Konflikte.
+Tests mit fremden gespeicherten UI-Fixtures bestätigen die neue explizite
+Übernahme; sie umgehen den Konfliktschutz nicht mehr durch stilles Storage-Update.
+Der frühere ungültige Versionstest verwendet nun de-999, weil de-2 unterstützt wird.
+
+`node tools/simulate_selection.cjs`: 570 reale Checkpoints, drei Verfahren,
+drei Seeds im Moduswechsel sowie reine Modusprofile, alle vier Längen,
+komplette Zyklen plus Übergang. JSON-Ausgaben unter data/quality/.
+
+Browserversuch `node tests/browser-duel.cjs` erneut ausgeführt: Start gescheitert,
+Playwright Chromium headless shell fehlt. Keine Layout-/Touch-/Safari-/installierte
+PWA-Prüfung als bestanden behauptet. Die Adapter prüfen Controller und Daten,
+keine Bildschirm-Geometrie. SW-Adapter prüft 32 vorhandene Assets unter Unterpfad,
+Navigation-Fallback und Scope-Isolation, keine reale PWA-Installation.
+
+Offen für Phase 8, ausschließlich auf isoliertem Test-Origin:
+320×568, 360×640, 390/430 Pixel, Desktop/Querformat; lange Tower-Historie;
+Dark/Light und reduzierte Bewegung; alle Ergebnis-/Melde-/Konfliktdialoge;
+physische und Touch-Eingaben inkl. ÄÖÜẞ; iOS Share/Clipboard/JSON-Downloads;
+Speedrun Hintergrund/Foreground/pagehide; alte PWA parallel zu neuer;
+Storage-Quoten, gleichzeitige Tabs, bestätigte Übernahme und Sicherung beider
+Stände; echte Installation/Offline/atomare Cache-Aktualisierung mit neuer
+Release-Cache-Version. Noch keine Release-Freigabe.

@@ -104,3 +104,48 @@ besteht derzeit kein Datenrisiko für live spielende Nutzer.
   anlegen, neues Paket veröffentlichen, Update laden, Daten und Offline testen.
 - main und Pages erst nach sämtlichen Modi, Migrationstests, Wortfreigabe und
   ausdrücklicher gemeinsamer Veröffentlichung verändern.
+
+## In Phase 7 implementiert
+
+Registry de-1/de-2, bytegleiches Archiv, optionales `selection`-Feld unter Schema 2.
+Neue freie Runden verwenden de-2; Daily sowie historische Runden/Themen/Challenges
+resolvieren die gespeicherte Basisversion. Alte klassische Runden ohne Worttag
+werden weiterhin als de-1 gelesen. Ereignisse werden weder neu interpretiert
+noch erneut gewertet. Neue klassische Ereignisse erhalten ihren Wortversionstag.
+
+Restbeutel werden deterministisch in A/B/C aufgeteilt, ausschließlich freigegebene
+Ausschlüsse entfernt. Alte Bag-/Last-Felder bleiben als Kompatibilitätsdaten
+vorhanden. Nur das tatsächlich gespeicherte letzte alte Wort ist rekonstruierbar;
+es wird kein erfundenes historisches 150-Wörter-Gedächtnis angelegt.
+
+`legacySource` speichert die exakte originale v1-Rohkopie/null im v2-Stand.
+Änderungen des v1-Keys blockieren weitere v2-Schreibvorgänge und bieten Export
+beider Stände. Das Original wird nicht gelöscht. Ein validierter, eindeutig
+additiver Merge ist als reine vorbereitende Funktion getestet; die UI führt
+**keine automatische Zusammenführung** aus. Unklare Reihenfolge (Schema 1 hat
+nur Tagesdatum), verschiedene Entwürfe/Beutel/Einstellungen/IDs werden abgelehnt.
+Ein erstmaliger v2/v1-Konflikt wird ebenfalls geschützt.
+
+v2-Tabs: Vor jedem Speichern wird der geladene exakte v2-String als Lease geprüft.
+Fremde Storage-Events pausieren den Speedrun. Validierte fremde Stände können
+nur nach ausdrücklicher Bestätigung übernommen werden; ein nochmals veränderter
+Stand wird nicht mit einem alten Dialog überschrieben. Ungültige Daten oder
+Löschung schützen den lokalen Stand. Export des eigenen Standes und der fremden
+Originalkopie bleiben erreichbar. Bewusstes Backup-Importieren ist eine bestätigte
+vollständige Übernahme, kein versprochenes Zusammenführen zweier Spielverläufe.
+
+Grenze: localStorage besitzt kein atomares Compare-and-Swap. Zwei exakt simultane
+Read/Write-Operationen können ohne zusätzliche Browser-Sperre konkurrieren.
+Die Lease-/Storage-Event-Erkennung reduziert gewöhnliche Konflikte, ist keine
+vollständig atomare Multi-Tab-Transaktion. Vor Release auf isoliertem Test-Origin
+alte und neue PWA parallel, Wiederherstellung, Löschung, Quotenfehler und diese
+Race-Grenze prüfen. Die exakte v1-Kopie vergrößert Backups; keine Historie wird
+zur Platzgewinnung automatisch gelöscht. Schema 3 wird nicht eingeführt.
+
+Die Cache-Version bleibt bis zum gemeinsamen Release v1. Phase 8 muss einen
+neuen gemeinsamen Cache vergeben und tatsächliche Update-/Offline-Tests ausführen.
+
+Die Quellkopie ist ein opaker Vergleichswert. Nach ausdrücklich bestätigter
+Wiederherstellung darf auch ein beschädigter Originalstring als geschützte
+Quelle erhalten bleiben, ohne den validierten neuen Stand am Speichern zu
+hindern. Ein ungefragt beschädigter alter Speicher wird weiterhin nicht übernommen.

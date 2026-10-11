@@ -178,3 +178,26 @@ python tools/build_words.py
 ```
 
 Node/Python sind ausschließlich Entwicklungswerkzeuge, keine Laufzeitabhängigkeiten. Beim Ändern der Offline-Dateien die Cache-Version in `sw.js` erhöhen. Updates warten, bis der Spieler sie in den Einstellungen aktiviert. `de-1`-Lösungspools und deren Reihenfolge **nicht** nachträglich verändern, weil sich sonst gemeinsame Tagesrätsel verschieben. Neue Wortlisten brauchen eine neue Version und bewusst implementierte Datenmigration.
+
+## Entwicklungsstand Phase 7
+
+Nur `feature/arcade-v2`, weiterhin keine Veröffentlichung. Neue freie Spiele
+nutzen intern de-2, Tagesrätsel/historische Spielstände behalten de-1. Beide
+Wörterbücher liegen offline vor. Gemeinsame gewichtete Beutel verhindern
+Wiederholungen über alle freien Modi. A/B/C-Klassen sind vorläufig; die manuelle
+Prüfliste ist vor Veröffentlichung redaktionell zu bearbeiten.
+
+Ergebnisbildschirme bieten „Wortqualität melden“: lokal speichern, Grund und
+optionale Notiz, JSON-Export in Einstellungen. Meldungen sind auch im normalen
+Backup enthalten; keine automatische Übermittlung oder Wortentfernung.
+
+Bei geänderten alten PWA-/anderen Tab-Daten werden Schreibzugriffe geschützt.
+Beide Stände sichern, erst dann bewusst übernehmen/importieren. Backup-Import
+überschreibt nach Bestätigung; er vereinigt nicht automatisch konkurrierende Runs.
+
+Prüfen: `python tools/test_all.py`.
+Reproduzieren: `python tools/build_quality.py`.
+Simulation: `node tools/simulate_selection.cjs`.
+Messung: `node tools/benchmark_phase7.cjs`.
+Berichte: docs/PHASE_7_REPORT.md, WORD_REVIEW.md, docs/WORD_SELECTION.md,
+docs/SELECTION_SIMULATION.md, docs/WORD_VERSION_PLAN.md.
