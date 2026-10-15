@@ -8,7 +8,7 @@ function model(s,context){
  const session=Array.isArray(s.rounds),mode=s.mode;
  let boards=session?s.rounds.map(r=>G.roundView(s,r.id)):[{...s,evaluations:s.guesses.map(w=>E.evaluate(w,s.target))}];
  let summary=session?`${s.attempts.length} Versuche`:`${s.guesses.length}/${s.length<6?6:7} Versuche · ${s.length} Buchstaben`,detail='';
- if(mode==='double')summary=`${s.attempts.length}/8 gemeinsame Versuche`;
+ if(mode==='double')summary=`${s.attempts.length}/${s.attemptBudget} gemeinsame Versuche · ${s.rounds[0].length} Buchstaben`;
  if(mode==='tower'){const p=root.WordleTower.progress(s);boards=boards.slice(0,p.reached);summary=`${p.solved}/4 Etagen · ${p.used}/20 Versuche`;detail=`${p.remaining} Versuche übrig`;}
  if(mode==='speedrun'){const m=root.WordleSpeedrun.metrics(s);boards=m.rounds;summary=`${m.score.toLocaleString('de-DE')} Punkte · ${m.solved} Wörter gelöst`;detail=`${m.attempts} Tipps · ${m.skipped} übersprungen`;}
  if(mode==='theme'){detail=s.categoryId||'';if(s.themeVersion)detail=root.WordleTheme.category(s.themeVersion,s.categoryId,root.WordRegistry.resolve(s.wordVersion)).name||detail;}

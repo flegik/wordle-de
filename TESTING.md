@@ -419,3 +419,49 @@ Offene Gates, Dateihashes, Messungen und Rollback: [Release Candidate](docs/RELE
 `node tests/browser-results.cjs`: vorbereitete isolierte localhost-Prüfung bei 320×568, 360×640, 390×844, 430×932, Desktop und Querformat, Touch, Raster, PNG-Decodierung und Offline-Start. Native Sharing wird dabei nur gemockt. Alle sechs Browser-Skripte wurden gestartet, scheiterten hier schon vor Browserstart an fehlendem Chromium; Installation scheiterte an ungültigem Downloadarchiv.
 
 Offen vor Veröffentlichung: dieselben Breiten real rendern; Hardwaretastatur und Scrollbedienung; Safari/iPhone Datei-Sharing, Download/Long-Press und Safe Area; Chrome/Android/Samsung Internet Datei-Sharing; installierte PWA; Altversion-Update bei aktiven Runden/Speedrun; Hintergrund/Foreground, Offline-Neustart, fehlgeschlagenes Update, parallele Tabs/alte PWA und Geräte-Speichergrenzen. Keine dieser Geräteprüfungen wird als bestanden behauptet. Produktive Origin nicht verwenden.
+
+
+## Doppel-Längen 2.1.2 · 15.10.2026
+
+Branch `feature/double-lengths-v2-1-2`, Ausgangspunkt `37689b0`.
+
+| Tatsächlich ausgeführte Prüfung | Ergebnis |
+|---|---|
+| Baseline `python tools/test_all.py` vor Änderungen | Erfolgreich |
+| Vollständige Suite nach Änderungen, einschließlich Online-Duell-Tests | Erfolgreich |
+| Neue `tests/double-lengths.test.cjs` innerhalb der Gesamtsuite | 20 Testgruppen erfolgreich |
+| Online-Client / Online-API zusätzlich separat | 7 / 16 Testgruppen erfolgreich |
+| `node tools/verify_result_png.cjs /tmp/wordle-double-png-qa` | 104 echte PNGs dekodiert, Wiederholung bytegleich |
+| Echter Chromium 153, localhost, 6 Viewports × 5 Auswahlen | 30 Kombinationen erfolgreich |
+| Echter SW-Start und Offline-Reload unter `/wordle-de/` | Erfolgreich, neue 7er-Runde offline startbar |
+| `git diff --check` | Erfolgreich |
+
+Viewports: 320×568, 360×640, 390×844, 430×932, 1000×850 und 740×420.
+Jede Kombination prüft Touch-Eingaben, Hardware-ASCII/Enter/Backspace,
+Kartenwechsel, Draft-/Session-Erhalt beim Reload, maximale laufende Historie,
+keinen horizontalen Überlauf, sichtbare aktuelle Zeile und erreichbare Tastatur,
+Duplikatablehnung, Niederlage, echte Canvas-PNG-Vorschau, nächste Runde und Sieg.
+Unicode-Tasten werden im Browser über die Bildschirmtastatur betätigt; Unicode-
+Hardware-Ereignisse zusätzlich im vorhandenen State-Adapter geprüft.
+Swipe-Navigation wird im Controller-Adapter geprüft. Keine Behauptung echter
+Android-/iPhone-Gerätetests oder nativer Share-Sheets.
+
+Der Standard-Playwright-Download scheiterte erneut an einem unvollständigen ZIP.
+Für die reale Browserprüfung wurde ein ausschließlich temporär installiertes
+`@sparticuz/chromium` (153.0.0) verwendet; keine neue Projekt-/App-Abhängigkeit.
+Start über `WORDLE_BROWSER_LAUNCH=/tmp/wordle-chromium-launch.json node
+tests/browser-double-lengths.cjs`. Die JSON-Datei enthielt nur den temporären
+Binary-Pfad und lokale Chromium-Launchargumente. Der letzte Offline-Test hatte
+zunächst eine fehlende `hasTouch`-Testoption; nach Korrektur wurde nur dieser
+Fall mit zusätzlichem `WORDLE_QA_OFFLINE_ONLY=1` erneut erfolgreich ausgeführt.
+Die 30 vorher bestandenen Matrixfälle benötigten keine Produktkorrektur.
+
+Belege: `docs/qa/double-lengths-automated.log`,
+`docs/qa/double-lengths-browser.log`, `docs/qa/double-lengths-png.log` und
+`docs/qa/double-lengths-7-320.png` (lange 7er-Historie auf 320×568).
+
+Noch manuell prüfen: iPhone Safari/installierte PWA, Android/installierte PWA,
+echter Touch-Swipe, native PNG-/Textfreigabe und späterer PWA-Upgradepfad.
+Keine neuen Runtime-Dateien und keine Änderung an SW-Cache-Name oder Pages.
+Der spätere Release benötigt einen neuen Cache-Namen und Prüfung des dann
+aktuellen main-/Revanche-Stands. Technischer Bericht: `docs/DOUBLE_LENGTHS_2_1_2.md`.
