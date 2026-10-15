@@ -278,3 +278,12 @@ UI, Modi, Punkte, Timer und Grundregeln verwenden weiterhin vorhandene Module.
 Gemeinsame Flip-Zeiten wurden verkürzt; Speedrun behält seine kurzen Spezialzeiten.
 Alle sieben neuen Runtime-Assets sind im vorbereiteten SW enthalten, v1-Cache
 unverändert bis zum späteren ausdrücklich freigegebenen gemeinsamen Release.
+
+## Survivor 2.2 · Vertragsversion 1
+
+`survivor.js` ergänzt einen eigenen Modus mit kanonischen Rundenenden und
+Upgrade-Entscheidungen. Leben, Score und Restladungen werden durch geordneten
+Replay abgeleitet. `survivor-ui.js` nutzt die vorhandene Bildschirmtastatur.
+`survivorSelection` verwendet den bestehenden Auswahlalgorithmus mit eigenem
+A/B-Beutel. Schema bleibt 2, Session-Ergebnisse und Klassiker bleiben getrennt.
+Details, Invarianten, Fallback und Ressourcenlimits: `SURVIVOR_V2_2.md`.

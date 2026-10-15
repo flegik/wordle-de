@@ -477,3 +477,24 @@ Neustart erneut erfolgreich mit dem Release-Cache. Belege:
 `docs/qa/double-lengths-release-tests.log` und
 `docs/qa/double-lengths-release-offline.log`. Keine Änderungen an Backend,
 Wortlisten oder Pages-Konfiguration.
+
+## Survivor 2.2 · Entwicklungsbranch
+
+Baseline: `python tools/test_all.py` vor Änderungen erfolgreich.
+Neue Suitebestandteile: 21 `survivor.test.cjs`-Gruppen, 14 `survivor-app.test.cjs`-
+Gruppen und 3 `survivor-layout.test.cjs`-Vertragsgruppen. Prüfen u. a. drei Herzen,
+Schildverbrauch, Heilung, Extra-/Hinweisdauer, feste Hinweisposition nach Reload,
+Upgrade-Fallback, doppelte/stale Klicks, Game Over, 1.001 Rätsel, Punkte,
+Historien, Backup-Roundtrip, getrennte Statistiken und unveränderte andere Modi.
+
+Die vollständige Suite enthält diese Tests. `tools/verify_result_png.cjs`
+prüft zusätzlich Survivor neben allen bisherigen Modi: 108 erzeugte/dekodierte
+PNGs, wiederholte Exporte bytegleich (nativer Canvas-Adapter). Ein Browserstart
+wurde versucht und scheiterte an fehlendem Chromium. Render-/CSS-Vertragstests
+sind ausdrücklich keine Prüfung tatsächlicher mobiler Pixelgeometrie.
+
+Offen: reale Layouts bei 320/360/390/430 Pixeln, iPhone-/Android-PWA, echte
+Tastaturen, Touch und native Freigabe. Keine Aussage über bestandene Gerätetests.
+Quell-/Statistikschutz und Offline-Asset-Liste wurden automatisiert geprüft;
+reale Installation/Offline-Nutzung und späteres Update bleiben manuell zu prüfen.
+Details und reproduzierbare Testkopie: `docs/SURVIVOR_V2_2.md`.
