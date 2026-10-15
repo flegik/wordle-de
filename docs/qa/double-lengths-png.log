@@ -1,0 +1,3 @@
+node tools/verify_result_png.cjs /tmp/wordle-double-png-qa
+104 PNGs generated and decoded; 104 repeated exports byte-identical.
+Native @napi-rs/canvas adapter, no native share-sheet or device claim.

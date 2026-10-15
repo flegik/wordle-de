@@ -234,3 +234,10 @@ Aktive Wort-/Qualitätsversion: `de-2.2 / quality-3`; Schema und Schlüssel blei
 Prüfen: `python tools/test_all.py`. Optionale echte Browserprüfung: `node tests/browser-results.cjs` mit installiertem Playwright/Chromium. Native Canvas-QA: `node tools/verify_result_png.cjs` mit einer nur für Entwicklung erforderlichen `@napi-rs/canvas`-Installation; die Anwendung selbst hat keine externe Laufzeitabhängigkeit.
 
 Der vorbereitete PWA-Cache `v2-final-20261011-b` gehört ausschließlich zum Entwicklungsbranch. Isolierten HTTPS-/localhost-Origin verwenden; nicht auf der produktiven Pages-URL testen. Keine automatische Releasefreigabe. Bericht und offene Gerätetests: [docs/PHASE_8_REPORT.md](docs/PHASE_8_REPORT.md).
+
+### Doppel-Wordle 2.1.2 (Entwicklungsbranch)
+
+`feature/double-lengths-v2-1-2` ergänzt die Auswahl 4/5/6/7/Zufall mit
+7/8/9/10 gemeinsamen Versuchen. Alte 5/8-Runden und Backups bleiben kompatibel.
+„Neue Doppel-Runde“ behält die Wahl, „Wortlänge ändern“ öffnet die Auswahl.
+Details und spätere Merge-/Release-Hinweise: [DOUBLE_LENGTHS_2_1_2.md](docs/DOUBLE_LENGTHS_2_1_2.md).

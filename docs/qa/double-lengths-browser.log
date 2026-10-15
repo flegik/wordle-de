@@ -1,0 +1,35 @@
+Chromium 153.0.8010.0; isolated localhost /wordle-de/.
+30 layout cases passed in full matrix run.
+The final offline case initially used tap without hasTouch; test setup corrected.
+Offline-only rerun passed; no product change needed for this harness correction.
+PASS 320x568 choice=4: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 320x568 choice=5: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 320x568 choice=6: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 320x568 choice=7: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 320x568 choice=random: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 360x640 choice=4: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 360x640 choice=5: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 360x640 choice=6: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 360x640 choice=7: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 360x640 choice=random: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 390x844 choice=4: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 390x844 choice=5: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 390x844 choice=6: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 390x844 choice=7: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 390x844 choice=random: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 430x932 choice=4: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 430x932 choice=5: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 430x932 choice=6: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 430x932 choice=7: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 430x932 choice=random: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 1000x850 choice=4: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 1000x850 choice=5: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 1000x850 choice=6: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 1000x850 choice=7: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 1000x850 choice=random: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 740x420 choice=4: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 740x420 choice=5: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 740x420 choice=6: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 740x420 choice=7: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS 740x420 choice=random: touch/hardware, reload, long grid, loss, PNG, next, win
+PASS nested-path service-worker offline start, 7 letters

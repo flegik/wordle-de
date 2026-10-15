@@ -31,7 +31,7 @@ const server=http.createServer((req,res)=>{
    await page.waitForTimeout(180);await page.keyboard.type('SEGEL');await page.keyboard.press('Enter');
    await page.locator('.double-victory').waitFor();
    const s=await page.evaluate(()=>JSON.parse(localStorage.getItem('wordle-de:v2')));assert.equal(s.sessionEvents.length,1);assert.equal(s.events.length,0);assert(s.settings.hard);assert.equal(s.sessionEvents[0].attempts,2);
-   await page.locator('[data-action="next"]').tap();await page.locator('#close-info').tap();
+   await page.locator('[data-action="next"]').tap();
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Horizontal overflow at '+width);
    const boxes=await page.locator('.double-card').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().height));assert(boxes.every(h=>h>=44));
    assert.deepEqual(errors,[]);console.log(`✓ Real Chromium: ${width}px, touch, keyboard, layout, two-board win`);

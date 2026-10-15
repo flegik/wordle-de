@@ -9,7 +9,7 @@ const T=root.WordleTower||(typeof require==='function'?require('./tower.js'):nul
 const R=root.WordleSpeedrun||(typeof require==='function'?require('./speedrun.js'):null);
 const H=root.WordleTheme||(typeof require==='function'?require('./theme.js'):null);
 const J=root.WordleDuel||(typeof require==='function'?require('./duel.js'):null);
-const sessionResult=(session,date)=>session.mode==='duel'&&J.hasContract(session)?J.result(session,date):session.mode==='theme'&&H.hasContract(session)?H.result(session,date):session.mode==='tower'?T.result(session,date):session.mode==='speedrun'&&R.hasContract(session)?R.result(session,date):G.result(session,date);
+const sessionResult=(session,date)=>session.mode==='double'?D.result(session,date):session.mode==='duel'&&J.hasContract(session)?J.result(session,date):session.mode==='theme'&&H.hasContract(session)?H.result(session,date):session.mode==='tower'?T.result(session,date):session.mode==='speedrun'&&R.hasContract(session)?R.result(session,date):G.result(session,date);
 const P=root.WordReports||(typeof require==='function'?require('./reports.js'):null);
 const Y=root.WordleSync||(typeof require==='function'?require('./sync.js'):null);
 const KEY='wordle-de:v2',LEGACY_KEY='wordle-de:v1',SCHEMA=2;
@@ -17,6 +17,7 @@ const clone=v=>JSON.parse(JSON.stringify(v));
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
 function fresh(){return {...E.fresh(),schema:SCHEMA,sessions:{},sessionEvents:[]};}
 function validate(state,words){
+ if(state?.doubleLengthChoice!==undefined&&state.doubleLengthChoice!=='random'&&![4,5,6,7].includes(state.doubleLengthChoice))throw Error('Ungültige Doppel-Längenauswahl.');
  if(!object(state)||state.schema!==SCHEMA)throw Error('Unbekannte Speicherversion.');
  // Reuse the proven schema-1 validation unchanged, including daily and streak.
  const legacy=V.resolve(state.wordVersion,words);
