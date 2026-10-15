@@ -6,7 +6,7 @@ if(typeof require==='function'&&!root.WordQuality)require('../data/word-quality.
 if(typeof require==='function'&&!root.WordQualityV1)require('../data/word-quality-de-2.js');
 if(typeof require==='function'&&!root.WordQualityV21)require('../data/word-quality-de-2.1.js');
 const Q=root.WordQuality,Q1=root.WordQualityV1,Q21=root.WordQualityV21,clone=v=>JSON.parse(JSON.stringify(v)),CLASSES=['A','B','C'],WINDOW=64,COOLDOWN=150;
-const weights={classic:[.70,.25,.05],random:[.70,.25,.05],streak:[.70,.25,.05],double:[.75,.25,0],tower:[.70,.30,0],speedrun:[.85,.15,0],duel:[.75,.25,0]};
+const weights={classic:[.70,.25,.05],random:[.70,.25,.05],streak:[.70,.25,.05],double:[.75,.25,0],tower:[.70,.30,0],speedrun:[.85,.15,0],duel:[.75,.25,0],survivor:[.9,.1,0]};
 const cached={};
 function pools(n){if(cached[n])return Object.fromEntries(CLASSES.map(c=>[c,[...cached[n][c]]]));const p={A:[],B:[],C:[]};for(const w of V.active().solutions[n])p[Q.classes[w]].push(w);cached[n]=p;return Object.fromEntries(CLASSES.map(c=>[c,[...p[c]]]));}
 const membership=Object.fromEntries([4,5,6,7].map(n=>[n,new Set(V.active().solutions[n])]));
@@ -20,7 +20,8 @@ function draw(state,n,mode='classic',random=Math.random,algorithm='adaptive'){
  if(![4,5,6,7].includes(n)||!weights[mode]||!['adaptive','naive','uniform'].includes(algorithm))throw Error('Ungültige Auswahlkonfiguration.');
  // Clone only this small bag, never the entire session history.
  const base=state.selection?.wordVersion===V.current?state.selection:prepare(state),old=base.lengths[n],b=old?clone(old):{cycle:0,recent:[],initial:{A:0,B:0,C:0},remaining:{A:[],B:[],C:[]}};
- if(!CLASSES.some(c=>b.remaining[c].length)){const p=pools(n);b.cycle++;b.remaining=Object.fromEntries(CLASSES.map(c=>[c,shuffled(p[c],random)]));b.initial=Object.fromEntries(CLASSES.map(c=>[c,p[c].length]));}
+ if(mode==='survivor'){b.initial.C=0;b.remaining.C=[];}
+ if(!CLASSES.some(c=>b.remaining[c].length)){const p=pools(n);if(mode==='survivor')p.C=[];b.cycle++;b.remaining=Object.fromEntries(CLASSES.map(c=>[c,shuffled(p[c],random)]));b.initial=Object.fromEntries(CLASSES.map(c=>[c,p[c].length]));}
  const total=CLASSES.reduce((sum,c)=>sum+b.initial[c],0),used=total-CLASSES.reduce((sum,c)=>sum+b.remaining[c].length,0),cooldown=Math.min(COOLDOWN,V.active().solutions[n].length-1),recent=new Set(b.recent.slice(-cooldown));
  const preferred=weights[mode],eligible=CLASSES.map((c,i)=>preferred[i]>0&&b.remaining[c].length>0);if(algorithm==='uniform'||!eligible.some(Boolean))eligible.fill(true);
  let candidates=CLASSES.map((c,i)=>eligible[i]?b.remaining[c].filter(w=>!recent.has(w)):[]);

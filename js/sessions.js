@@ -3,7 +3,7 @@
 'use strict';
 const V=root.WordRegistry||(typeof require==='function'?require('../data/word-registry.js'):null);
 const E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
-const MODES=Object.freeze(['double','tower','speedrun','theme','duel']);
+const MODES=Object.freeze(['double','tower','speedrun','theme','duel','survivor']);
 const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
 const id=v=>typeof v==='string'&&v.length>0&&v.length<=128;
 const integer=(v,min,max)=>Number.isSafeInteger(v)&&v>=min&&v<=max;
@@ -42,8 +42,8 @@ function validate(session,words){
  if(!object(session)||!id(session.id)||!MODES.includes(session.mode)||
     !Number.isFinite(session.started)||session.started<0||
     !['playing','won','lost','completed','abandoned'].includes(session.status)||
-    !Array.isArray(session.rounds)||!integer(session.rounds.length,1,1000)||
-    !Array.isArray(session.attempts)||session.attempts.length>1000)fail('Ungültige Session.');
+    !Array.isArray(session.rounds)||!integer(session.rounds.length,1,session.mode==='survivor'?100000:1000)||
+    !Array.isArray(session.attempts)||session.attempts.length>(session.mode==='survivor'?100000:1000))fail('Ungültige Session.');
  words=dictionary(words,session.wordVersion);
  if(session.attemptBudget!==undefined&&!integer(session.attemptBudget,1,1000))fail('Ungültiges Versuchsbudget.');
  if(session.attemptBudget!==undefined&&session.attempts.length>session.attemptBudget)fail('Versuchsbudget überschritten.');
@@ -65,7 +65,7 @@ function validate(session,words){
  }
  const allSolved=session.rounds.every(r=>histories.get(r.id).includes(r.target));
  if(session.status==='won'&&!allSolved||session.status==='lost'&&allSolved||
-    session.status==='completed'&&session.mode!=='speedrun')fail('Widersprüchlicher Session-Abschluss.');
+    session.status==='completed'&&!['speedrun','survivor'].includes(session.mode))fail('Widersprüchlicher Session-Abschluss.');
  if(session.status==='playing'&&session.ended!==undefined||session.status!=='playing'&&
     (!Number.isFinite(session.ended)||session.ended<session.started))fail('Ungültige Session-Zeit.');
  if(session.score!==undefined&&(!Number.isFinite(session.score)||session.score<0))fail('Ungültige Session-Punkte.');
@@ -95,9 +95,9 @@ function validateEvent(event,words){
  words=dictionary(words,event?.wordVersion);
  if(!object(event)||!id(event.id)||!MODES.includes(event.mode)||event.wordVersion!==words.version||
     !['won','lost','completed','abandoned'].includes(event.status)||
-    event.status==='completed'&&event.mode!=='speedrun'||
+    event.status==='completed'&&!['speedrun','survivor'].includes(event.mode)||
     typeof event.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(event.date)||
-    !integer(event.attempts,0,1000)||!integer(event.rounds,1,1000)||!integer(event.solved,0,event.rounds)||
+    !integer(event.attempts,0,event.mode==='survivor'?100000:1000)||!integer(event.rounds,1,event.mode==='survivor'?100000:1000)||!integer(event.solved,0,event.rounds)||
     event.status==='won'&&event.solved!==event.rounds||event.status==='lost'&&event.solved===event.rounds||
     !Number.isFinite(event.durationMs)||event.durationMs<0||
     event.score!==undefined&&(!Number.isFinite(event.score)||event.score<0))fail('Ungültige Session-Statistik.');
