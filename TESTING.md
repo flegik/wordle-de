@@ -498,3 +498,13 @@ Tastaturen, Touch und native Freigabe. Keine Aussage über bestandene Gerätetes
 Quell-/Statistikschutz und Offline-Asset-Liste wurden automatisiert geprüft;
 reale Installation/Offline-Nutzung und späteres Update bleiben manuell zu prüfen.
 Details und reproduzierbare Testkopie: `docs/SURVIVOR_V2_2.md`.
+
+### Survivor 2.2 · freigegebener Release
+
+Neue Runs verwenden Vertrag 2 mit Upgrades alle fünf Siege. Alte Vertrag-1-
+Sessions und Backups werden ohne Änderung akzeptiert. Neue Grenzen 5/10/15,
+Eventvalidierung, offene alte Upgrade-Auswahl und aktive alte Effekte sind
+automatisiert geprüft. Core-Suite nun 23 Gruppen; UI 14 und Layoutverträge 3.
+Komplette Release-Suite: `docs/qa/survivor-release-tests.log`.
+Cache: `v2-2-release-20261015-a`. Kein Backend-/Cloudflare-Update.
+Die oben dokumentierten echten Browser-/Gerätetests bleiben offen.

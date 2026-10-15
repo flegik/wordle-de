@@ -1,7 +1,8 @@
-# Wordle Survivor 2.2 · Vertrag 1
+# Wordle Survivor 2.2 · Verträge 1 und 2
 
 Branch: `feature/survivor-v2-2`, Basis `e96c811a473c769d799eb93c3050680a9946bdda`.
-Keine Änderungen an main, Marke, Wörterbuchdaten, Cloudflare-Worker oder D1.
+Am 15.10.2026 ausdrücklich zur Veröffentlichung freigegeben, mit Upgrades alle fünf Siege.
+Keine Änderungen an Marke, Wörterbuchdaten, Cloudflare-Worker oder D1.
 
 ## Spielregeln
 
@@ -35,7 +36,7 @@ A/B-Wörtern. de-1/de-2/de-2.1/de-2.2 bleiben unverändert vorhanden.
 
 ## Upgrade-Vertrag
 
-Nach jedem dritten **Sieg**, unabhängig von dazwischenliegenden Niederlagen,
+Neue Runs (Vertrag 2): Nach jedem fünften **Sieg**, unabhängig von dazwischenliegenden Niederlagen,
 wird genau ein Ereignis mit drei unterschiedlichen nutzbaren Optionen gespeichert.
 Es gibt Heilung (+1 bis 3), einen nicht stapelbaren Schild, Extra-Versuch
 (+3 Rätsel-Ladungen) und Start-Hinweis (+2 Rätsel-Ladungen).
@@ -63,7 +64,7 @@ Es gibt keinen zweiten Wordle-Auswerter und keinen neuen Speicherschlüssel.
 
 Schema bleibt 2 (`wordle-de:v2`). Survivor speichert zusätzlich:
 
-- `survivorVersion:1`, `input`;
+- `survivorVersion:2` für neue Runs (1 wird unverändert akzeptiert), `input`;
 - kanonische `attempts` und Rundenkonfigurationen im bestehenden Format;
 - `roundEnds`: geordnete `{roundId, reason, attemptIndex}`;
 - `upgrades`: `{afterRound, offered, picked}`, wobei `picked:null` die offene
@@ -110,8 +111,8 @@ Wort-Historie statt ein unbeschränkt langes Gesamtbild. Ohne aktivierte
 Spoiler-Option enthält das Bild keine Buchstaben oder Lösungen.
 
 Zwei neue Runtime-Dateien sind vor storage/app geladen und im SW enthalten.
-Die produktive Cache-Version bleibt im Entwicklungsbranch unverändert. Vor dem
-später freigegebenen Release ist ein neuer Release-Cache erforderlich.
+Der freigegebene Release verwendet den neuen Cache `v2-2-release-20261015-a`.
+Bestehende Installationen erhalten das Update über die vorhandene Update-Aktivierung.
 
 ## Testkopie und tatsächliche Prüfgrenzen
 
@@ -124,7 +125,7 @@ Erster Zugriff erfordert ggf. ChatGPT-Anmeldung. Quelle und Lizenzhinweise bleib
 enthalten. Ein Test-Run zählt ausschließlich im Speicher dieses Test-Origins.
 
 Baselinesuite und vollständige erweiterte Suite wurden ausgeführt. Neue Tests:
-21 Core-/Replay-/Storage-/Auswahlgruppen, 14 Controllergruppen und 3 Render-/Asset-
+23 Core-/Replay-/Storage-/Auswahlgruppen, 14 Controllergruppen und 3 Render-/Asset-
 Vertragsgruppen. Die PNG-Prüfung erzeugte 108 echte Bilder und dekodierte sie;
 wiederholte Exporte waren bytegleich. PNG-Adapter ist kein Browser oder Share-Sheet.
 Ein realer Browserstart scheiterte am fehlenden Chromium. Es werden keine neuen
@@ -147,3 +148,21 @@ Kein Browserbesuch oder echter Geräte-Smoke-Test wird damit behauptet.
 Die private Seite kann beim ersten Öffnen eine ChatGPT-Anmeldung verlangen.
 Prüfprotokolle: `docs/qa/survivor-automated.log`, `survivor-png.log` und
 `survivor-browser-unavailable.log`.
+
+## Freigegebener Release und Balanceänderung
+
+Nutzerfreigabe: „Upgrade nur alle 5 Gelöste … veröffentlichen direkt“.
+Neue Runs tragen `survivorVersion:2`; Regeln, HUD, Angebote und Eventvalidierung
+verwenden durchgängig fünf Siege. Verluste zählen nicht zum Meilenstein.
+Unverändert: drei Herzen, Extra-Versuch für drei Rätsel, Hinweis für zwei.
+Alte Test-Runs/Backups mit Vertrag 1 behalten ihren Drei-Siege-Rhythmus inklusive
+offener Auswahl und bereits verbrauchter Ladungen. Keine rückwirkende Neuwertung,
+kein veränderter Schema-/Speicherschlüssel. Das Menü zeigt bei Fortsetzung den
+zur Session passenden Rhythmus. Neue Historien speichern ihre Vertragsversion.
+
+Tests ergänzen 5/10/15-Grenzen, Reload/Backup dazwischen sowie alte offene
+Auswahlen, aktive Hinweise und abgeschlossene Events mit Vertrag 1. Vollständiger
+Release-Testlauf: `docs/qa/survivor-release-tests.log`. Browser-/Gerätetests bleiben
+wie oben begrenzt; die Veröffentlichung wurde trotz dieser dokumentierten
+Prüfgrenzen ausdrücklich freigegeben. Der private Testlink oben dokumentiert den
+ersten Drei-Siege-Teststand; der veröffentlichte Fünf-Siege-Stand liegt auf Pages.

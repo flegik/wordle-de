@@ -279,7 +279,7 @@ Gemeinsame Flip-Zeiten wurden verkürzt; Speedrun behält seine kurzen Spezialze
 Alle sieben neuen Runtime-Assets sind im vorbereiteten SW enthalten, v1-Cache
 unverändert bis zum späteren ausdrücklich freigegebenen gemeinsamen Release.
 
-## Survivor 2.2 · Vertragsversion 1
+## Survivor 2.2 · Vertragsversionen 1 und 2
 
 `survivor.js` ergänzt einen eigenen Modus mit kanonischen Rundenenden und
 Upgrade-Entscheidungen. Leben, Score und Restladungen werden durch geordneten
@@ -287,3 +287,7 @@ Replay abgeleitet. `survivor-ui.js` nutzt die vorhandene Bildschirmtastatur.
 `survivorSelection` verwendet den bestehenden Auswahlalgorithmus mit eigenem
 A/B-Beutel. Schema bleibt 2, Session-Ergebnisse und Klassiker bleiben getrennt.
 Details, Invarianten, Fallback und Ressourcenlimits: `SURVIVOR_V2_2.md`.
+
+Neue Runs verwenden Survivor-Vertrag 2 (Upgrade alle fünf Siege). Vertrag 1
+bleibt für gespeicherte Test-Runs inklusive Drei-Siege-Meilensteinen gültig.
+Der Release ist ausdrücklich freigegeben; neuer Cache `v2-2-release-20261015-a`.

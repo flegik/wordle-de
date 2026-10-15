@@ -242,9 +242,11 @@ Der vorbereitete PWA-Cache `v2-final-20261011-b` gehört ausschließlich zum Ent
 „Neue Doppel-Runde“ behält die Wahl, „Wortlänge ändern“ öffnet die Auswahl.
 Details und spätere Merge-/Release-Hinweise: [DOUBLE_LENGTHS_2_1_2.md](docs/DOUBLE_LENGTHS_2_1_2.md).
 
-### Wordle Survivor 2.2 (nur Entwicklungsbranch)
+### Wordle Survivor 2.2
 
-`feature/survivor-v2-2`: Solo-Run mit drei Herzen, vier Upgrades alle drei Siege,
+Solo-Run mit drei Herzen, vier Upgrades alle **fünf gelösten Wörter**,
 behutsam steigenden Wortlängen und eigenen Rekorden. Pausieren, Backups und
-PNG-/Textsharing verwenden die vorhandenen Systeme. Keine Veröffentlichung
-auf main ohne ausdrückliche Freigabe. [Regeln, Speicherung und Testgrenzen](docs/SURVIVOR_V2_2.md).
+PNG-/Textsharing verwenden die vorhandenen Systeme. Alte Test-Runs bleiben
+kompatibel. Veröffentlichung am 15.10.2026 ausdrücklich freigegeben;
+Release-Cache `v2-2-release-20261015-a`.
+[Regeln, Speicherung und Testgrenzen](docs/SURVIVOR_V2_2.md).
