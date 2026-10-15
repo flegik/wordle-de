@@ -104,3 +104,14 @@ Vor Zusammenführung den dann aktuellen `main`-Stand erneut laden. Insbesondere
 `app.js`, `style.css`, SW und Testdokumentation können mit dem parallel laufenden
 Online-Revanche-Branch kollidieren. Konflikte gezielt zusammenführen und alle
 Tests erneut ausführen; keine anderen Branches zurücksetzen oder überschreiben.
+
+
+## Freigegebener Release · 15.10.2026
+
+Nach ausdrücklicher Nutzerfreigabe wird dieser Branch nach main übernommen.
+Vorprüfung: main und Revanche-Branch standen weiterhin auf `37689b0`; keine
+fremden Änderungen oder Merge-Konflikte. Der oben dokumentierte unveränderte
+Cache bezog sich auf die Entwicklungsphase. Für die Veröffentlichung erhält
+`sw.js` nun den neuen Cache-Namen `v2-1-2-release-20261015-a`. Die vollständige
+Asset-Liste und die ausdrückliche Update-Aktivierung bleiben erhalten.
+Kein Cloudflare-Worker-/D1-Update und keine Änderung der Pages-Konfiguration.

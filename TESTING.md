@@ -465,3 +465,15 @@ echter Touch-Swipe, native PNG-/Textfreigabe und späterer PWA-Upgradepfad.
 Keine neuen Runtime-Dateien und keine Änderung an SW-Cache-Name oder Pages.
 Der spätere Release benötigt einen neuen Cache-Namen und Prüfung des dann
 aktuellen main-/Revanche-Stands. Technischer Bericht: `docs/DOUBLE_LENGTHS_2_1_2.md`.
+
+
+### Freigegebener 2.1.2-Release
+
+Nach Nutzerfreigabe neuer Cache `v2-1-2-release-20261015-a`. Bestehende
+Cache-Namenerwartungen in Audit-/Phase-7-Tests aktualisiert; der fehlgeschlagene
+Installations-Test ermittelt den aktuellen Cache-Namen jetzt aus dem SW.
+Vollständige Suite erneut erfolgreich. Reale Chromium-Installation/Offline-
+Neustart erneut erfolgreich mit dem Release-Cache. Belege:
+`docs/qa/double-lengths-release-tests.log` und
+`docs/qa/double-lengths-release-offline.log`. Keine Änderungen an Backend,
+Wortlisten oder Pages-Konfiguration.
