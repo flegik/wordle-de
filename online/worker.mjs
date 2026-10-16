@@ -1,8 +1,10 @@
 // The existing engine and frozen dictionary run on the server as well as offline.
 import '../js/engine.js';
 import '../data/words-de-2.2.js';
-const E=globalThis.Engine,W=globalThis.WORDS_DE_22;
-const accepted=Object.fromEntries(Object.entries(W.accepted).map(([n,a])=>[n,new Set(a)]));
+import '../data/words-de-2.3.js';
+import '../data/accepted-additions.js';
+const E=globalThis.Engine,packages={'de-2.2':globalThis.WORDS_DE_22,'de-2.3':globalThis.WORDS_DE_23};
+const accepted=Object.fromEntries(Object.entries(packages).map(([v,w])=>[v,Object.fromEntries(Object.entries(globalThis.AcceptedAdditions.apply(w).accepted).map(([n,a])=>[n,new Set(a)]))]));
 export const TTL=30*86400000;
 const EMPTY={revision:0,guesses:[],status:'playing'};
 class Fault extends Error { constructor(status,code){super(code);this.status=status;this.code=code;} }
@@ -49,7 +51,8 @@ async function operate(request,env,now){
  const hash=await digest(raw.slice(7));
  await rate(request,env.DB,now,!code);
  if(!code){
-  const b=await body(request);exact(b,['length']);if(![4,5,6,7].includes(b.length))fail(400,'invalid_length');
+  const b=await body(request);exact(b,b?.wordVersion===undefined?['length']:['length','wordVersion']);if(![4,5,6,7].includes(b.length))fail(400,'invalid_length');
+  if(b.wordVersion!==undefined&&(typeof b.wordVersion!=='string'||!Object.hasOwn(packages,b.wordVersion)))fail(400,'unsupported_word_version');const W=packages[b.wordVersion||'de-2.2'];
   let old=await env.DB.prepare('SELECT * FROM rooms WHERE host_hash=?').bind(hash).first();
   if(old){if(old.expires<=now)fail(410,'expired');if(old.length!==b.length)fail(409,'request_conflict');return projection(old,'host');}
   for(let i=0;i<12;i++){
@@ -61,8 +64,10 @@ async function operate(request,env,now){
  }
  let room=await read(env.DB,code);
  if(action==='join'){
-  const b=await body(request);exact(b,[]);
+  const b=await body(request);exact(b,b?.wordVersion===undefined?[]:['wordVersion']);
+  if(b.wordVersion!==undefined&&(typeof b.wordVersion!=='string'||!Object.hasOwn(packages,b.wordVersion)))fail(400,'unsupported_word_version');
   if(!room||room.expires<=now)fail(410,'expired');
+  if(room.word_version==='de-2.3'&&b.wordVersion!=='de-2.3')fail(426,'client_update_required');
   if(room.host_hash===hash)return projection(room,'host');
   await env.DB.prepare('UPDATE rooms SET guest_hash=? WHERE code=? AND expires>? AND (guest_hash IS NULL OR guest_hash=?)').bind(hash,code,now,hash).run();
   room=await read(env.DB,code);if(room.guest_hash!==hash)fail(409,'room_full');return projection(room,'guest');
@@ -74,7 +79,7 @@ async function operate(request,env,now){
  if(!action)return projection(room,role);
  const b=await body(request);exact(b,['revision','word']);
  if(!Number.isSafeInteger(b.revision)||b.revision<0||b.revision>7||typeof b.word!=='string'||b.word.length>16)fail(400,'invalid_request');
- const word=E.normalize(b.word);if(!accepted[room.length].has(word))fail(422,'invalid_word');
+ const word=E.normalize(b.word);if(!accepted[room.word_version]?.[room.length]?.has(word))fail(422,'invalid_word');
  const column=role==='host'?'host_state':'guest_state',p=JSON.parse(room[column]);
  // A replay of an already accepted revision is acknowledged, even after finish.
  if(b.revision<p.revision){if(p.guesses[b.revision]!==word)fail(409,'revision_conflict');return projection(room,role);}

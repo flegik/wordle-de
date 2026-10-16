@@ -58,7 +58,7 @@ function migrate(input,words){
   if('sessions' in state||'sessionEvents' in state)throw Error('Schema-1-Daten enthalten reservierte Session-Felder.');
   state.schema=SCHEMA;state.sessions={};state.sessionEvents=[];
  }
- validate(state,words);if(words.version===V.current)state.selection=F.prepare(state);validate(state,words);return state;
+ validate(state,words);if(words.version===V.current){state.selection=F.prepare(state);if(state.survivorSelection){state.survivorSelection=F.prepare({selection:state.survivorSelection});for(const b of Object.values(state.survivorSelection.lengths)){b.initial.C=0;b.remaining.C=[];}}}validate(state,words);return state;
 }
 function load(storage,words){
  let raw=null,source=KEY,state;

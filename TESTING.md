@@ -516,3 +516,35 @@ Verträge 1 und 2 werden mit offener Auswahl, aktivem Hinweis und terminalem
 Ergebnis durch Backup und Validierung geprüft. Bestehende Upgrade-Dauern bleiben
 unverändert. Vollständiges Protokoll: `docs/qa/survivor-seven-release-tests.log`.
 Release-Cache `v2-2-release-20261016-a`; keine neuen Gerätetests behauptet.
+
+## Wortqualität 2.2.1 · Entwicklungsbranch, 16.10.2026
+
+Baseline und vollständige erweiterte Suite: `python tools/test_all.py`.
+22 gezielte neue Prüfgruppen: 12 Daten-/Modul-/UI-/Migrationsgruppen in
+`word-quality-221.test.cjs`, 6 API-/SQLite-/Clientgruppen in
+`quality-221-online.test.cjs`, 4 Reproduktions-/Delta-Prüfgruppen in
+`quality-221-build.test.py`. Gesamtes Protokoll: `docs/qa/word-quality-221-tests.log`.
+
+Geprüft: alle 5.400 vorherigen Lösungen im vollständigen Ledger, Delta der
+Ratewörter genau +NUTZUNG, neue und eingefrorene Wortversionen, Datei-Hashes,
+366 unveränderte Tagesziele, NUTZUNG tatsächlich in Klassisch/Zufall/Streak,
+Daily-Validierung, Doppel/Tower/Speedrun/Survivor/offline Duell. themes-1 hat
+aktuell keine freigeschalteten Sieben-Buchstaben-Rätsel und bleibt unverändert.
+Aktive alte KIEBITZ-/MUFFLON-Spielstände und Survivor-Runs, Statistiken,
+Backup-Roundtrips, idempotente Migration beider Auswahlbeutel, verbrauchte Wörter,
+Cooldown, neues NUTZUNG und umklassifizierte Restwörter sind abgedeckt.
+Survivor-Dateien einschließlich Sieben-Siege-Balance sind bytegleich zur Basis.
+
+Online: neue API mit echter SQLite-Testdatenbank (kein produktives D1), alte
+Requests/Räume und neue de-2.3-Räume, NUTZUNG, exakt einmalige Requests,
+versionsbewusster Beitritt ohne Platzverbrauch alter Clients, neue Client-Snapshots,
+Fallback auf alten API-Vertrag nur bei invalid_request. Nicht automatisch bei
+Netzfehler, Zugriffssperre, Rate-Limit oder Versionsfehler erneut senden.
+
+Kein Cloudflare-Deployment, kein Produktions-Duell angelegt/verändert, keine
+Migration produktiver D1-Daten. Neuer Worker muss vor bzw. zusammen mit der
+später freigegebenen PWA separat getestet und veröffentlicht werden. Solange der
+alte Service läuft, bleibt NUTZUNG dort noch ungültig und neue Räume de-2.2.
+PWA-Assetliste vollständig, Cache-Identifier bewusst unverändert; vor Release
+neue Kennung vergeben. Kein Merge oder Deployment erfolgt. Echte mobile Browser,
+PWA-Update/Offline-Installation und Service-Rollout bleiben manuell offen.

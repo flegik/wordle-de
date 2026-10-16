@@ -1,0 +1,17 @@
+{
+  "baseCommit": "8b07282bce0a78897d986f518012e40c0fa1029f",
+  "files": {
+    "data/words.js": "b0f7c90eeab551a01d72e5b12ddb27135bb2c485aa44a7f23a73efaeaa427623",
+    "data/words-de-1.js": "b0f7c90eeab551a01d72e5b12ddb27135bb2c485aa44a7f23a73efaeaa427623",
+    "data/words-de-2.js": "15b79ced886696da9bdf56ea839448ba972d336dc843bd017d951528fde357bb",
+    "data/words-de-2.1.js": "21936a1cf34b3d2d1040efa5f5ab06081d2699145a13027eaa0754bad43228af",
+    "data/words-de-2.2.js": "a1b254103f30e06c04fff7828e8d8b873aa6d291f5d20150db83c02cb1c6fc36",
+    "data/word-quality-de-2.js": "7bef9b76bed10d443ff67d5633558942781e58a849122c824d9c282f4609400f",
+    "data/word-quality-de-2.1.js": "e84a07d417ada349d8c10d01ad23b638f364c650b3bc24d5765895f0e953485b",
+    "data/themes.js": "2f30227f2349097d6fcb29a0b01731f70f4d2c01c7544347fe9905352a84b0f8",
+    "js/survivor.js": "28cf86b3b0b71b2dc5b3c70df957ae09868f86a15a449c40ca01ff2e0ea2e810",
+    "js/survivor-ui.js": "d196285d19f061c4c4399832cf71f2b1cab4257170164d30b7f8e67b082e007a",
+    "online/wrangler.production.toml": "954e0cfd7a8f9678059e2d1b358fa529adca545f82aefeddb9cfaedd50641b48",
+    "js/online-config.js": "87f8e0b5287063de58c0ab2f8f8405c8481fd9d8edca1c90bf26765c8c1d3dba"
+  }
+}

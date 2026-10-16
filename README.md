@@ -229,7 +229,7 @@ Ergebnisraster und lokales PNG-Sharing sind für alle neun Modi integriert. „A
 
 Gespeicherte Ergebnisse sind über die Statistik erreichbar (die letzten 20 vorhandenen Historien, ohne ältere Daten zu löschen). Alte reine Statistikeinträge ohne Wortverlauf können kein Raster liefern. Neue klassische Abschlüsse speichern Eingaben, keine redundanten Farbraster; Arcade-Historien verwenden vorhandene Sessions. Backup enthält beides.
 
-Aktive Wort-/Qualitätsversion: `de-2.2 / quality-3`; Schema und Schlüssel bleiben 2 / `wordle-de:v2`. Alle vorherigen Wörterbücher bleiben verfügbar. Tagesrätsel und themes-1 bleiben unverändert. KI-Prüfung und ihre Grenzen: [WORD_REVIEW.md](WORD_REVIEW.md).
+Aktive Wort-/Qualitätsversion im Entwicklungsbranch: `de-2.3 / quality-4`; Schema und Schlüssel bleiben 2 / `wordle-de:v2`. Alle vorherigen Wörterbücher bleiben verfügbar. Tagesrätsel und themes-1 bleiben unverändert. KI-Prüfung und ihre Grenzen: [WORD_REVIEW.md](WORD_REVIEW.md).
 
 Prüfen: `python tools/test_all.py`. Optionale echte Browserprüfung: `node tests/browser-results.cjs` mit installiertem Playwright/Chromium. Native Canvas-QA: `node tools/verify_result_png.cjs` mit einer nur für Entwicklung erforderlichen `@napi-rs/canvas`-Installation; die Anwendung selbst hat keine externe Laufzeitabhängigkeit.
 
@@ -250,3 +250,13 @@ PNG-/Textsharing verwenden die vorhandenen Systeme. Alte Test-Runs bleiben
 kompatibel. Balance-Update am 16.10.2026 ausdrücklich zur Veröffentlichung freigegeben;
 Release-Cache `v2-2-release-20261016-a`.
 [Regeln, Speicherung und Testgrenzen](docs/SURVIVOR_V2_2.md).
+
+### Wortqualität 2.2.1 (Entwicklungsbranch)
+
+`feature/word-quality-v2-2-1` bereitet de-2.3 / quality-4 vor: NUTZUNG als
+A-Lösung und Ratewort, 154 Spezialbegriffe nur noch als Ratewörter und 514
+neu eingestufte Lösungen. Historische Ziele, Statistiken und Survivor-Regeln
+bleiben erhalten. [Vollständiger Qualitätsbericht](docs/WORD_QUALITY_2_2_1.md).
+Keine Veröffentlichung; Online-API-Unterstützung und PWA-Cache sind für eine
+spätere gemeinsame Freigabe vorbereitet. Auf dem alten Online-Service ist
+NUTZUNG bis zum gesondert freigegebenen Worker-Update noch nicht gültig.

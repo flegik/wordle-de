@@ -2,11 +2,11 @@
 (function(root){
 'use strict';
 const KEY='wordle-de:online:1',E=root.Engine||(typeof require==='function'?require('./engine.js'):null);
-const messages={token_required:'Teilnehmer-Zugang fehlt.',unauthorized:'Dieser Zugang gehört nicht zu diesem Raum.',expired:'Raum abgelaufen oder nicht mehr vorhanden.',room_full:'Dieser Raum ist bereits belegt.',invalid_word:'Dieses Wort steht nicht in der Wortliste.',duplicate_word:'Dieses Wort hast du schon versucht.',revision_conflict:'Der Spielstand wurde geändert. Bitte synchronisieren.',waiting_for_opponent:'Warte auf den zweiten Spieler.',finished:'Deine Runde ist abgeschlossen.',rate_limited:'Zu viele Anfragen. Bitte eine Minute warten.',origin_denied:'Diese Testversion ist für den Service noch nicht freigegeben.',service_unavailable:'Service vorübergehend nicht erreichbar.',request_conflict:'Diese Anfrage passt nicht zum gespeicherten Raum.'};
+const messages={client_update_required:'Bitte aktualisiere die App für diesen neuen Wortvertrag.',unsupported_word_version:'Dieser Service unterstützt die angefragte Wortversion noch nicht.',token_required:'Teilnehmer-Zugang fehlt.',unauthorized:'Dieser Zugang gehört nicht zu diesem Raum.',expired:'Raum abgelaufen oder nicht mehr vorhanden.',room_full:'Dieser Raum ist bereits belegt.',invalid_word:'Dieses Wort steht nicht in der Wortliste.',duplicate_word:'Dieses Wort hast du schon versucht.',revision_conflict:'Der Spielstand wurde geändert. Bitte synchronisieren.',waiting_for_opponent:'Warte auf den zweiten Spieler.',finished:'Deine Runde ist abgeschlossen.',rate_limited:'Zu viele Anfragen. Bitte eine Minute warten.',origin_denied:'Diese Testversion ist für den Service noch nicht freigegeben.',service_unavailable:'Service vorübergehend nicht erreichbar.',request_conflict:'Diese Anfrage passt nicht zum gespeicherten Raum.'};
 const validCode=c=>typeof c==='string'&&/^\d{6}$/.test(c);
 const token=()=>Array.from(root.crypto.getRandomValues(new Uint8Array(32)),n=>n.toString(16).padStart(2,'0')).join('');
 function validateSnapshot(s,code){
- if(!s||s.contract!==1||s.code!==code||!['host','guest'].includes(s.role)||![4,5,6,7].includes(s.length)||s.wordVersion!=='de-2.2'||s.attemptLimit!==(s.length<6?6:7)||!Number.isSafeInteger(s.expires)||typeof s.joined!=='boolean'||typeof s.complete!=='boolean')throw Error('Ungültiger Online-Spielstand. Originaldaten bleiben erhalten.');
+ if(!s||s.contract!==1||s.code!==code||!['host','guest'].includes(s.role)||![4,5,6,7].includes(s.length)||!['de-2.2','de-2.3'].includes(s.wordVersion)||s.attemptLimit!==(s.length<6?6:7)||!Number.isSafeInteger(s.expires)||typeof s.joined!=='boolean'||typeof s.complete!=='boolean')throw Error('Ungültiger Online-Spielstand. Originaldaten bleiben erhalten.');
  function player(p){if(!p||!Number.isSafeInteger(p.revision)||p.revision<0||p.revision>s.attemptLimit||!['playing','won','lost'].includes(p.status)||!Array.isArray(p.guesses)||!Array.isArray(p.rows)||p.rows.length!==p.revision||p.guesses.length!==p.revision||p.rows.some((r,i)=>typeof r.word!=='string'||r.word!==p.guesses[i]||!/^[A-ZÄÖÜẞ]{4,7}$/.test(r.word)||E.letters(r.word).length!==s.length||!Array.isArray(r.colors)||r.colors.length!==s.length||r.colors.some(c=>![0,1,2].includes(c))))throw Error('Ungültige Online-Ratewörter. Originaldaten bleiben erhalten.');}
  player(s.you);if(s.complete){player(s.opponent);if(s.you.status==='playing'||s.opponent.status==='playing'||typeof s.solution!=='string'||!/^[A-ZÄÖÜẞ]{4,7}$/.test(s.solution)||E.letters(s.solution).length!==s.length||!['host','guest','draw','none'].includes(s.winner))throw Error('Ungültiger Online-Abschluss.');}
  else if(!s.opponent||!['waiting','playing','won','lost'].includes(s.opponent.status)||s.opponent.rows!==undefined||s.opponent.guesses!==undefined||s.solution!==undefined)throw Error('Ungültige Online-Freigabe.');return s;
@@ -14,12 +14,15 @@ function validateSnapshot(s,code){
 function validate(s){
  if(!s||s.contract!==1||!Array.isArray(s.rooms)||s.rooms.length>1000)throw Error('Online-Speicher beschädigt. Originaldaten bleiben erhalten.');
  const codes=new Set();for(const r of s.rooms){if(!r||!validCode(r.code)||codes.has(r.code)||!/^[a-f0-9]{64}$/.test(r.token)||typeof r.draft!=='string'||r.draft.length>7||!/^[A-ZÄÖÜẞ]*$/.test(r.draft)||r.pending&&(!Number.isSafeInteger(r.pending.revision)||r.pending.revision<0||r.pending.revision>6||typeof r.pending.word!=='string'||!/^[A-ZÄÖÜẞ]{4,7}$/.test(r.pending.word)))throw Error('Online-Speicher beschädigt. Originaldaten bleiben erhalten.');if(r.snapshot)validateSnapshot(r.snapshot,r.code);codes.add(r.code);}
+ if(s.pending?.wordVersion!==undefined&&(!['de-2.2','de-2.3'].includes(s.pending.wordVersion)))throw Error('Unbekannter Online-Wortvertrag.');
  if(s.pending&&(!['create','join'].includes(s.pending.action)||!/^[a-f0-9]{64}$/.test(s.pending.token)||s.pending.action==='join'&&!validCode(s.pending.code)||s.pending.action==='create'&&![4,5,6,7].includes(s.pending.length)))throw Error('Online-Anfrage beschädigt. Originaldaten bleiben erhalten.');return s;
 }
 function store(storage){
  let raw=storage.getItem(KEY),s=raw===null?{contract:1,rooms:[]}:validate(JSON.parse(raw));
  return {get state(){return s;},write(next){validate(next);if(storage.getItem(KEY)!==raw)throw Error('Anderer Tab hat Online-Daten geändert. Bitte neu laden.');const value=JSON.stringify(next);storage.setItem(KEY,value);raw=value;s=next;}};
 }
+async function versionedRequest(request,p,path,data){try{return await request(path,p.token,{...data,...(p.wordVersion?{wordVersion:p.wordVersion}:{})});}catch(e){if(e.code!=='invalid_request'||!p.wordVersion)throw e;return request(path,p.token,data);}}
+const createRoom=(request,p)=>versionedRequest(request,p,'/api/rooms',{length:p.length}),joinRoom=(request,p)=>versionedRequest(request,p,'/api/rooms/'+p.code+'/join',{});
 function api(base,fetcher=root.fetch){
  if(!base)throw Error('Online-Testservice ist noch nicht eingerichtet.');const u=new URL(base);if(u.protocol!=='https:'&&!(u.protocol==='http:'&&['localhost','127.0.0.1'].includes(u.hostname)))throw Error('Sichere API-Adresse erforderlich.');
  return async(path,secret,data)=>{const c=new AbortController(),timer=setTimeout(()=>c.abort(),12000);try{
@@ -51,7 +54,7 @@ function mount(container,{home,apiURL=root.WORDLE_ONLINE_API,code=null}={}){
  }
  async function run(action){if(busy||blocked||!request||stopped)return;busy=true;error='';terminal=false;clearTimeout(timer);render();try{await action();delay=15000;}catch(e){error=e.message;terminal=['expired','unauthorized','token_required'].includes(e.code);if(persistence.state.pending&&['room_full','expired'].includes(e.code))write({...persistence.state,pending:null});delay=Math.min(delay*2,120000);}finally{busy=false;render();schedule();}}
  async function pendingAction(){
-  const p=persistence.state.pending;if(!p)return;const s=await request(p.action==='create'?'/api/rooms':'/api/rooms/'+p.code+'/join',p.token,p.action==='create'?{length:p.length}:{});
+  const p=persistence.state.pending;if(!p)return;const s=p.action==='create'?await createRoom(request,p):await joinRoom(request,p);
   const existing=persistence.state.rooms.find(r=>r.code===s.code);if(existing&&existing.token!==p.token)throw Error('Für diesen Raum ist bereits ein eigener Zugang gespeichert.');
   if(!write({...persistence.state,pending:null,rooms:[...persistence.state.rooms.filter(r=>r.code!==s.code),{code:s.code,token:p.token,draft:existing?.draft||'',snapshot:s}]}))return;
   if(!stopped){active=s.code;snapshot=s;route(active);}
@@ -76,7 +79,7 @@ function mount(container,{home,apiURL=root.WORDLE_ONLINE_API,code=null}={}){
    if(persistence.state.rooms.length>=1000){error='Online-Speicher voll. Bitte eigene Duelle sichern.';render();return;}
    const c=container.querySelector('#online-code').value;if(a==='join'&&!validCode(c)){error='Bitte genau sechs Ziffern eingeben.';render();return;}
    if(a==='join'&&persistence.state.rooms.some(r=>r.code===c)){active=c;route(active);snapshot=own().snapshot||null;render();run(sync);return;}
-   const p={action:a,token:token(),...(a==='create'?{length:+container.querySelector('#online-length').value}:{code:c})};if(write({...persistence.state,pending:p}))run(pendingAction);
+   const p={action:a,token:token(),...(a==='create'?{length:+container.querySelector('#online-length').value,wordVersion:root.WordRegistry?.current||'de-2.2'}:{code:c,wordVersion:root.WordRegistry?.current||'de-2.2'})};if(write({...persistence.state,pending:p}))run(pendingAction);
   }else if(a==='invite'){
    const u=new URL(root.location.href);u.search='';u.hash='online='+active;error='Raumcode '+active+' · '+u.href;render();
   }
@@ -88,5 +91,5 @@ function mount(container,{home,apiURL=root.WORDLE_ONLINE_API,code=null}={}){
  container.addEventListener('click',click);root.document.addEventListener('keydown',physical);root.document.addEventListener('visibilitychange',visibility);root.addEventListener('online',online);root.addEventListener('offline',visibility);
  if(own()){snapshot=own().snapshot||null;render();run(sync);}else render();return {dispose};
 }
-const apiObject={KEY,validCode,token,validateSnapshot,validate,store,api,board,mount};root.WordleOnline=apiObject;if(typeof module!=='undefined')module.exports=apiObject;
+const apiObject={KEY,validCode,token,validateSnapshot,validate,store,api,createRoom,joinRoom,board,mount};root.WordleOnline=apiObject;if(typeof module!=='undefined')module.exports=apiObject;
 })(globalThis);

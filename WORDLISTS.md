@@ -44,3 +44,28 @@ unverändert. Die ursprünglichen Audit-Belege werden vollständig erhalten.
 ## Phase 8: de-2.2
 
 Der neue Lösungspool ist eine redaktionelle Teilmenge der bisherigen Wörter, mit unverändertem Eingabepool. Keine neue externe Datenquelle; sämtliche bestehenden Quellen-/Lizenzhinweise gelten weiterhin. Klassifikation und Bekanntheitsschätzungen stammen von KI, nicht von einer externen lexikografischen Freigabe. Historische de-1/de-2/de-2.1-Daten bleiben verfügbar. Der vollständige Entscheidungsledger und Generator liegen unter `data/quality/phase8/` bzw. `tools/build_quality_v2.py`. Details: WORD_REVIEW.md.
+
+## WORDLE DE 2.2.1 · de-2.3 / quality-4 (noch nicht veröffentlicht)
+
+`tools/build_quality_v2_2_1.py` erzeugt aus dem unveränderten de-2.2-Paket und
+`data/quality/v2-2-1/policy.json` den neuen Entwicklungspool. 5.400 → 5.247
+Lösungen: 154 entfernte Lösungen, 514 Klassenänderungen, NUTZUNG neu als A.
+Es wurden keine gültigen Ratewörter entfernt. Die Ergänzung NUTZUNG ist ein
+vom Projektinhaber vorgegebenes einzelnes deutsches Wort; keine Übernahme einer
+weiteren Wörterbuchsammlung. Die bestehenden Datenlizenzen gelten weiterhin.
+Einzelbeleg für den bekannten Gebrauch: Duden „Benutzung“, Synonym „Nutzung“
+(https://www.duden.de/rechtschreibung/Benutzung, eingesehen 16.10.2026).
+Keine Definitionen oder längeren Quelltexte übernommen.
+
+Der vollständige maschinenlesbare Prüfbestand mit eindeutigen Wortentscheidungen
+und indizierten Begründungen steht in `data/quality/v2-2-1/review.json`, die
+lesbare Änderungsliste in `docs/WORD_QUALITY_2_2_1.md`. Diese zweite redaktionelle
+Prüfung ist eine KI-Einschätzung von Spielbarkeit, keine empirische Untersuchung
+der Bekanntheit. Alle 5.400 bisherigen Lösungen wurden als Listen gesichtet;
+Beibehaltungen sind ausdrücklich keine externe Einzelverifikation.
+
+Historische Dateien und Tagesziele bleiben eingefroren. Der alte quality-3-Inhalt
+ist unter `word-quality-de-2.2.js` weiter verfügbar (nur Exportname umbenannt).
+`accepted-additions.js` erzeugt ausschließlich additive Eingabesichten, damit
+NUTZUNG auch in bestehenden Sieben-Buchstaben-Runden gültig ist. Alte Zielpools
+werden dadurch nicht verändert. Der aktive Entwicklungspool ist de-2.3.
