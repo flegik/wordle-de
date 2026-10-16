@@ -47,7 +47,7 @@ for path, digest in audit['inputsSha256'].items():
 import hashlib
 b = (ROOT / 'data/words.js').read_bytes()
 assert hashlib.sha1(b'blob ' + str(len(b)).encode() + b'\0' + b).hexdigest() == 'fac0d8bff14b260d7deee041bd6d17838ac89cd1'
-assert (ROOT / 'sw.js').read_text().count("const CACHE=PREFIX+'v2-2-1-release-20261016-a';") == 1
+assert (ROOT / 'sw.js').read_text().count("const CACHE=PREFIX+'v2-2-1-vorwahl-20261017-a';") == 1
 print('✓ Runtime de-1 word bytes and distinct 2.1 release cache version are preserved')
 frequency_lines = (ROOT / 'data/review/sources/de_50k.txt').read_text().splitlines()
 assert len(frequency_lines) == 50000

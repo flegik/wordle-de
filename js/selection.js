@@ -6,14 +6,15 @@ if(typeof require==='function'&&!root.WordQuality)require('../data/word-quality.
 if(typeof require==='function'&&!root.WordQualityV1)require('../data/word-quality-de-2.js');
 if(typeof require==='function'&&!root.WordQualityV21)require('../data/word-quality-de-2.1.js');
 if(typeof require==='function'&&!root.WordQualityV22)require('../data/word-quality-de-2.2.js');
-const Q=root.WordQuality,Q1=root.WordQualityV1,Q21=root.WordQualityV21,Q22=root.WordQualityV22,clone=v=>JSON.parse(JSON.stringify(v)),CLASSES=['A','B','C'],WINDOW=64,COOLDOWN=150;
+// Local de-2.4 overlay preserves the generated quality-4 artifact for historical bags.
+const Q={...root.WordQuality,wordVersion:V.current,version:'quality-5',classes:{...root.WordQuality.classes,VORWAHL:'A'}},Q1=root.WordQualityV1,Q21=root.WordQualityV21,Q22=root.WordQualityV22,clone=v=>JSON.parse(JSON.stringify(v)),CLASSES=['A','B','C'],WINDOW=64,COOLDOWN=150;
 const weights={classic:[.70,.25,.05],random:[.70,.25,.05],streak:[.70,.25,.05],double:[.75,.25,0],tower:[.70,.30,0],speedrun:[.85,.15,0],duel:[.75,.25,0],survivor:[.9,.1,0]};
 const cached={};
 function pools(n){if(cached[n])return Object.fromEntries(CLASSES.map(c=>[c,[...cached[n][c]]]));const p={A:[],B:[],C:[]};for(const w of V.active().solutions[n])p[Q.classes[w]].push(w);cached[n]=p;return Object.fromEntries(CLASSES.map(c=>[c,[...p[c]]]));}
-const qualityFor=version=>version===V.current?Q:version==='de-2.2'?Q22:version==='de-2.1'?Q21:Q1;
+const qualityFor=version=>version===V.current?Q:version==='de-2.3'?root.WordQuality:version==='de-2.2'?Q22:version==='de-2.1'?Q21:Q1;
 const recentWords=Object.fromEntries([4,5,6,7].map(n=>[n,new Set(Object.values(V.packages).flatMap(p=>p.solutions[n]))]));
 const membership=Object.fromEntries([4,5,6,7].map(n=>[n,new Set(V.active().solutions[n])]));
-function valid(s){if(s===undefined)return;if(!s||s.version!==1||!([V.current,'de-2','de-2.1','de-2.2'].includes(s.wordVersion))||s.qualityVersion!==qualityFor(s.wordVersion).version||!s.lengths||typeof s.lengths!=='object'||Array.isArray(s.lengths)||Object.keys(s).some(k=>!['version','wordVersion','qualityVersion','lengths'].includes(k)))throw Error('Ungültige Auswahlversion.');
+function valid(s){if(s===undefined)return;if(!s||s.version!==1||!([V.current,'de-2.3','de-2','de-2.1','de-2.2'].includes(s.wordVersion))||s.qualityVersion!==qualityFor(s.wordVersion).version||!s.lengths||typeof s.lengths!=='object'||Array.isArray(s.lengths)||Object.keys(s).some(k=>!['version','wordVersion','qualityVersion','lengths'].includes(k)))throw Error('Ungültige Auswahlversion.');
  for(const [n,b] of Object.entries(s.lengths)){if(!['4','5','6','7'].includes(n)||!b||Object.keys(b).sort().join(',')!=='cycle,initial,recent,remaining'||!Number.isSafeInteger(b.cycle)||b.cycle<0||!Array.isArray(b.recent)||b.recent.length>COOLDOWN||b.recent.some(w=>!recentWords[n].has(w))||!b.initial||!b.remaining||Object.keys(b.initial).sort().join(',')!=='A,B,C'||Object.keys(b.remaining).sort().join(',')!=='A,B,C')throw Error('Ungültiger Auswahlbeutel.');const dict=V.resolve(s.wordVersion),quality=qualityFor(s.wordVersion),p={A:[],B:[],C:[]};for(const w of dict.solutions[n])p[quality.classes[w]].push(w);const members=new Set(dict.solutions[n]),seen=new Set();for(const c of CLASSES){if(!Number.isSafeInteger(b.initial[c])||b.initial[c]<0||b.initial[c]>p[c].length||!Array.isArray(b.remaining[c])||b.remaining[c].length>b.initial[c])throw Error('Ungültige Klassengröße.');for(const w of b.remaining[c]){if(quality.classes[w]!==c||!members.has(w)||seen.has(w))throw Error('Ungültiges Auswahlwort.');seen.add(w);}}}
 }
 function shuffled(a,random){for(let i=a.length-1;i>0;i--){const j=Math.floor(value(random)*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}

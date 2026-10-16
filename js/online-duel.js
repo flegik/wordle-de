@@ -79,7 +79,7 @@ function mount(container,{home,apiURL=root.WORDLE_ONLINE_API,code=null}={}){
    if(persistence.state.rooms.length>=1000){error='Online-Speicher voll. Bitte eigene Duelle sichern.';render();return;}
    const c=container.querySelector('#online-code').value;if(a==='join'&&!validCode(c)){error='Bitte genau sechs Ziffern eingeben.';render();return;}
    if(a==='join'&&persistence.state.rooms.some(r=>r.code===c)){active=c;route(active);snapshot=own().snapshot||null;render();run(sync);return;}
-   const p={action:a,token:token(),...(a==='create'?{length:+container.querySelector('#online-length').value,wordVersion:root.WordRegistry?.current||'de-2.2'}:{code:c,wordVersion:root.WordRegistry?.current||'de-2.2'})};if(write({...persistence.state,pending:p}))run(pendingAction);
+   const p={action:a,token:token(),...(a==='create'?{length:+container.querySelector('#online-length').value,wordVersion:'de-2.3'}:{code:c,wordVersion:'de-2.3'})};if(write({...persistence.state,pending:p}))run(pendingAction);
   }else if(a==='invite'){
    const u=new URL(root.location.href);u.search='';u.hash='online='+active;error='Raumcode '+active+' · '+u.href;render();
   }
