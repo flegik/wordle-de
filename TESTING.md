@@ -508,3 +508,11 @@ automatisiert geprüft. Core-Suite nun 23 Gruppen; UI 14 und Layoutverträge 3.
 Komplette Release-Suite: `docs/qa/survivor-release-tests.log`.
 Cache: `v2-2-release-20261015-a`. Kein Backend-/Cloudflare-Update.
 Die oben dokumentierten echten Browser-/Gerätetests bleiben offen.
+
+### Survivor Balance · 16.10.2026
+
+Neue Runs mit Vertrag 3: Upgrade nach 7/14/21 Siegen. Verluste zählen nicht mit.
+Verträge 1 und 2 werden mit offener Auswahl, aktivem Hinweis und terminalem
+Ergebnis durch Backup und Validierung geprüft. Bestehende Upgrade-Dauern bleiben
+unverändert. Vollständiges Protokoll: `docs/qa/survivor-seven-release-tests.log`.
+Release-Cache `v2-2-release-20261016-a`; keine neuen Gerätetests behauptet.

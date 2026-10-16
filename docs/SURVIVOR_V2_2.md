@@ -1,4 +1,4 @@
-# Wordle Survivor 2.2 · Verträge 1 und 2
+# Wordle Survivor 2.2 · Verträge 1, 2 und 3
 
 Branch: `feature/survivor-v2-2`, Basis `e96c811a473c769d799eb93c3050680a9946bdda`.
 Am 15.10.2026 ausdrücklich zur Veröffentlichung freigegeben, mit Upgrades alle fünf Siege.
@@ -36,7 +36,7 @@ A/B-Wörtern. de-1/de-2/de-2.1/de-2.2 bleiben unverändert vorhanden.
 
 ## Upgrade-Vertrag
 
-Neue Runs (Vertrag 2): Nach jedem fünften **Sieg**, unabhängig von dazwischenliegenden Niederlagen,
+Neue Runs (Vertrag 3): Nach jedem siebten **Sieg**, unabhängig von dazwischenliegenden Niederlagen,
 wird genau ein Ereignis mit drei unterschiedlichen nutzbaren Optionen gespeichert.
 Es gibt Heilung (+1 bis 3), einen nicht stapelbaren Schild, Extra-Versuch
 (+3 Rätsel-Ladungen) und Start-Hinweis (+2 Rätsel-Ladungen).
@@ -64,7 +64,7 @@ Es gibt keinen zweiten Wordle-Auswerter und keinen neuen Speicherschlüssel.
 
 Schema bleibt 2 (`wordle-de:v2`). Survivor speichert zusätzlich:
 
-- `survivorVersion:2` für neue Runs (1 wird unverändert akzeptiert), `input`;
+- `survivorVersion:3` für neue Runs (1 und 2 werden unverändert akzeptiert), `input`;
 - kanonische `attempts` und Rundenkonfigurationen im bestehenden Format;
 - `roundEnds`: geordnete `{roundId, reason, attemptIndex}`;
 - `upgrades`: `{afterRound, offered, picked}`, wobei `picked:null` die offene
@@ -111,7 +111,7 @@ Wort-Historie statt ein unbeschränkt langes Gesamtbild. Ohne aktivierte
 Spoiler-Option enthält das Bild keine Buchstaben oder Lösungen.
 
 Zwei neue Runtime-Dateien sind vor storage/app geladen und im SW enthalten.
-Der freigegebene Release verwendet den neuen Cache `v2-2-release-20261015-a`.
+Der freigegebene Release verwendet den neuen Cache `v2-2-release-20261016-a`.
 Bestehende Installationen erhalten das Update über die vorhandene Update-Aktivierung.
 
 ## Testkopie und tatsächliche Prüfgrenzen
@@ -166,3 +166,18 @@ Release-Testlauf: `docs/qa/survivor-release-tests.log`. Browser-/Gerätetests bl
 wie oben begrenzt; die Veröffentlichung wurde trotz dieser dokumentierten
 Prüfgrenzen ausdrücklich freigegeben. Der private Testlink oben dokumentiert den
 ersten Drei-Siege-Teststand; der veröffentlichte Fünf-Siege-Stand liegt auf Pages.
+
+## Balance-Update 16.10.2026 · freigegebener Vertrag 3
+
+Auf ausdrücklichen Wunsch Upgrade-Abstand auf sieben gelöste Wörter erhöht.
+Neue Runs vergeben Angebote nach 7/14/21 usw. Siegen. HUD und Starttext leiten
+den Abstand aus der Session ab. Drei Herzen, Punkte und Upgrade-Dauer unverändert.
+Alte Runs mit Vertrag 1 (drei Siege) und 2 (fünf Siege) bleiben unverändert
+fortsetzbar und importierbar, einschließlich offener Auswahl, aktiver Effekte
+und abgeschlossener Ergebnisse. Keine rückwirkende Neuwertung.
+
+Vollständige Testsuite mit 7/14/21, Verlust zwischen Meilensteinen und beiden
+Legacy-Verträgen: `docs/qa/survivor-seven-release-tests.log`. Neue Cache-Version
+`v2-2-release-20261016-a` ermöglicht das bestehende PWA-Updateverfahren.
+Keine Änderungen an Wortlisten oder Online-Duellressourcen. Weiterhin keine
+neuen echten Browser-/Gerätetests; bestehende manuelle Prüfgrenzen gelten.

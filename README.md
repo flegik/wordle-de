@@ -244,9 +244,9 @@ Details und spätere Merge-/Release-Hinweise: [DOUBLE_LENGTHS_2_1_2.md](docs/DOU
 
 ### Wordle Survivor 2.2
 
-Solo-Run mit drei Herzen, vier Upgrades alle **fünf gelösten Wörter**,
+Solo-Run mit drei Herzen, vier Upgrades alle **sieben gelösten Wörter**,
 behutsam steigenden Wortlängen und eigenen Rekorden. Pausieren, Backups und
 PNG-/Textsharing verwenden die vorhandenen Systeme. Alte Test-Runs bleiben
-kompatibel. Veröffentlichung am 15.10.2026 ausdrücklich freigegeben;
-Release-Cache `v2-2-release-20261015-a`.
+kompatibel. Balance-Update am 16.10.2026 ausdrücklich zur Veröffentlichung freigegeben;
+Release-Cache `v2-2-release-20261016-a`.
 [Regeln, Speicherung und Testgrenzen](docs/SURVIVOR_V2_2.md).

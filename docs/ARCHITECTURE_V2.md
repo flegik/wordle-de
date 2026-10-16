@@ -291,3 +291,6 @@ Details, Invarianten, Fallback und Ressourcenlimits: `SURVIVOR_V2_2.md`.
 Neue Runs verwenden Survivor-Vertrag 2 (Upgrade alle fünf Siege). Vertrag 1
 bleibt für gespeicherte Test-Runs inklusive Drei-Siege-Meilensteinen gültig.
 Der Release ist ausdrücklich freigegeben; neuer Cache `v2-2-release-20261015-a`.
+
+Survivor-Vertrag 3: neue Runs erhalten Upgrades alle sieben Siege (16.10.2026).
+Verträge 1/2 behalten drei/fünf; Schema 2 und alte Ergebnisse bleiben erhalten.
