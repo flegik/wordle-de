@@ -548,3 +548,13 @@ alte Service läuft, bleibt NUTZUNG dort noch ungültig und neue Räume de-2.2.
 PWA-Assetliste vollständig, Cache-Identifier bewusst unverändert; vor Release
 neue Kennung vergeben. Kein Merge oder Deployment erfolgt. Echte mobile Browser,
 PWA-Update/Offline-Installation und Service-Rollout bleiben manuell offen.
+
+### Freigegebener 2.2.1-PWA-Release · 16.10.2026
+
+Ausdrückliche Nutzerfreigabe: „Ja bitte veröffentlichen“. Neuer Cache
+`v2-2-1-release-20261016-a`; vollständige Suite erneut ausgeführt, Beleg
+`docs/qa/word-quality-221-release-tests.log`. Keine Survivor- oder Zielhistorien-
+Änderungen. Client-API-Fallback ist getestet und erlaubt den gestaffelten Rollout.
+Cloudflare ist in dieser Umgebung abgemeldet; Worker-Deployment daher erst nach
+sicherer Anmeldung. Solange bleibt das produktive Online-Wörterbuch de-2.2,
+NUTZUNG ist dort noch kein gültiger Tipp. Kein D1-Schema-Update erforderlich.

@@ -27,7 +27,7 @@ def build(destination):
     app = (destination / 'js/app.js').read_text()
     app = re.sub(r'<button class="mode-card" data-action="start" data-mode="online">.*?</button>', '', app)
     (destination / 'js/app.js').write_text(app)
-    (destination / 'sw.js').write_text(source.replace('v2-2-release-20261016-a', 'v2-2-survivor-test-a'))
+    (destination / 'sw.js').write_text(source.replace('v2-2-1-release-20261016-a', 'v2-2-survivor-test-a'))
     print(f'Network-isolated Survivor preview: {destination}; {len(paths)} offline assets.')
 if __name__ == '__main__':
     if len(sys.argv) != 2:

@@ -45,7 +45,7 @@ unverändert. Die ursprünglichen Audit-Belege werden vollständig erhalten.
 
 Der neue Lösungspool ist eine redaktionelle Teilmenge der bisherigen Wörter, mit unverändertem Eingabepool. Keine neue externe Datenquelle; sämtliche bestehenden Quellen-/Lizenzhinweise gelten weiterhin. Klassifikation und Bekanntheitsschätzungen stammen von KI, nicht von einer externen lexikografischen Freigabe. Historische de-1/de-2/de-2.1-Daten bleiben verfügbar. Der vollständige Entscheidungsledger und Generator liegen unter `data/quality/phase8/` bzw. `tools/build_quality_v2.py`. Details: WORD_REVIEW.md.
 
-## WORDLE DE 2.2.1 · de-2.3 / quality-4 (noch nicht veröffentlicht)
+## WORDLE DE 2.2.1 · de-2.3 / quality-4 (PWA freigegeben)
 
 `tools/build_quality_v2_2_1.py` erzeugt aus dem unveränderten de-2.2-Paket und
 `data/quality/v2-2-1/policy.json` den neuen Entwicklungspool. 5.400 → 5.247

@@ -251,12 +251,13 @@ kompatibel. Balance-Update am 16.10.2026 ausdrücklich zur Veröffentlichung fre
 Release-Cache `v2-2-release-20261016-a`.
 [Regeln, Speicherung und Testgrenzen](docs/SURVIVOR_V2_2.md).
 
-### Wortqualität 2.2.1 (Entwicklungsbranch)
+### Wortqualität 2.2.1
 
 `feature/word-quality-v2-2-1` bereitet de-2.3 / quality-4 vor: NUTZUNG als
 A-Lösung und Ratewort, 154 Spezialbegriffe nur noch als Ratewörter und 514
 neu eingestufte Lösungen. Historische Ziele, Statistiken und Survivor-Regeln
 bleiben erhalten. [Vollständiger Qualitätsbericht](docs/WORD_QUALITY_2_2_1.md).
-Keine Veröffentlichung; Online-API-Unterstützung und PWA-Cache sind für eine
-spätere gemeinsame Freigabe vorbereitet. Auf dem alten Online-Service ist
+PWA-Veröffentlichung am 16.10.2026 freigegeben; Cache `v2-2-1-release-20261016-a`.
+Online-API-Unterstützung ist vorbereitet, wartet aber auf die erforderliche
+Cloudflare-Anmeldung für das Worker-Update. Auf dem alten Online-Service ist
 NUTZUNG bis zum gesondert freigegebenen Worker-Update noch nicht gültig.

@@ -1,6 +1,6 @@
 # WORDLE DE 2.2.1 · Wortqualität
 
-Nicht veröffentlicht. Basis de-2.2 → neuer aktiver Entwicklungsbestand de-2.3 / quality-4.
+PWA-Veröffentlichung am 16.10.2026 ausdrücklich freigegeben. Basis de-2.2 → de-2.3 / quality-4. Cloudflare-Worker-Update wartet auf die erforderliche Anmeldung.
 
 Gesamter aktiver Bestand von 5400 Lösungen in vollständigen Wortlängenlisten gelesen. Keine pauschale Tier- oder C-Klassen-Löschung. Unveränderte Wörter behalten dokumentiert ihre Klasse.
 
@@ -706,4 +706,4 @@ Eingabe-Ergänzung NUTZUNG wird als additive Registry-Sicht auch für historisch
 
 Die vorbereitete Online-API wählt neue Wörter nach dem angefragten unterstützten Wortvertrag. Ohne Versionswunsch bleibt de-2.2 für alte Clients erhalten. Ein neuer Client fällt bei einem alten API-Stand nur nach explizitem invalid_request auf den alten Erstellvertrag zurück. Bestehende Räume behalten ihre Ziel-/Wortversion. NUTZUNG wird serverseitig erst nach gesondert freigegebenem Worker-Deployment akzeptiert; es fand kein Cloudflare-Deployment statt. Alte Clients können de-2.3-Räume nicht lesen; beide Spieler müssen dafür den später freigegebenen neuen Client verwenden. Ein Beitritt zu de-2.3 benötigt die Versionsangabe; alte Clients erhalten vor Belegen des zweiten Platzes client_update_required. Der vorübergehende Fallback auf einen alten Service benötigt zwei Anfragen und zählt in dessen bestehendes Rate-Limit.
 
-Service-Worker-Assetliste ist vorbereitet, produktiver Cache-Identifier unverändert. Vor Veröffentlichung neuen Release-Cache vergeben und Worker-/PWA-Rollout gemeinsam prüfen. Backup-, Auswahl- und Modustests siehe TESTING.md. Keine neuen echten Browser- oder Gerätetests behauptet.
+PWA-Release-Cache: v2-2-1-release-20261016-a. Der Client-Fallback erlaubt die PWA-Veröffentlichung vor dem Worker-Update; auf dem alten Service bleiben Online-Ziele de-2.2 und NUTZUNG dort noch ungültig. Worker-Rollout nach sicherer Anmeldung separat prüfen. Backup-, Auswahl- und Modustests siehe TESTING.md. Keine neuen echten Browser- oder Gerätetests behauptet.

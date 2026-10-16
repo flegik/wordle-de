@@ -1,0 +1,434 @@
+✓ All historical packages, Survivor rules, theme pools and production endpoint/config retain exact bytes
+✓ Complete unique ledger covers every previous solution plus the explicit addition
+✓ Every excluded solution remains an accepted guess; protected animals and LEGAT remain solutions
+✓ NUTZUNG is a selectable A solution and accepted in every supported registry view without mutation
+✓ Daily targets stay identical to frozen raw de-1 for 366 dates
+✓ NUTZUNG is actually submitted through classic/random/streak UI and historical daily validation
+✓ NUTZUNG is a real guess in double, tower, speedrun, Survivor and offline duel
+✓ Old excluded classic and Survivor targets, progress and backups survive migration exactly
+✓ Main and Survivor bags migrate once, retain cooldown/consumption, filter removals and insert NUTZUNG once
+✓ Reclassified remaining words move bags rather than being redrawn or lost
+✓ New-word cooldown validates, keeps reload-deterministic draw and prevents immediate repeats
+✓ Malformed old bags still protect original storage instead of resetting progress
+12 word-quality 2.2.1 compatibility/integration groups passed.
+✓ Old create contract stays de-2.2; explicit new contract pins de-2.3 targets
+✓ Unknown/malformed versions are rejected before creating rooms
+✓ Frozen de-2.2 room keeps removed target and accepts additive NUTZUNG once
+✓ New room requires updated joining client without consuming its second slot on rejection
+✓ New create/join clients fall back only on old API invalid_request with identical token
+✓ Mixed online snapshots and pending negotiated requests persist separately from statistics
+6 word-quality 2.2.1 online API/SQLite/client groups passed; no Cloudflare deployment.
+3 Survivor render/layout/asset contract groups passed; real 320/360/390/430px checks remain manual.
+✓ Starts with 3 hearts, normal limits, no Hard Mode and no redundant score
+✓ One failed word costs one heart; invalid and duplicate guesses do not cost attempts or health
+✓ Three unshielded losses finish exactly once at zero hearts
+✓ Points reward length and efficiency; extra attempts never create extra efficiency bonus
+✓ Every seventh WIN grants one persisted distinct usable offer; losses do not grant repeats
+✓ Shield prevents exactly the next heart loss and is consumed once
+✓ Full health plus held shield produces two useful choices, never a dummy heal or duplicate shield
+✓ Healing restores one lost heart up to 3 and cannot be re-applied
+✓ Extra attempt applies to exactly the next 3 started puzzles, preserved after reload
+✓ Last extra attempt can solve the puzzle without costing a heart
+✓ Hint position is fixed, in bounds and correct for exactly two future rounds
+✓ Extra/hint charges can stack additively, shield cannot stack and stale choices reject
+✓ Malformed boundaries, missing offers, fabricated charges/hints/score and post-close inputs reject
+✓ Unicode, NFC and repeated letters use the existing engine without a second evaluator
+✓ Difficulty phases use only 4/5 initially, delay 7s and still keep mixed lengths late
+✓ Private Survivor bag excludes C for complete cycles and preserves ordinary shared bags
+✓ Backups preserve active word/draft, pending offer, chosen effects and exactly-once finished results
+✓ Historical schema-1/2, double history and daily data remain unchanged
+✓ Explicit abandonment stores actual score and does not falsely count an unfinished word as lost
+✓ Separate run statistics include active runs; sharing and PNG summary contain authentic metrics without spoilers
+✓ Generic modes retain original size limits; Survivor accepts 1,001 real attempts without a new artificial run cap
+✓ New runs grant upgrades only after 7/14/21 wins; partial progress and losses survive backups
+✓ Legacy v1/v2 runs, pending offers, active effects and terminal events retain 3/5-win contracts
+23 Survivor rules, replay, storage and selection groups passed.
+✓ Menu, fair initial length, hearts, independent bag and global hard setting unchanged
+✓ Rapid Enter/typing cannot double-submit, duplicate next cannot create an extra round
+✓ Draft and all hints survive home/reload, no second run on resume or launch
+✓ Every seventh win opens a stable persisted offer, exactly one choice applies
+✓ Hint appears at its persisted correct position and does not pre-submit a guess
+✓ Shield feedback, two-option safe fallback and no heal at full hearts
+✓ Two-option fallback explicitly explains why only useful upgrades are offered
+✓ Game Over produces one independent result, highscore, real result boards and share action
+✓ Pause is not a loss; canceled then confirmed abandonment is counted exactly once
+✓ Classic/double state and quality pools remain byte-equivalent while Survivor progresses
+✓ UI JSON export/import preserves Survivor draft
+✓ UI JSON export/import preserves Survivor offer
+✓ UI JSON export/import preserves Survivor chosen
+✓ Survivor text uses existing Web Share without leaking solutions
+14 Survivor UI/controller groups passed (DOM adapter, not device tests).
+✓ 4 letters: limits, independent hints, win/loss at final attempt, frozen solved board and backup
+✓ 5 letters: limits, independent hints, win/loss at final attempt, frozen solved board and backup
+✓ 6 letters: limits, independent hints, win/loss at final attempt, frozen solved board and backup
+✓ 7 letters: limits, independent hints, win/loss at final attempt, frozen solved board and backup
+✓ Uniform random selection independent of dictionary sizes; exact interval boundaries
+✓ Historical 5/8 snapshots remain byte-identical through validation, migration and export
+✓ Six-letter sharp-S target normalizes and duplicate-letter colors stay core-derived
+✓ Mixed length statistics and invalid event-length tampering
+✓ Controller selection 4: pause/reload, physical input limit, swipe, win, next and length change
+✓ Controller selection 5: pause/reload, physical input limit, swipe, win, next and length change
+✓ Controller selection 6: pause/reload, physical input limit, swipe, win, next and length change
+✓ Controller selection 7: pause/reload, physical input limit, swipe, win, next and length change
+✓ Controller selection random: pause/reload, physical input limit, swipe, win, next and length change
+✓ New random sessions actually re-roll, maintain same-length distinct solutions and consume shared bags
+✓ UI projects each tile and actual row count dynamically for all lengths
+✓ Controller JSON export/import 4 preserves Unicode draft, selection and preference
+✓ Controller JSON export/import 5 preserves Unicode draft, selection and preference
+✓ Controller JSON export/import 6 preserves Unicode draft, selection and preference
+✓ Controller JSON export/import 7 preserves Unicode draft, selection and preference
+✓ Controller JSON export/import random preserves Unicode draft, selection and preference
+20 variable-double test groups passed (state adapter).
+✓ Six numeric digits, crypto selection, pinned dictionary and secret target
+✓ Creation retries recover exactly the same room and reject changed length
+✓ Atomic competing joins: only one guest; same token retries recover
+✓ No result access with room code alone, wrong token or malformed token
+✓ Strict methods, body types, bounded streamed bytes and exact fields
+✓ CORS allowlist, no-store and bearer preflight
+✓ Must have two players before submitting; arbitrary colors/results rejected
+✓ Dictionary rejects unknown words; umlauts, NFC and independent sharp S
+✓ Server uses authentic guesses and two-pass repeated-letter colors
+✓ Identical retries count once; stale changed guesses cannot overwrite
+✓ Different concurrent guesses at same revision yield one accepted attempt
+✓ Opponent words and solution hidden until both finish, then both boards released
+✓ Six/seven attempt limits and loss do not reveal target prematurely
+✓ Winner rules: solved wins, fewer attempts wins, successful tie, both lost none
+✓ Reload reads canonical progress; 30-day expiry and scheduled cleanup
+✓ IP and creation rate limits plus global free-budget circuit breaker
+16 online API/SQLite groups passed; Cloudflare runtime is checked separately.
+✓ Codes, secure participant tokens, no token in invitation contract
+✓ Separate storage resumes draft and pending retry without touching statistics
+✓ Corrupt data, quota and concurrent-tab changes are protected
+✓ Bearer access uses no-store, bounded timeout, omitted cookies and strict HTTPS
+✓ Offline and API errors stay actionable and preserve tokens
+✓ Authentic Unicode letters and server colors render escaped, without invented rows
+✓ Service worker bypasses same-origin API and Authorization requests
+7 online client/storage/cache groups passed.
+✓ Real frozen 1.0 controller creates saves; 2.0 preserves all legacy collections and original bytes
+✓ Legacy backup, current backup, reload and idempotent migration preserve statistics and active draft
+✓ Later real old-tab writes protect both snapshots instead of silently overwriting or double-counting
+3 release upgrade groups passed; state adapter, not a real installed-PWA update.
+2 service-worker failed-install groups passed; adapter only.
+✓ All four classic result modes show real ordered Unicode letters and evaluations
+✓ Double solved board receives no fabricated result rows
+✓ Tower only renders reached floors and the real longest history
+✓ Speedrun reflects skips and selects authentic individual histories
+✓ Theme and duel result models preserve category / challenge identification
+✓ Old quality bags migrate without restoring consumed words; migration is idempotent
+✓ Historical excluded target remains playable through its own word registry
+✓ Spoiler-free renderer never draws guesses or targets, spoiler mode explicitly marks them
+✓ File sharing requires actual canShare support and handles rejected capability
+✓ New modules loaded before app and precached; critical update guard retained
+✓ Classic archived history survives new rounds, reload, backup and cannot disagree with its event
+✓ Early Phase-8 de-2.1 targets and quality bags retain exact compatibility
+12 Phase-8 result/compatibility groups passed.
+✓ Registry selects de-2 for new games and de-1 for historical games
+✓ Daily retains exactly the old dictionary and deterministic UTC choices
+✓ All selection classes exactly cover their active solution pools
+✓ Shared mixed modes consume each full pool once and protect 150-word cycle boundary
+✓ Selection state roundtrip preserves seed-dependent future draws
+✓ Legacy remaining bag keeps surviving words and never restores removed solutions
+✓ C-only exhaustion falls back once instead of repeating A/B or hanging
+✓ C is suppressed in speedrun while any unplayed A/B remains
+✓ Empty legacy bags refill safely and never repeat the immediately previous solution
+✓ Malformed selection versions, classes, duplicates and RNG are rejected
+✓ Schema-1 migration preserves all old rounds/events/streaks and is idempotent
+✓ Schema-2 prior backups retain legacy word interpretation
+✓ Active de-1 HUNNI and removed PESEL remain valid historical solutions
+✓ Mixed de-1 and de-2 classical rounds validate without changing old stats
+✓ Old and new arcade sessions keep their own dictionary contract
+✓ Old duel invitation remains readable, new invitations reject PESEL
+✓ Changed legacy source blocks writes without destroying modern state
+✓ Concurrent modern storage lease prevents silent last-write-wins
+✓ Initial adoption rejects divergent old active drafts
+✓ Conservative additive merge rejects conflicting IDs/settings/bags
+✓ Unchanged legacy history is merged idempotently without duplicate stats
+✓ Local reports preserve word data and backup roundtrip
+✓ Reports reject unknown versions/words/reasons/IDs, long notes and duplicate IDs
+✓ New UI rounds use de-2 and daily still uses de-1
+✓ UI conflict keeps own progress until explicit confirmation
+✓ Completed classic UI exposes local report form, saves once and exports JSON
+✓ Cached runtime asset list includes versions, registry, selection, sync and reports
+✓ Safe additive later legacy history preserves order, streaks and idempotence
+✓ Changing the foreign save again before confirmation prevents stale overwrite
+✓ Deleting storage from another tab protects the local run against recreation
+✓ Confirmed recovery can preserve a corrupt legacy original without blocking new saves
+31 Phase-7 integration checks passed (DOM adapter, not device tests).
+✓ ß stays one letter; NFC composed umlauts
+✓ Two-pass duplicate evaluation
+✓ Every solution is accepted and has its indexed length
+✓ Daily deterministic, distributed lengths and stable version
+✓ Hard Mode retains exact positions and duplicate minimum/maximum
+✓ Stats exclude losses from solution mean; distributions and streaks
+✓ Backup roundtrip, completed games and corruption rejection
+✓ Manifest paths and required offline assets exist
+8 rule/data/configuration checks passed.
+✓ All 4–7 letter UI rounds can be won and reload into a valid save
+✓ Rapid input while flip is active cannot submit twice
+✓ Typing and pause/reload preserve the unfinished round
+✓ Daily is deterministic and completion is counted once
+✓ Streak wins increment; abandonment ends the series with confirmation
+✓ A weighted pool does not repeat before exhaustion; LEGAT is selectable
+✓ Random draws lengths before words and exercises all four lengths
+✓ JSON export and validated import require confirmation; invalid versions are rejected
+8 application state checks passed (DOM adapter; no real browser).
+✓ All precache URLs resolve under a nested hosting path
+✓ Cache cleanup preserves other apps and other Wordle scopes
+✓ Offline script lookup and navigation fallback work in the cache adapter
+✓ Every HTML script, stylesheet, manifest and icon is precached
+4 service-worker logic checks passed (adapter; no real installation).
+✓ Two distinct five-letter solutions, eight shared attempts, hard disabled
+✓ One canonical attempt independently evaluates duplicate letters on both boards
+✓ Solved board freezes; only unsolved board consumes later shared attempts
+✓ Eighth failed shared attempt ends the session; eighth success wins
+✓ Invalid length, nonwords and duplicate guesses consume no attempt
+✓ Unicode normalization and German keyboard alphabet remain valid
+✓ Double backup rejects inconsistent boards, budgets, draft and terminal states
+✓ Recording is exactly once, preserves classic history and backup roundtrips
+✓ Own averages, min record, distribution, partial solved loss and streaks
+✓ Share includes only real rows and never reveals solution text
+10 double rules/storage checks passed.
+✓ New session explains hard exception, picks different targets and reuses bag without repeats
+✓ Input lock ignores duplicate Enter and other rapid keys during flip
+✓ Invalid input and duplicate guesses do not spend shared attempts
+✓ Reload retains targets, draft, selection and solved board; no active session is overwritten
+✓ Pause, canceled abandonment and confirmed abandonment count correctly exactly once
+✓ Global hard stays enabled but conflicting known hints never constrain double guesses
+✓ German physical keyboard and pointer swipe switch preserve input and keyboard colors
+✓ Classic game can coexist with double; statistics filters never blend them
+✓ Completed session restored from another tab shows result, cannot accept ninth attempt
+✓ Double UI JSON export/import retains both boards and draft after confirmation
+✓ Web Share and secure clipboard fallbacks receive only spoiler-free emoji grids
+11 double UI state checks passed (DOM adapter, not device tests).
+✓ Four floors, increasing lengths, one 20-attempt budget and no hard constraints
+✓ One valid guess costs exactly one and affects only its active floor
+✓ Invalid length, unknown words and repeated guesses consume no budget
+✓ No floor skipping, no inputs on solved floors, no inputs to multiple floors
+✓ A solved floor freezes, persisted transition must be acknowledged, budget unchanged
+✓ More than seven attempts are allowed on the same floor
+✓ Four solutions create one won session, zero classic wins, exactly-once result
+✓ Fourth solution on attempt 20 is a win with zero remaining attempts
+✓ Attempt 20 without all four solutions loses and budget cannot be negative
+✓ Solving an earlier floor on attempt 20 cannot unlock the next floor
+✓ Tower validation rejects invalid limits, terminal states, transition and drafts
+✓ Umlauts, NFC, sharp S and duplicate evaluations reuse Engine unchanged
+✓ Reached and completed floors differ across pending, entered and budget-exhausted runs
+✓ Own winning-only records, means, floor averages and streaks are correct
+✓ Schema-1, Phase-2 double data and tower transition survive backup roundtrip
+✓ Corrupt tower backups are rejected before storage writes and kept protected
+✓ Share shows only actual successful floors and contains no solutions
+17 tower rule/storage checks passed.
+✓ Start overview explains budget and hard exception, normal start draws frozen pool targets
+✓ Invalid input consumes nothing; animation lock prevents duplicate attempts and keys
+✓ Floor transition is persisted, reload restores it and inputs cannot skip the Continue button
+✓ Draft, targets, history, active floor and remaining attempts survive reopening
+✓ Pause does not lose; canceled abandon preserves run; confirmed transition abandon counts once
+✓ Full UI ascent wins once, shows all floor attempts, record, remaining budget and own statistics
+✓ UI restores nineteen attempts and recognizes twentieth final solution as victory
+✓ Twenty long floor rows stay in a dedicated scroll region and exhaustion ends without next-floor action
+✓ Tower preserves global hard, unicode physical keys and fresh keyboard colors per floor
+✓ Classic and double sessions coexist and all statistic selectors offer tower separately
+✓ Validated cross-tab completion cancels pending animation and restores the tower result
+✓ Current-row helper returns from scrolled history without scrolling the page
+✓ Tower UI backup export/import retains pending transition and confirms overwrite
+✓ Tower sharing uses the existing Web Share helper without target words
+14 tower UI state checks passed (DOM adapter, not device tests).
+✓ 180 seconds, separate limits, hard mode disabled
+✓ Length selection is uniform independently of dictionary sizes
+✓ All four lengths award exactly the documented points
+✓ Attempts belong only to the current word and previous word stays solved
+✓ Invalid, incomplete and repeated guesses never consume attempts
+✓ Two-pass duplicate letters, NFC and sharp S use the existing core
+✓ Exhausting a word ends only that round and starts a new word
+✓ Skip is a distinct ending and deducts exactly ten seconds
+✓ Skipping with less than ten seconds clamps at zero and completes
+✓ Score is reproducible after expiry; unfinished words yield no points
+✓ Confirmation immediately before deadline counts; at or after deadline rejected
+✓ Expiry and abandonment have different statuses and cannot finish twice
+✓ Canonical replay rejects attempts on skipped or solved previous words
+✓ Reject duplicate boundaries, forged score, negative/infinite time and wrong limits
+✓ Replay rejects backwards time, wrong order and missing endings
+✓ Event snapshots reject inconsistent counts, points, time and abandonment
+✓ Highscore ties: more solved, fewer attempts, then older record
+✓ Own statistics exclude classic/double/tower and legacy prototype events
+✓ Schema 2 backup is lossless, migration idempotent, completion counted once
+✓ Corrupt timer data protects original local storage without overwrite
+✓ Sharing contains real score and skips but no targets
+✓ Clock starts only on resume, and paused/start time consumes no budget
+✓ Repeated checkpoints preserve exact active elapsed time without drift
+✓ Fresh monotone epoch after browser restart resumes stored budget
+✓ Clock refuses double resume and clips only at actual deadline
+✓ Removing the version marker cannot bypass new-contract validation
+✓ Skip chronology cannot hide an unplayed next round or extra active time
+27 speedrun rule/timer/storage checks passed.
+✓ Menu, point explanation and conscious start do not charge overview time
+✓ HUD, grid, shared German keyboard and skip button are available
+✓ 500ms checkpoints consume monotone elapsed time and never reset budget
+✓ Invalid input gives feedback without consuming attempts
+✓ Success immediately persists points and next word; repeated enter is locked
+✓ Keyboard colors reset for the automatically created new round
+✓ Double skip click deducts only once; skip remains distinct from loss
+✓ Skip within last ten seconds completes exactly once
+✓ Hidden document pauses automatically and foreground requires explicit resume
+✓ Pagehide stores the draft and elapsed time without causing a loss
+✓ Reload preserves solutions, guesses, draft and time with a fresh clock epoch
+✓ Home and other screens pause; ordinary navigation never aborts
+✓ Pause is possible even during a flip; accepted score remains saved
+✓ Confirmed abort counted once; cancelling keeps the run paused
+✓ At zero, session completes once and remaining time never goes negative
+✓ A valid guess confirmed just before expiry counts during its animation
+✓ An unfinished draft cannot be confirmed after expiry
+✓ No interval tick needed: Enter checks deadline itself
+✓ Hard mode is preserved globally and not imposed on speedrun rounds
+✓ Hardware keyboard, lowercase umlaut and sharp S work without native inputs
+✓ Speedrun statistics leave classic events untouched
+✓ Backup export/import preserves speedrun and cannot re-award a result
+✓ Restoring another tab state stops the previous monotone timer safely
+✓ Current row is followed inside the scroll region, never by moving the keyboard
+✓ Sharing uses the existing manual fallback and has no solution leak
+25 speedrun controller checks passed (adapter, not browser).
+✓ Canonical versioned links roundtrip exact words for all lengths
+✓ Nested deployment paths and index entry survive link creation
+✓ Wish words use accepted pool including LEGAT, MICH and HUHNS
+✓ NFC, uppercase umlauts and one-character sharp S normalize at creation
+✓ Wish creation rejects digits, spaces, symbols, missing dictionary words and lengths
+✓ Malformed, truncated and foreign formats fail safely
+✓ Unexpected metadata, versions, wrong types, IDs, pools and lengths rejected
+✓ Noncanonical JSON, duplicate keys, arrays and malformed UTF8/base64 reject
+✓ Correct checksums do not authenticate changed data; legal modified payload still parses
+✓ UUID uses crypto randomUUID or correctly marked WebCrypto fallback
+✓ Duels have one round and six/seven fixed normal attempts
+✓ One valid canonical guess creates one attempt; colors reuse Engine
+✓ Repeated-letter two-pass colors independently correct
+✓ Invalid, incomplete and repeated guesses do not consume attempts
+✓ Winning immediately closes and blocks new guesses or abandonment
+✓ Loss after exact limits, with last-attempt victory preserved
+✓ Same challenge accept resumes exactly; completed sessions cannot restart
+✓ Same-ID different target or variant is rejected without mutation
+✓ Different challenges coexist without overwriting other sessions
+✓ Creation counts no game and known own wish cannot become self-rated
+✓ Pending random converts once into session and leaves no redundant payload
+✓ Pending payloads reject inconsistent keys, unknown data and session duplicates
+✓ Finished result counted exactly once and isolated from classics and arcade
+✓ Confirmed abandonment is terminal, separate and counted exactly once
+✓ Statistics exclude failures from averages and separate challenge types
+✓ Schema-2 backup roundtrip preserves active draft, pending challenge and completed event
+✓ Schema-1 migration is unchanged and legacy duel prototypes stay importable
+✓ Forged duel state, hard rules, missing contract and invalid endings rejected
+✓ Corrupt data retains raw original with read-only protection
+✓ Spoiler-free real emoji rows and no words in result codes
+✓ Comparisons use fewer attempts, draws, solved/failed; never time
+✓ Foreign, wish, malformed and inconsistent peer results rejected
+✓ Archived event without full session blocks a second award of the same challenge
+33 duel codec/rule/storage checks passed.
+✓ Menu exposes duel cards and random length selection
+✓ Rapid creation click does not draw a second challenge after ready screen
+✓ Initial fragment opens invitation without silently starting or revealing target
+✓ Incoming wishes show correct invitation and use general accepted pool
+✓ Wish live input count and validation update without replacing input
+✓ Invalid wish does not create challenges or stats; LEGAT works normally
+✓ Reloading own wish link remains creator sharing screen with no participation
+✓ Invalid and malicious fragments show fixed safe error and keep original data
+✓ Same-ID changed target rejected without destroying ongoing duel
+✓ Reload restores exact target, history, draft and ID through invitation
+✓ Completed challenge opens result and cannot become a new rated attempt
+✓ Invalid guesses and rapid duplicate Enter do not consume extra attempts
+✓ Pause and cancelled abandonment preserve draft without loss
+✓ Confirmed abandonment counts once and repeated link cannot restart
+✓ Different incoming challenges remain available in hub with separate drafts
+✓ Hardware and screen keyboard preserve umlauts and single sharp S
+✓ Global hard mode remains enabled but duel always normal
+✓ Incoming fragment pauses speedrun clock and never overwrites its run
+✓ New invitation during accepted animation does not lose or double-count prior result
+✓ Other arcade and classic states preserved when duel finishes
+✓ Duel statistics separate variants and local comparisons from own solutions
+✓ Result sharing uses existing safe manual fallback without target
+✓ Challenge copy falls back to safe textarea with current nested URL
+✓ Local file challenges explain why public sharing is unavailable
+✓ Comparison displays real same-challenge result and never changes statistics
+✓ JSON export/import includes all duel challenges with no new schema
+✓ Shared bounded raster helper scrolls only inner history
+✓ Native link share uses actual nested URL and contains no clear target
+✓ Clipboard copy receives exact current challenge link
+✓ Failed clipboard copy opens safe manual fallback
+✓ Native share cancellation does not force clipboard or modal
+✓ Failed native result share falls back to clipboard without solutions
+32 duel controller checks passed (adapter, not browser/device).
+✓ Stable unique categories and independently versioned de-1 themes
+✓ Every pool is canonical, indexed, unique and contains only base solutions
+✓ Exactly nine sufficiently filled combinations are enabled
+✓ Unwanted/uncertain words excluded; LEGAT globally preserved
+✓ Each enabled combination starts and respects classical word limits
+✓ Unknown categories, disabled lengths, foreign targets and versions rejected
+✓ All dictionary guesses are accepted irrespective of category
+✓ Invalid/incomplete/repeated guesses consume no attempt
+✓ Two-pass repeated-letter evaluation remains the existing algorithm
+✓ Unicode NFC and umlauts accepted, sharp S remains one character
+✓ Hard mode reuses exact position/min/max checks
+✓ Winning ends once, with no further attempts permitted
+✓ Loss after six/seven attempts and no input after finish
+✓ Abandonment and completed results counted exactly once independently
+✓ Category/length statistics, means and distributions exclude losses
+✓ Bags run the full pool, survive JSON roundtrip, never alter general bags
+✓ Nearly exhausted cross-category overlap avoids immediate repetition
+✓ Manipulated bags reject duplicates, unknown versions/categories and targets
+✓ New backups roundtrip with draft, hard setting, category and bags
+✓ Forged sessions/events, missing marker and missing theme version rejected
+✓ Older theme version validates by its own immutable registry package
+✓ Generic historic theme prototypes remain valid without reinterpretation
+✓ Sharing has exactly real rows, correct category and no target
+23 theme rule/data/storage checks passed.
+✓ Discover menu and four categories with disabled sparse lengths
+✓ Category and enabled lengths selected before launch
+✓ Disabled length cannot be started even by a synthetic click
+✓ Unrelated dictionary word accepted; category is not a guess restriction
+✓ Rapid duplicate Enter and invalid inputs do not create extra attempts
+✓ Reload preserves category, target, history, draft and bag order
+✓ Pause never loses; resume keeps the same session ID
+✓ Changing category requires explicit replacement; cancellation preserves round
+✓ Abandon confirmed once, separately from classic and other arcade events
+✓ Winning persists exactly one result and next keeps category/length
+✓ Completed theme sessions never overwrite a paused other mode
+✓ Global hard mode copied at start and remains pinned across later setting changes
+✓ Shared keyboard and physical umlauts/sharp S work without native inputs
+✓ Themed statistics support category and length filters
+✓ Backup includes category/version and dedicated selection bags
+✓ Sharing invokes existing manual fallback with no targets
+✓ Scoped current-row helper scrolls inner raster only
+17 theme controller checks passed (adapter, not device).
+✓ Representative schema-1 fixture validates and migrates without changing any legacy collection
+✓ Migration is deterministic and idempotent, including backup roundtrips
+✓ 1461 frozen UTC daily fixtures remain unchanged across schema migration
+✓ New key takes precedence; the original key stays byte-for-byte unchanged
+✓ Corrupt/unknown data is preserved and writing is explicitly blocked
+✓ Multiple rounds share one canonical input and derive separate duplicate-aware colors
+✓ Session budgets, round limits, IDs, dictionary validation and Hard Mode are enforced
+✓ Arcade result recording is idempotent and never changes original Wordle means
+✓ Mode-specific score records stay separate and inconsistent backups are rejected
+✓ Validation failure and storage quota failure cannot overwrite existing saves
+10 session/migration checks passed.
+✓ Legacy saved rounds resume through the UI and original data is never rewritten
+✓ Corrupted storage permits temporary play but cannot replace the protected original
+✓ Invalid cross-tab writes are protected; a valid replacement restores persistence
+✓ Physical German keyboard inputs preserve umlauts and sharp S as single letters
+✓ Schema-1 UI backup import/export retains history and overwrites only after confirmation
+✓ UI backups preserve future session data without counting it as Wordle rounds
+6 application migration checks passed (DOM adapter).
+✓ Theme runtime is exactly reproducible from editorial decisions
+✓ All approved decisions retain actual audit evidence and explicit editorial reason
+✓ Editorial candidates have unique category-word assignments and known IDs
+3 theme build/editorial checks passed.
+✓ All four audit outputs reproduce byte-for-byte
+✓ Every solution has exactly one classification and real source evidence
+✓ Candidates are unapproved; LEGAT protected; examples correctly classified
+✓ Runtime de-1 word bytes and distinct 2.1 release cache version are preserved
+✓ All solutions have actual usage evidence; PESEL is separately flagged for guesses
+5 audit checks passed.
+✓ de-2, frozen de-1 and quality index reproduce byte-for-byte
+✓ Only six authorized solutions and one authorized guess removed
+✓ Complete valid class coverage; protected words and accepted-only forms survive
+✓ Uncertain classifications stay explicitly provisional; de-1 archive unchanged
+4 quality checks passed.
+3 Phase-8 quality groups passed: reproducibility, complete ledger, protected compatibility.
+4 quality-2.2.1 build groups passed: reproducibility, exact guess delta, complete normalized class coverage, pool counts.
+All Phase-8 checks passed; no browser/device certification implied.
