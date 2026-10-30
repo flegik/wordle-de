@@ -1,0 +1,28 @@
+Browser 153.0.8010.0
+✓ 320×568: six win/loss/shield/upgrade/8-attempt/Game Over cases, exact letters/colors, no horizontal clipping, keyboard scrolling, touch next/upgrade
+✓ 360×640: six win/loss/shield/upgrade/8-attempt/Game Over cases, exact letters/colors, no horizontal clipping, keyboard scrolling, touch next/upgrade
+✓ 390×844: six win/loss/shield/upgrade/8-attempt/Game Over cases, exact letters/colors, no horizontal clipping, keyboard scrolling, touch next/upgrade
+✓ 430×932: six win/loss/shield/upgrade/8-attempt/Game Over cases, exact letters/colors, no horizontal clipping, keyboard scrolling, touch next/upgrade
+✓ 1280×900: six win/loss/shield/upgrade/8-attempt/Game Over cases, exact letters/colors, no horizontal clipping, keyboard scrolling, touch next/upgrade
+✓ 844×390: six win/loss/shield/upgrade/8-attempt/Game Over cases, exact letters/colors, no horizontal clipping, keyboard scrolling, touch next/upgrade
+✓ Light theme + reduced motion at 320×568
+✓ Hardware keyboard/backspace/rapid Enter preserves exactly one accepted attempt
+Starting isolated worker update v1-active-hint
+Old worker ready v1-active-hint
+New worker waiting v1-active-hint
+Update button visible 1
+Update requested v1-active-hint
+✓ Real nested-path old-cache → waiting worker → explicit update → resume/offline: v1-active-hint
+Starting isolated worker update v2-active-extra
+Old worker ready v2-active-extra
+New worker waiting v2-active-extra
+Update button visible 1
+Update requested v2-active-extra
+✓ Real nested-path old-cache → waiting worker → explicit update → resume/offline: v2-active-extra
+Starting isolated worker update v3-pending-offer
+Old worker ready v3-pending-offer
+New worker waiting v3-pending-offer
+Update button visible 1
+Update requested v3-pending-offer
+✓ Real nested-path old-cache → waiting worker → explicit update → resume/offline: v3-pending-offer
+36 mobile/desktop result scenarios passed; no page exceptions. Chromium emulation, not physical iOS/Android certification.

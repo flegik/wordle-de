@@ -558,3 +558,50 @@ Ausdrückliche Nutzerfreigabe: „Ja bitte veröffentlichen“. Neuer Cache
 Cloudflare ist in dieser Umgebung abgemeldet; Worker-Deployment daher erst nach
 sicherer Anmeldung. Solange bleibt das produktive Online-Wörterbuch de-2.2,
 NUTZUNG ist dort noch kein gültiger Tipp. Kein D1-Schema-Update erforderlich.
+
+## PR #3 · Survivor-Raster und bestehende Runs (30.10.2026)
+
+`python tools/test_all.py` führt zusätzlich aus:
+
+- `tests/survivor-between-grid.test.cjs`: ursprünglicher PR-Regressionstest.
+- `tests/survivor-grid-compat.test.cjs`: 48 kanonische, eingecheckte Spielstände mit
+  Survivor-Verträgen 1/2/3 und Upgrade-Intervallen 3/5/7; vorherige Oberfläche → neue
+  Controlleransicht, Drafts/Herzen/Heilung/Schild/Extra-Versuche/Hinweise/Upgrade-Angebote,
+  Statistiken, JSON-Roundtrip, Fortsetzen und genau einmal erfasste Abschlüsse.
+- `tests/survivor-grid-update.test.cjs`: acht Gruppen für die echten App-Updatehandler;
+  erfolgreiche Speicherung vor Aktivierung/Reload, Sperre bei Speicherfehlern,
+  korrupten Originalen, konkurrierenden Tabs und aktivem Spiel.
+
+Die unveränderte historische Oberfläche liegt unter
+`tests/fixtures/survivor-grid/ui-before-grid.js` (mit bekanntem SHA-256).
+Dadurch prüft der historische Wortqualitätsaudit weiterhin seine damalige Grundlage,
+verhindert aber nicht jede spätere Präsentationsänderung. Spielregeln, Storage-Modul,
+Wortpakete, Survivor-Balance und Online-Dienst sind unverändert.
+Fixtures reproduzieren: `node tools/build_survivor_grid_fixtures.cjs`.
+
+Realer Chromium-Test auf einem frischen, ausschließlich lokalen Origin:
+
+```sh
+mkdir -p /tmp/wordle-before-grid
+git archive 56cc8574837732990d3e34ffb1a7d224b168fef1 | tar -x -C /tmp/wordle-before-grid
+WORDLE_OLD_ROOT=/tmp/wordle-before-grid node tests/browser-survivor-grid.cjs
+```
+
+Benötigt eine separat installierte Playwright-/Chromium-Testumgebung; keine neuen
+Laufzeitabhängigkeiten der PWA. Optional: `WORDLE_CHROMIUM_EXECUTABLE` und
+`WORDLE_CHROMIUM_ARGS_FILE` (JSON-Liste von Testbrowser-Startargumenten).
+Der Test startet seinen eigenen HTTP-Server, nutzt isolierte Browserprofile und
+ruft den produktiven Online-Dienst nicht auf. Keine echten Spielernutzer-Daten.
+
+Prüfmatrix: 320×568, 360×640, 390×844, 430×932, 1280×900, 844×390;
+Sieg/Verlust/Schild/Upgrade/acht Versuche mit sieben Buchstaben/Game Over;
+Buchstaben/Farben, Scrollen bis zur letzten Zeile, erreichbare Touch-Buttons,
+Hardwaretastatur, doppelte Eingabe, Light Mode und reduzierte Bewegung.
+Mit `WORDLE_OLD_ROOT` zusätzlich echter Service-Worker-Wechsel aus dem letzten
+Produktionsstand mit Fortsetzen und Offline-Reload von drei alten aktiven Runs.
+Screenshots und Ergebnisprotokolle: `docs/qa/survivor-grid/`.
+
+Offen bleiben physische iPhone-/Android-Geräte und installierte mobile PWAs.
+Vor Veröffentlichung: ausdrückliche PR-Freigabe berücksichtigen, aktuellen main prüfen,
+Spiel pausieren und möglichst JSON-Backup sichern; dann regulär „Update laden“.
+Keine Neuinstallation oder Löschung der Website-Daten erforderlich.
