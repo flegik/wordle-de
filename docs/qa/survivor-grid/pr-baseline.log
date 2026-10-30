@@ -1,0 +1,38 @@
+SÜDPOL: NFC/six letters, selectable A solution, real mode submissions, historical compatibility, deterministic build, de-2.4 bag migration, idempotence, backups, frozen daily/Survivor/online contracts passed.
+VORWAHL: active A target, historical input compatibility, real Survivor win, seven-win balance, bag migration/idempotence, backup round-trip and frozen daily targets passed.
+VORWAHL accepted through classic/random/streak UI in saved historical rounds.
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: js/survivor-ui.js
++ actual - expected
+
++ 'b7b045355a55fa07d28951c9e137dd0e30a730ac70413f78a2a305dedb395e96'
+- 'd196285d19f061c4c4399832cf71f2b1cab4257170164d30b7f8e67b082e007a'
+
+    at /workspace/scratch/213b95aacd00/wordle-double/tests/word-quality-221.test.cjs:6:255
+    at test (/workspace/scratch/213b95aacd00/wordle-double/tests/word-quality-221.test.cjs:5:20)
+    at Object.<anonymous> (/workspace/scratch/213b95aacd00/wordle-double/tests/word-quality-221.test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'b7b045355a55fa07d28951c9e137dd0e30a730ac70413f78a2a305dedb395e96',
+  expected: 'd196285d19f061c4c4399832cf71f2b1cab4257170164d30b7f8e67b082e007a',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1
+Traceback (most recent call last):
+  File "/workspace/scratch/213b95aacd00/wordle-double/tools/test_all.py", line 11, in <module>
+    subprocess.run(['node', file], cwd=ROOT, check=True)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['node', 'tests/word-quality-221.test.cjs']' returned non-zero exit status 1.

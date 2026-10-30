@@ -261,3 +261,15 @@ PWA-Veröffentlichung am 16.10.2026 freigegeben; Cache `v2-2-1-release-20261016-
 Online-API-Unterstützung ist vorbereitet, wartet aber auf die erforderliche
 Cloudflare-Anmeldung für das Worker-Update. Auf dem alten Online-Service ist
 NUTZUNG bis zum gesondert freigegebenen Worker-Update noch nicht gültig.
+
+### Survivor-Raster · PR #3
+
+Nach einem abgeschlossenen Survivor-Rätsel zeigt die Zwischenansicht die tatsächlich
+abgegebenen Wörter mit ihren Farben. Längere Raster sind scrollbar; Upgrade-Auswahl
+und „Nächstes Wort“ bleiben erreichbar. Auch das letzte Game-Over-Rätsel wird angezeigt.
+Bestehende Runs behalten ihre gespeicherten Regeln (Upgrades nach 3, 5 oder 7 Siegen),
+Herzen, Effekte, Wortversion und Fortschritt. Es ist kein neuer Run erforderlich.
+
+Der vorbereitete PWA-Cache heißt `v2-2-2-survivor-grid-20261030-a`.
+Bei einem Speicherfehler wird die Update-Aktivierung bzw. automatisches Neuladen
+angehalten. Details und Freigabegrenzen: [PR-3-Prüfbericht](docs/PR_3_SURVIVOR_GRID_REVIEW.md).

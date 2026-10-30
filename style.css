@@ -84,6 +84,7 @@
 /* Reveal only authentic, already submitted Survivor guesses on the between-round screen. */
 .survivor-round-review{margin:12px 0;padding:14px}
 .survivor-round-review h3{margin-bottom:5px}
-.survivor-round-grid{width:min(100%,calc(var(--n)*48px));max-width:330px;max-height:42dvh;gap:4px}
+.survivor-round-grid{width:min(100%,calc(var(--n)*48px));max-width:330px;max-height:42vh;max-height:42dvh;gap:4px;touch-action:pan-y;scrollbar-width:thin;outline-offset:3px}
+.survivor-round-grid:focus-visible{outline:2px solid var(--yellow)}
 .survivor-round-grid .row{gap:4px}
 .survivor-round-grid .tile{font-size:clamp(16px,5vw,24px);min-width:0}
